@@ -15,8 +15,10 @@ class LowonganController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function AllLowongan(){
-        $low = Lowongan::all();
+    public function AllLowongan(Request $request){
+        $cari = $request->cari;
+        $low = Lowongan::where('nama','like','%'.$cari.'%')
+        ->paginate();
         return view('welcome', compact('low'));
     }
     public function index()

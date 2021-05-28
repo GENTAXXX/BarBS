@@ -22,7 +22,10 @@ SIMAGANG
     <section class="justify-content-center align-items-center">
         <div class="container">
             <div class="mr-xl-5 ml-xl-5 p-xl-5">
-                <input class="form-control search-bar" type="text" placeholder="Search" aria-label="Search">
+                <form action="/" method="GET">
+                    <input class="form-control search-bar" type="text" placeholder="Search" aria-label="Search" name="cari" value="{{ old('cari') }}">
+                    <button class="btn btn-primary">Cari</button>
+                </form>
             </div>
         </div>
     </section>

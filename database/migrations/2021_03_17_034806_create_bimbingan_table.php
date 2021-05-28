@@ -15,10 +15,12 @@ class CreateBimbinganTable extends Migration
     {
         Schema::create('bimbingan', function (Blueprint $table) {
             $table->id('id');
-            $table->string('catatan');
-            $table->date('tgl_bimbingan');
-            $table->unsignedBigInteger('mhs_id');
-            $table->unsignedBigInteger('dosen_id');
+            $table->string('catatan')->nullable();
+            $table->date('tgl_bimbingan')->nullable();
+            $table->string('file')->nullable();
+            $table->string('feedback')->nullable();
+            $table->unsignedBigInteger('mhs_id')->nullable();
+            $table->unsignedBigInteger('dosen_id')->nullable();
             $table->unsignedBigInteger('magang_id')->nullable();
             $table->timestamps();
         });

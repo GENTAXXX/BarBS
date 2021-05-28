@@ -20,11 +20,13 @@ class CreateLogbookTable extends Migration
             $table->string('deskripsi')->nullable();
             $table->string('saran')->nullable();
             $table->unsignedBigInteger('magang_id')->nullable();
+            $table->unsignedBigInteger('spv_id')->nullable();
             $table->timestamps();
         });
 
         Schema::table('logbook', function ($table) {
             $table->foreign('magang_id')->references('id')->on('magang')->onDelete('cascade');
+            $table->foreign('spv_id')->references('id')->on('supervisor')->onDelete('cascade');
         });
     }
 

@@ -108,6 +108,7 @@ class ApplyController extends Controller
         $magang->update([
             'tgl_mulai' => $request->tgl_mulai,
             'tgl_selesai' => $request->tgl_selesai,
+            'spv_id' => $request->spv_id,
             'approval' => $request->approval
         ]);
 
