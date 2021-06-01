@@ -17,7 +17,7 @@ class LowonganController extends Controller
      */
     public function AllLowongan(Request $request){
         $cari = $request->cari;
-        $low = Lowongan::where('nama','like','%'.$cari.'%')
+        $low = Lowongan::where('nama_low','like','%'.$cari.'%')
         ->paginate();
         return view('welcome', compact('low'));
     }
@@ -50,19 +50,19 @@ class LowonganController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
+            'nama_low' => 'required',
             'deskripsi' => 'required',
-            'telepon' => 'required',
+            'telepon_low' => 'required',
             'jumlah_mhs' => 'required',
             'durasi' => 'required',
             'mitra_id' => 'required',
             'kategori_id' => 'required',
             'lokasi' => 'required',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto_low' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $imageName = time() . '.' . $request->foto->extension();
-        $request->foto->move(public_path('images'), $imageName);
+        $imageName = time() . '.' . $request->foto_low->extension();
+        $request->foto_low->move(public_path('images'), $imageName);
 
         Lowongan::create($request->all());
        
@@ -104,15 +104,15 @@ class LowonganController extends Controller
     public function update(Request $request, Lowongan $lowongan)
     {
         $request->validate([
-            'nama' => 'required',
+            'nama_low' => 'required',
             'deskripsi' => 'required',
-            'telepon' => 'required',
+            'telepon_low' => 'required',
             'jumlah_mhs' => 'required',
             'durasi' => 'required',
             'mitra_id' => 'required',
             'kategori_id' => 'required',
             'lokasi' => 'required',
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto_low' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $imageName = time() . '.' . $request->foto->extension();

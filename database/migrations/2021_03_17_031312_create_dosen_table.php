@@ -16,10 +16,10 @@ class CreateDosenTable extends Migration
         Schema::create('dosen', function (Blueprint $table) {
             $table->id('id');
             $table->unsignedBigInteger('user_id');
-            $table->string('nama')->unique();
-            $table->string('telepon')->nullable();
+            $table->string('nama_dosen')->unique();
+            $table->string('telepon_dosen')->nullable();
             $table->integer('NIP')->nullable();
-            $table->string('foto')->nullable()->default('avatar.png');
+            $table->string('foto_dosen')->nullable()->default('avatar.png');
             $table->unsignedBigInteger('depart_id')->nullable();
             $table->timestamps();
         });

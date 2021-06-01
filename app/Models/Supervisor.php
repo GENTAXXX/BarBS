@@ -12,6 +12,10 @@ class Supervisor extends Model
     protected $table = 'supervisor';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'user_id', 'nama', 'telepon', 'no_pegawai', 'foto'
+        'user_id', 'nama_spv', 'telepon_spv', 'no_pegawai', 'foto_spv', 'mitra_id'
     ];
+
+    public function mitra(){
+        return $this->belongsTo(Mitra::class, 'mitra_id');
+    }
 }

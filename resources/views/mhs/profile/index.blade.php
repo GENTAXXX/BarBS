@@ -33,10 +33,10 @@ Profile Mahasiswa
                     <div class="card card-primary card-outline">
                         <div class="card-body box-profile">
                             <div class="text-center">
-                                <img class="profile-user-img img-fluid img-circle" src="{{ asset('$mhs->foto') }}" alt="User profile picture">
+                                <img class="profile-user-img img-fluid img-circle" src="{{ asset('$mhs->foto_mhs') }}" alt="User profile picture">
                             </div>
 
-                            <h3 class="profile-username text-center">{{ $mhs->nama }}</h3>
+                            <h3 class="profile-username text-center">{{ $mhs->nama_mhs }}</h3>
 
                             <p class="text-muted text-center">Software Engineer</p>
                             <strong><i class="fas fa-book mr-1"></i> NIM</strong>
@@ -47,7 +47,7 @@ Profile Mahasiswa
 
                             <strong><i class="fas fa-mail-bulk mr-1"></i> Telepon</strong>
 
-                            <p class="text-muted">{{ $mhs->telepon }}</p>
+                            <p class="text-muted">{{ $mhs->telepon_mhs }}</p>
 
                             <hr>
 
@@ -59,7 +59,7 @@ Profile Mahasiswa
 
                             <strong><i class="fas fa-pencil-alt mr-1"></i> Jurusan</strong>
 
-                            <p class="text-muted"> {{ $mhs->jurusan['nama'] }}
+                            <p class="text-muted"> {{ $mhs->jurusan['jurusan'] }}
                             </p>
 
                             <hr>

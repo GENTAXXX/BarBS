@@ -12,7 +12,7 @@ class Mitra extends Model
     protected $table = 'mitra';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'nama','user_id','alamat','telepon','fax','foto','kab_id'
+        'nama_mitra','user_id','alamat_mitra','telepon_mitra','fax_mitra','foto_mitra','kab_id'
     ];
 
     public function lowongan()
@@ -27,5 +27,9 @@ class Mitra extends Model
 
     public function user(){
         return $this->belongsTo(Mitra::class);
+    }
+
+    public function spv(){
+        return $this->hasMany(Supervisor::class);
     }
 }

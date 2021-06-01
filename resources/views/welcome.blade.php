@@ -42,11 +42,11 @@ SIMAGANG
                 @foreach ($low as $data)
                 <div class="testimonial-item">
                     <a href="{{ route('detail.show', $data->id) }}">
-                        <h3>{{ $data->nama }}</h3>
+                        <h3>{{ $data->nama_low }}</h3>
                         <img src="assets/img/sim-vertical-black.png" class="testimonial-img" alt="">
                         <div class="icon-box container">
                             <ul class="list-unstyled ">
-                                <li class="d-flex align-items-start m-3"><span><img src="{{ asset('assets/img/building.svg') }}" alt="" style="height: 20px;width: 20px;" class=""></span><span class="ml-3">{{ $data->mitra['nama'] }}</span></li>
+                                <li class="d-flex align-items-start m-3"><span><img src="{{ asset('assets/img/building.svg') }}" alt="" style="height: 20px;width: 20px;" class=""></span><span class="ml-3">{{ $data->mitra['nama_mitra'] }}</span></li>
                                 <li class="d-flex align-items-start m-3"><span><img src="{{ asset('assets/img/placeholder.svg') }}" alt="" style="height: 20px;width: 20px;"></span><span class="ml-3">{{ $data->lokasi}}</span></li>
                                 <li class="d-flex align-items-start m-3"><span><img src="{{ asset('assets/img/filter.svg') }}" alt="" style="height: 20px;width: 20px;"></span><span class="ml-3">{{ $data->kategori['kategori'] }}</span></li>
                             </ul>
@@ -76,10 +76,10 @@ SIMAGANG
                         </a>
                     </div>
                     <div class="col-lg-6 pt-4 pt-lg-0">
-                        <h3>{{ $data->nama }}</h3>
+                        <h3>{{ $data->nama_low }}</h3>
                         <ul class="list-unstyled ">
                             <span>
-                                <li class="d-flex align-items-start m-3"><span><img src="{{ asset('assets/img/building.svg') }}" alt="" style="height: 20px;width: 20px;" class=""></span><span class="ml-3">{{ $data->mitra['nama'] }}</span></li>
+                                <li class="d-flex align-items-start m-3"><span><img src="{{ asset('assets/img/building.svg') }}" alt="" style="height: 20px;width: 20px;" class=""></span><span class="ml-3">{{ $data->mitra['nama_mitra'] }}</span></li>
                             </span>
                             <span>
                                 <li class="d-flex align-items-start m-3"><span><img src="{{ asset('assets/img/placeholder.svg') }}" alt="" style="height: 20px;width: 20px;"></span><span class="ml-3">{{ $data->lokasi}}</span></li>

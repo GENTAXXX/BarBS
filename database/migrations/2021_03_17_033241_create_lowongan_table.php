@@ -15,15 +15,15 @@ class CreateLowonganTable extends Migration
     {
         Schema::create('lowongan', function (Blueprint $table) {
             $table->id('id');
-            $table->string('nama')->unique();
+            $table->string('nama_low')->unique();
             $table->string('deskripsi');
-            $table->string('telepon')->unique();
+            $table->string('telepon_low')->unique();
             $table->integer('jumlah_mhs');
             $table->string('durasi');
             $table->unsignedBigInteger('mitra_id');
             $table->unsignedBigInteger('kategori_id');
             $table->string('lokasi');
-            $table->string('foto')->nullable()->default('bg.png');
+            $table->string('foto_low')->nullable()->default('bg.png');
             $table->timestamps();
         });
 

@@ -11,12 +11,13 @@ Edit Pengajuan
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Detail Mahasiswa</h1>
+            <h1>Pengajuan</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="profile-departemen.html">Home</a></li>
-              <li class="breadcrumb-item active">User Profile</li>
+              <li class="breadcrumb-item"><a href="{{ route('depart.home') }}">Home</a></li>
+              <li class="breadcrumb-item">Daftar Pengajuan</li>
+              <li class="breadcrumb-item active">Pengajuan</li>
             </ol>
           </div>
         </div>
@@ -35,24 +36,24 @@ Edit Pengajuan
                     <div class="text-center">
                         <img class="profile-user-img img-fluid img-circle"src="dist/img/user8-128x128.jpg"alt="User profile picture">
                     </div>
-                        <h3 class="profile-username text-center">{{ $data->nama }}</h3>
+                        <h3 class="profile-username text-center">{{ $data->nama_mhs }}</h3>
 
                         <p class="text-muted text-center">Software Engineer</p>
                         <strong><i class="fas fa-book mr-1"></i> NIM</strong>
 
-                        <p class="text-muted">{{ $data->mahasiswa['NIM'] }}</p>
+                        <p class="text-muted">{{ $data->NIM }}</p>
 
                         <hr>
 
                         <strong><i class="fas fa-mail-bulk mr-1"></i> Telepon</strong>
 
-                        <p class="text-muted">{{ $data->mahasiswa['telepon'] }}</p>
+                        <p class="text-muted">{{ $data->telepon_mhs }}</p>
 
                         <hr>
 
                         <strong><i class="fas fa-mail-bulk mr-1"></i> Pengalaman</strong>
 
-                        <p class="text-muted">{{ $data->mahasiswa['pengalaman'] }}</p>
+                        <p class="text-muted">{{ $data->pengalaman }}</p>
 
                         <hr>
 
@@ -70,13 +71,13 @@ Edit Pengajuan
 
                         <strong><i class="far fa-file-alt mr-1"></i> Jenis Kelamin</strong>
 
-                        <p class="text-muted">{{ $data->mahasiswa['jenis_kelamin'] }}</p>
+                        <p class="text-muted">{{ $data->jenis_kelamin }}</p>
 
                         <hr>
 
                         <strong><i class="far fa-file-alt mr-1"></i> Tanggal Lahir</strong>
 
-                        <p class="text-muted">{{ $data->mahasiswa['tgl_lahir'] }}</p>
+                        <p class="text-muted">{{ $data->tgl_lahir }}</p>
                     </div>
                 </div>
               <!-- /.card-body -->
@@ -96,7 +97,7 @@ Edit Pengajuan
                           <select class="form-control" name="dosen_id">
                             <option value="">- Pilih Dosen -</option>
                             @foreach ($dosen as $dos)
-                            <option value="{{ $dos->id }}">{{ $dos->nama }}</option>
+                            <option value="{{ $dos->id }}">{{ $dos->nama_dosen }}</option>
                             @endforeach
                           </select>
                         </div>
@@ -126,9 +127,9 @@ Edit Pengajuan
                     <tbody>
                     <tr>
                       <td><a href="#">1</a></td>
-                      <td class="text-center">{{ $data->lowongan['nama'] }}</td>
-                      <td class="text-center">{{ $data->lowongan['deskripsi'] }}</td>
-                      <td class="text-center">{{ $data->lowongan['lokasi'] }}</td>
+                      <td class="text-center">{{ $data->nama_low }}</td>
+                      <td class="text-center">{{ $data->deskripsi }}</td>
+                      <td class="text-center">{{ $data->lokasi }}</td>
                     </tr>
                     </tbody>
                   </table>

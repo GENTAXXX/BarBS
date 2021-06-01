@@ -48,20 +48,20 @@ Edit Profile
                                     @csrf
                                     <div class="form-group">
                                         <label for="nama">Nama:</label>
-                                        <input type="text" class="form-control" name="nama" value="{{ $mitra->nama }}" />
+                                        <input type="text" class="form-control" name="nama_mitra" value="{{ $mitra->nama_mitra }}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="alamat">Alamat:</label>
-                                        <textarea class="form-control" name="alamat" value="{{ $mitra->alamat }}"></textarea>
+                                        <textarea class="form-control" name="alamat_mitra" value="{{ $mitra->alamat_mitra }}"></textarea>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="telepon">Telepon:</label>
-                                        <input type="number" class="form-control" name="telepon" value="{{ $mitra->telepon }}" />
+                                        <input type="number" class="form-control" name="telepon_mitra" value="{{ $mitra->telepon_mitra }}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="fax">Fax:</label>
-                                        <input type="number" class="form-control" name="fax" value="{{ $mitra->fax }}" />
+                                        <input type="number" class="form-control" name="fax_mitra" value="{{ $mitra->fax_mitra }}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="kab_id">Kabupaten:</label>
@@ -74,7 +74,7 @@ Edit Profile
                                     </div>
                                     <div class="form-group">
                                         <label for="foto">Foto:</label>
-                                        <input type="file" class="form-control" name="foto" value="{{ $mitra->foto }}" />
+                                        <input type="file" class="form-control" name="foto_mitra" value="{{ $mitra->foto_mitra }}" />
                                     </div>
                                     <div class="form-group row">
                                         <div class="offset-sm-2 col-sm-10">

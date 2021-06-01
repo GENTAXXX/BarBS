@@ -30,9 +30,6 @@ Route::get('detail/{id}', [ApplyController::class, 'detail'])->name('detail.show
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('profile', ProfileController::class);
-    // Route::get('profile', [ProfileController::class, 'index'])->name('profile.index');
-    // Route::get('profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    // Route::patch('profile/edit', [ProfileController::class, 'update'])->name('profile.update');
 });
 
 Route::group(['middleware' => 'is_depart'], function () {
@@ -57,17 +54,21 @@ Route::group(['middleware' => 'is_mitra'], function () {
     //Pendaftar
     Route::get('mitra/pendaftar', [ApplyController::class, 'listPendaftar'])->name('pendaftar.index');
     Route::get('mitra/pendaftar/{id}', [ApplyController::class, 'pendaftar'])->name('pendaftar.edit');
-    Route::get('mitra/pendaftar/{id}', [ApplyController::class, 'approval'])->name('pendaftar.approval');
+    Route::post('mitra/pendaftar/{id}', [ApplyController::class, 'approval'])->name('pendaftar.approval');
 });
 
 Route::group(['middleware' => 'is_dospem'], function () {
     Route::get('dosen/home', [DospemController::class, 'dospemHome'])->name('dospem.home');
     //Bimbingan
-    Route::get('dosen/bimbingan', [BimbinganController::class, 'listMahasiswa'])->name('dospem.index');
+    Route::get('dosen/bimbingan', [BimbinganController::class, 'mhsBimbingan'])->name('dospem.index');
+    Route::get('dosen/bimbingan/{id}', [BimbinganController::class, 'bimbinganDetail'])->name('dospem.bimbingan');
 });
 
 Route::group(['middleware' => 'is_supervisor'], function () {
     Route::get('supervisor/home', [SpvController::class, 'supervisorHome'])->name('supervisor.home');
+    //Logbook
+    Route::get('supervisor/logbook', [LogBookController::class, 'mhsLogbook'])->name('spv.index');
+    Route::get('supervisor/logbook/{id}', [LogBookController::class, 'logbookDetail'])->name('spv.logbook');
 });
 
 Route::group(['middleware' => 'is_mahasiswa'], function () {

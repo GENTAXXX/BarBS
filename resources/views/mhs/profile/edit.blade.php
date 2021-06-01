@@ -48,7 +48,7 @@ Profile Mahasiswa
                                     @csrf
                                     <div class="form-group">
                                         <label for="nama">Nama:</label>
-                                        <input type="text" class="form-control" name="nama" value="{{ $mhs->nama }}" />
+                                        <input type="text" class="form-control" name="nama_mhs" value="{{ $mhs->nama_mhs }}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="NIM">NIM:</label>
@@ -57,7 +57,7 @@ Profile Mahasiswa
 
                                     <div class="form-group">
                                         <label for="telepon">Telepon:</label>
-                                        <input type="number" class="form-control" name="telepon" value="{{ $mhs->telepon }}" />
+                                        <input type="number" class="form-control" name="telepon_mhs" value="{{ $mhs->telepon_mhs }}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="pengalaman">Pengalaman:</label>
@@ -68,7 +68,7 @@ Profile Mahasiswa
                                         <select name="jurusan_id" class="form-control">
                                             <option value="">- Pilih Jurusan -</option>
                                             @foreach($jurusan as $jur)
-                                            <option value="{{ $jur['id'] }}">{{ $jur->nama }}</option>
+                                            <option value="{{ $jur['id'] }}">{{ $jur->jurusan }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -96,7 +96,7 @@ Profile Mahasiswa
                                     </div>
                                     <div class="form-group">
                                         <label for="foto">Foto:</label>
-                                        <input type="file" class="form-control" name="foto" value="{{ $mhs->foto }}" />
+                                        <input type="file" class="form-control" name="foto_mhs" value="{{ $mhs->foto_mhs }}" />
                                     </div>
                                     <div class="form-group row">
                                         <div class="offset-sm-2 col-sm-10">

@@ -63,31 +63,31 @@ class UserController extends Controller
             case '1':
                 Departemen::create([
                     'user_id' => $user['id'],
-                    'nama' => $user['name'],
+                    'nama_depart' => $user['name'],
                 ]);
                 break;
             case '2':
                 Mitra::create([
                     'user_id' => $user['id'],
-                    'nama' => $user['name'],
+                    'nama_mitra' => $user['name'],
                 ]);
                 break;
             case '3':
                 Dosen::create([
                     'user_id' => $user['id'],
-                    'nama' => $user['name'],
+                    'nama_dosen' => $user['name'],
                 ]);
                 break;
             case '4':
                 Supervisor::create([
                     'user_id' => $user['id'],
-                    'nama' => $user['name'],
+                    'nama_spv' => $user['name'],
                 ]);
                 break;
             case '5':
                 Mahasiswa::create([
                     'user_id' => $user['id'],
-                    'nama' => $user['name'],
+                    'nama_mhs' => $user['name'],
                 ]);
                 break;
         }

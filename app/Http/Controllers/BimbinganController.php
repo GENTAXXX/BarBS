@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Bimbingan;
+use App\Models\Mahasiswa;
 
 class BimbinganController extends Controller
 {
@@ -13,11 +14,19 @@ class BimbinganController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function listMahasiswa(){
-        $bimbingan = Bimbingan::join('dosen', 'bimbingan.dosen_id', '=', 'dosen.id')
+    public function bimbinganDetail($id){
+        $data = Mahasiswa::join('bimbingan', 'mahasiswa.id', '=', 'bimbingan.mhs_id')
+        ->where('mahasiswa.id', $id)
+        ->find($id);
+        return view('dosen.bimbingan.edit', compact('data'));
+    }
+
+    public function mhsBimbingan(){
+        $data = Mahasiswa::join('bimbingan', 'mahasiswa.id', '=', 'bimbingan.mhs_id')
+        ->join('dosen', 'bimbingan.dosen_id', '=', 'dosen.id')
         ->where('dosen.user_id', Auth::id())
         ->get();
-        return view('dosen.bimbingan.index', compact('bimbingan'));
+        return view('dosen.bimbingan.index', compact('data'));
     }
 
     public function index()

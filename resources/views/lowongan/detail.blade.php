@@ -35,10 +35,10 @@ Detail Lowongan
                             <img src="{{ asset('assets/img/sim-vertical-black.png') }}" class="img-fluid" alt="">
                         </div>
                         <div class="col-lg-6 pt-4 pt-lg-0">
-                            <h3>{{ $low->nama }}</h3>
+                            <h3>{{ $low->nama_low }}</h3>
                             <ul class="list-unstyled ">
                                 <span>
-                                    <li class=" d-flex align-items-start m-3"><span><img src="{{ asset('assets/img/building.svg') }}" alt="" style="height: 20px;width: 20px;"></span><span class="ml-3">{{ $low->mitra['nama'] }}</span></li>
+                                    <li class=" d-flex align-items-start m-3"><span><img src="{{ asset('assets/img/building.svg') }}" alt="" style="height: 20px;width: 20px;"></span><span class="ml-3">{{ $low->mitra['nama_mitra'] }}</span></li>
                                 </span>
                                 <span>
                                     <li class="d-flex align-items-start m-3"><span><img src="{{ asset('assets/img/placeholder.svg') }}" alt="" style="height: 20px;width: 20px;"></span><span class="ml-3">{{ $low->lokasi}}</span></li>

@@ -48,16 +48,16 @@ Edit Profile
                                     @csrf
                                     <div class="form-group">
                                         <label for="nama">Nama:</label>
-                                        <input type="text" class="form-control" name="nama" value="{{ $depart->nama }}" />
+                                        <input type="text" class="form-control" name="nama_depart" value="{{ $depart->nama_depart }}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="alamat">Alamat:</label>
-                                        <textarea class="form-control" name="alamat" value="{{ $depart->alamat }}"></textarea>
+                                        <textarea class="form-control" name="alamat_depart" value="{{ $depart->alamat_depart }}"></textarea>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="telepon">Telepon:</label>
-                                        <input type="number" class="form-control" name="telepon" value="{{ $depart->telepon }}" />
+                                        <input type="number" class="form-control" name="telepon_depart" value="{{ $depart->telepon_depart }}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="NIDN">NIDN:</label>
@@ -65,7 +65,7 @@ Edit Profile
                                     </div>
                                     <div class="form-group">
                                         <label for="foto">Foto:</label>
-                                        <input type="file" class="form-control" name="foto" value="{{ $depart->foto }}" />
+                                        <input type="file" class="form-control" name="foto_depart" value="{{ $depart->foto_depart }}" />
                                     </div>
                                     <div class="form-group row">
                                         <div class="offset-sm-2 col-sm-10">

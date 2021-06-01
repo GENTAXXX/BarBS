@@ -12,8 +12,8 @@ class Mahasiswa extends Model
     protected $table = 'mahasiswa';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'user_id', 'nama', 'NIM', 'telepon', 'pengalaman', 'jurusan_id', 'status_id', 'skill_id', 'jenis_kelamin',
-        'tgl_lahir', 'foto'
+        'user_id', 'nama_mhs', 'NIM', 'telepon_mhs', 'pengalaman', 'jurusan_id', 'status_id', 'skill_id', 'jenis_kelamin',
+        'tgl_lahir', 'foto_mhs'
     ];
 
     public function status(){

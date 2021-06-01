@@ -12,6 +12,10 @@ class Dosen extends Model
     protected $table = 'dosen';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'user_id', 'nama', 'telepon', 'NIP', 'foto'
+        'user_id', 'nama_dosen', 'telepon_dosen', 'NIP', 'foto_dosen', 'depart_id'
     ];
+
+    public function depart(){
+        return $this->belongsTo(Departemen::class, 'depart_id');
+    }
 }

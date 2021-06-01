@@ -33,27 +33,27 @@ Profile Mitra
                     <div class="card card-primary card-outline">
                         <div class="card-body box-profile">
                             <div class="text-center">
-                                <img class="profile-user-img img-fluid img-circle" src="{{ asset('$mitra->foto') }}" alt="User profile picture">
+                                <img class="profile-user-img img-fluid img-circle" src="{{ asset('$mitra->foto_mitra') }}" alt="User profile picture">
                             </div>
 
-                            <h3 class="profile-username text-center">{{ $mitra->nama }}</h3>
+                            <h3 class="profile-username text-center">{{ $mitra->nama_mitra }}</h3>
 
                             <p class="text-muted text-center">Software Engineer</p>
                             <strong><i class="fas fa-book mr-1"></i> Alamat</strong>
 
-                            <p class="text-muted">{{ $mitra->alamat }}</p>
+                            <p class="text-muted">{{ $mitra->alamat_mitra }}</p>
 
                             <hr>
 
                             <strong><i class="fas fa-mail-bulk mr-1"></i> Telepon</strong>
 
-                            <p class="text-muted">{{ $mitra->telepon }}</p>
+                            <p class="text-muted">{{ $mitra->telepon_mitra }}</p>
 
                             <hr>
 
                             <strong><i class="fas fa-mail-bulk mr-1"></i> Fax</strong>
 
-                            <p class="text-muted">{{ $mitra->fax }}</p>
+                            <p class="text-muted">{{ $mitra->fax_mitra }}</p>
 
                             <hr>
 

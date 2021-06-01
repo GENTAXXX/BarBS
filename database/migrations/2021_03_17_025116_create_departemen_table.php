@@ -16,11 +16,11 @@ class CreateDepartemenTable extends Migration
         Schema::create('departemen', function (Blueprint $table) {
             $table->id('id');
             $table->unsignedBigInteger('user_id')->unsigned();
-            $table->string('nama')->unique();
-            $table->string('alamat')->nullable();
-            $table->string('telepon')->nullable();
+            $table->string('nama_depart')->unique();
+            $table->string('alamat_depart')->nullable();
+            $table->string('telepon_depart')->nullable();
             $table->integer('NIDN')->nullable();
-            $table->string('foto')->nullable()->default('avatar.png');
+            $table->string('foto_depart')->nullable()->default('avatar.png');
             $table->timestamps();
         });
 

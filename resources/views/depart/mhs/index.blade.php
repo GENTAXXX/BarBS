@@ -46,7 +46,7 @@ List Mahasiswa
                         @foreach ($mhs as $mhs)
                         <tr>
                             <td class="text-center">{{ $no++ }}</td>
-                            <td class="text-center">{{ $mhs->nama }}</td>
+                            <td class="text-center">{{ $mhs->nama_mhs }}</td>
                             <td class="text-center">{{ $mhs->NIM }}</td>
                             <td class="text-center">
                                 <label class="badge badge-success">{{ $mhs->status['status'] }}</label>

@@ -48,19 +48,28 @@ Edit Profile
                                     @csrf
                                     <div class="form-group">
                                         <label for="nama">Nama:</label>
-                                        <input type="text" class="form-control" name="nama" value="{{ $dosen->nama }}" />
+                                        <input type="text" class="form-control" name="nama_dosen" value="{{ $dosen->nama_dosen }}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="telepon">Telepon:</label>
-                                        <input type="number" class="form-control" name="telepon" value="{{ $dosen->telepon }}" />
+                                        <input type="number" class="form-control" name="telepon_dosen" value="{{ $dosen->telepon_dosen }}" />
                                     </div>
                                     <div class="form-group">
                                         <label for="NIP">NIP:</label>
                                         <input type="number" class="form-control" name="NIP" value="{{ $dosen->NIP }}" />
                                     </div>
                                     <div class="form-group">
+                                        <label for="depart_id">Departemen:</label>
+                                        <select class="form-control" name="depart_id">
+                                            <option value="">- Pilih Departemen -</option>
+                                            @foreach ($depart as $dep)
+                                            <option value="{{ $dep->id }}">{{ $dep->nama_depart }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <label for="foto">Foto:</label>
-                                        <input type="file" class="form-control" name="foto" value="{{ $dosen->foto }}" />
+                                        <input type="file" class="form-control" name="foto_dosen" value="{{ $dosen->foto_dosen }}" />
                                     </div>
                                     <div class="form-group row">
                                         <div class="offset-sm-2 col-sm-10">

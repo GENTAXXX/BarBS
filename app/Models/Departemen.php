@@ -12,6 +12,10 @@ class Departemen extends Model
     protected $table = 'departemen';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'user_id', 'nama', 'alamat', 'telepon', 'NIDN', 'foto'
+        'user_id', 'nama_depart', 'alamat_depart', 'telepon_depart', 'NIDN', 'foto_depart'
     ];
+
+    public function dosen(){
+        return $this->hasMany(Dosen::class);
+    }
 }

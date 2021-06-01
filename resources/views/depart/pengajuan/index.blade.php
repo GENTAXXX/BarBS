@@ -58,9 +58,9 @@ List Pengajuan
                                 @foreach ($magang as $data)
                                 <tr>
                                     <td class="text-center">{{ $no++ }}</a></td>
-                                    <td class="text-center">{{ $data->mahasiswa['nama'] }}</td>
+                                    <td class="text-center">{{ $data->mahasiswa['nama_mhs'] }}</td>
                                     <td class="text-center">{{ $data->mahasiswa['NIM']}}</td>
-                                    <td class="text-center">{{ $data->lowongan['nama'] }}</td>
+                                    <td class="text-center">{{ $data->lowongan['nama_low'] }}</td>
                                     <td class="text-center">
                                         <a href="{{ route('pengajuan.edit', $data->id) }}" class="btn btn-primary-m2">Details</a>
                                     </td>

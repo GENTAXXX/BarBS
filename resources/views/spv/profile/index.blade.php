@@ -36,19 +36,25 @@ Profile Supervisor
                                 <img class="profile-user-img img-fluid img-circle" src="{{ asset('$spv->foto') }}" alt="User profile picture">
                             </div>
 
-                            <h3 class="profile-username text-center">{{ $spv->nama }}</h3>
+                            <h3 class="profile-username text-center">{{ $spv->nama_spv }}</h3>
 
                             <p class="text-muted text-center">Software Engineer</p>
 
                             <strong><i class="fas fa-mail-bulk mr-1"></i> Telepon</strong>
 
-                            <p class="text-muted">{{ $spv->telepon }}</p>
+                            <p class="text-muted">{{ $spv->telepon_spv }}</p>
 
                             <hr>
 
                             <strong><i class="fas fa-mail-bulk mr-1"></i> No. Pegawai</strong>
 
                             <p class="text-muted">{{ $spv->no_pegawai }}</p>
+
+                            <hr>
+
+                            <strong><i class="fas fa-mail-bulk mr-1"></i> Mitra</strong>
+
+                            <p class="text-muted">{{ $spv->mitra['nama_mitra'] }}</p>
 
                         </div>
                         <div class="form-group row">

@@ -56,11 +56,11 @@ List Pendaftar
                                 @foreach ($data as $data)
                                 <tr>
                                     <td class="text-center">{{ $no++ }}</a></td>
-                                    <td class="text-center">{{ $data->mahasiswa['nama'] }}</td>
+                                    <td class="text-center">{{ $data->nama_mhs }}</td>
                                     <td class="text-center">{{ $data->jurusan['jurusan'] }}</td>
-                                    <td class="text-center">{{ $data->lowongan['nama'] }}</td>
+                                    <td class="text-center">{{ $data->nama_low }}</td>
                                     <td class="text-center">
-                                        <a href="{{ route('pendaftar.edit', $data->id) }}" class="btn btn-primary-m2">Details</a>
+                                        <a href="{{ url('mitra/pendaftar', $data->id) }}" class="btn btn-primary-m2">Details</a>
                                     </td>
                                 </tr>
                                 @endforeach

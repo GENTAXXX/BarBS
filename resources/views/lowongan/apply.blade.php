@@ -37,7 +37,7 @@ Pengajuan Data Diri
                                     <img class="profile-user-img img-fluid img-circle" src="dist/img/user8-128x128.jpg" alt="User profile picture">
                                 </div>
 
-                                <h3 class="profile-username text-center">{{ $mhs->nama }}</h3>
+                                <h3 class="profile-username text-center">{{ $mhs->nama_mhs }}</h3>
 
                                 <p class="text-muted text-center">Software Engineer</p>
                                 <strong><i class="fas fa-book mr-1"></i> NIM</strong>
@@ -48,7 +48,7 @@ Pengajuan Data Diri
 
                                 <strong><i class="fas fa-mail-bulk mr-1"></i> Telepon</strong>
 
-                                <p class="text-muted">{{ $mhs->telepon }}</p>
+                                <p class="text-muted">{{ $mhs->telepon_mhs }}</p>
 
                                 <hr>
 
@@ -60,7 +60,7 @@ Pengajuan Data Diri
 
                                 <strong><i class="fas fa-pencil-alt mr-1"></i> Jurusan</strong>
 
-                                <p class="text-muted"> {{ $mhs->jurusan['nama'] }}
+                                <p class="text-muted"> {{ $mhs->jurusan['jurusan'] }}
                                 </p>
 
                                 <hr>
@@ -85,7 +85,7 @@ Pengajuan Data Diri
 
                                 <strong><i class="far fa-file-alt mr-1"></i> Lowongan Dipilih</strong>
 
-                                <p class="text-muted">{{ $low->nama }}</p>
+                                <p class="text-muted">{{ $low->nama_low }}</p>
                                 <input type="hidden" class="form-control" name="mhs_id" value="{{ $mhs->id }}"/>
                                 <input type="hidden" class="form-control" name="lowongan_id" value="{{ $low->id }}"/>
                             </div>

@@ -103,11 +103,13 @@ class ProfileController extends Controller
                 break;
             case '3':
                 $dosen = Dosen::where("user_id", $idUserLogin)->first();
-                return view('dosen.profile.edit', compact('dosen'));
+                $depart = Departemen::all();
+                return view('dosen.profile.edit', compact('dosen', 'depart'));
                 break;
             case '4':
                 $spv = Supervisor::where("user_id", $idUserLogin)->first();
-                return view('spv.profile.edit', compact('spv'));
+                $mitra = Mitra::all();
+                return view('spv.profile.edit', compact('spv', 'mitra'));
                 break;
             case '5':
                 $mhs = Mahasiswa::where("user_id", $idUserLogin)->first();
@@ -134,78 +136,80 @@ class ProfileController extends Controller
             case '1':
                 $depart = Departemen::where("user_id", $idUserLogin)->first();
                 $request->validate([
-                    'nama' => 'required',
-                    'alamat' => 'required',
-                    'telepon' => 'required',
+                    'nama_depart' => 'required',
+                    'alamat_depart' => 'required',
+                    'telepon_depart' => 'required',
                     'NIDN' => 'required',
-                    'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'foto_depart' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ]);
 
-                $imageName = time() . '.' . $request->foto->extension();
-                $request->foto->move(public_path('images'), $imageName);
+                $imageName = time() . '.' . $request->foto_depart->extension();
+                $request->foto_depart->move(public_path('images'), $imageName);
                 $depart->update($request->all());
                 return redirect()->route('profile.index');
                 break;
             case '2':
                 $mitra = Mitra::where("user_id", $idUserLogin)->first();
                 $request->validate([
-                    'nama' => 'required',
-                    'alamat' => 'required',
-                    'telepon' => 'required',
-                    'fax' => 'required',
-                    'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'nama_mitra' => 'required',
+                    'alamat_mitra' => 'required',
+                    'telepon_mitra' => 'required',
+                    'fax_mitra' => 'required',
+                    'foto_mitra' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                     'kab_id' => 'required',
                 ]);
 
-                $imageName = time() . '.' . $request->foto->extension();
-                $request->foto->move(public_path('images'), $imageName);
+                $imageName = time() . '.' . $request->foto_mitra->extension();
+                $request->foto_mitra->move(public_path('images'), $imageName);
                 $mitra->update($request->all());
                 return redirect()->route('profile.index');
                 break;
             case '3':
                 $dosen = Dosen::where("user_id", $idUserLogin)->first();
                 $request->validate([
-                    'nama' => 'required',
-                    'telepon' => 'required',
+                    'nama_dosen' => 'required',
+                    'telepon_dosen' => 'required',
                     'NIP' => 'required',
-                    'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'foto_dosen' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'depart_id' => 'required',
                 ]);
 
-                $imageName = time() . '.' . $request->foto->extension();
-                $request->foto->move(public_path('images'), $imageName);
+                $imageName = time() . '.' . $request->foto_dosen->extension();
+                $request->foto_dosen->move(public_path('images'), $imageName);
                 $dosen->update($request->all());
                 return redirect()->route('profile.index');
                 break;
             case '4':
                 $spv = Supervisor::where("user_id", $idUserLogin)->first();
                 $request->validate([
-                    'nama' => 'required',
-                    'telepon' => 'required',
+                    'nama_spv' => 'required',
+                    'telepon_spv' => 'required',
                     'no_pegawai' => 'required',
-                    'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'foto_spv' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'mitra_id' => 'required',
                 ]);
 
-                $imageName = time() . '.' . $request->foto->extension();
-                $request->foto->move(public_path('images'), $imageName);
+                $imageName = time() . '.' . $request->foto_spv->extension();
+                $request->foto_spv->move(public_path('images'), $imageName);
                 $spv->update($request->all());
                 return redirect()->route('profile.index');
                 break;
             case '5':
                 $mhs = Mahasiswa::where("user_id", $idUserLogin)->first();
                 $request->validate([
-                    'nama' => 'required',
+                    'nama_mhs' => 'required',
                     'NIM' => 'required',
-                    'telepon' => 'required',
+                    'telepon_mhs' => 'required',
                     'pengalaman' => 'required',
                     'jurusan_id' => 'required',
                     'skill_id' => 'required',
                     'jenis_kelamin' => 'required',
                     'tgl_lahir' => 'required',
-                    'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'foto_mhs' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ]);
 
-                $imageName = time() . '.' . $request->foto->extension();
-                $request->foto->move(public_path('images'), $imageName);
+                $imageName = time() . '.' . $request->foto_mhs->extension();
+                $request->foto_mhs->move(public_path('images'), $imageName);
                 $mhs->update($request->all());
                 return redirect()->route('profile.index');
                 break;

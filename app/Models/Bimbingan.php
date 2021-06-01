@@ -12,7 +12,7 @@ class Bimbingan extends Model
     protected $table = 'bimbingan';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'catatan','tgl_bimbingan','mhs_id','dosen_id', 'magang_id'
+        'catatan','tgl_bimbingan','file', 'feedback', 'mhs_id','dosen_id', 'magang_id'
     ];
 
     public function mahasiswa(){

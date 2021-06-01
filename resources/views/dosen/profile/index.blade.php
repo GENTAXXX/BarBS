@@ -36,19 +36,25 @@ Profile Dosen
                                 <img class="profile-user-img img-fluid img-circle" src="{{ asset('$dosen->foto') }}" alt="User profile picture">
                             </div>
 
-                            <h3 class="profile-username text-center">{{ $dosen->nama }}</h3>
+                            <h3 class="profile-username text-center">{{ $dosen->nama_dosen }}</h3>
 
                             <p class="text-muted text-center">Software Engineer</p>
 
                             <strong><i class="fas fa-mail-bulk mr-1"></i> Telepon</strong>
 
-                            <p class="text-muted">{{ $dosen->telepon }}</p>
+                            <p class="text-muted">{{ $dosen->telepon_dosen }}</p>
 
                             <hr>
 
                             <strong><i class="fas fa-mail-bulk mr-1"></i> NIP</strong>
 
                             <p class="text-muted">{{ $dosen->NIP }}</p>
+
+                            <hr>
+
+                            <strong><i class="fas fa-mail-bulk mr-1"></i> Departemen</strong>
+
+                            <p class="text-muted">{{ $dosen->depart['nama_depart'] }}</p>
 
                         </div>
                         <div class="form-group row">

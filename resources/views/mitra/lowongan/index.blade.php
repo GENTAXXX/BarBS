@@ -64,7 +64,7 @@ List Lowongan
                                 @foreach ($low as $low)
                                 <tr>
                                     <td class="text-center">{{ $no++ }}</a></td>
-                                    <td class="text-center">{{ $low->nama }}</td>
+                                    <td class="text-center">{{ $low->nama_low }}</td>
                                     <td class="text-center">{{ $low->deskripsi }}</td>
                                     <td class="text-center">{{ $low->lokasi }}</td>
                                     <td class="text-center"><span>

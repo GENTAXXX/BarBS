@@ -51,7 +51,7 @@ Tambah Lowongan
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Nama Lowongan</label>
-                                <input type="text" class="form-control" name="nama" autofocus />
+                                <input type="text" class="form-control" name="nama_low" autofocus />
                             </div>
                             <div class=" form-group">
                                 <label>Deskripsi Lowongan</label>
@@ -74,7 +74,7 @@ Tambah Lowongan
                                 <select class="form-control" name="mitra_id">
                                     <option value="">- Pilih Mitra -</option>
                                     @foreach ($mitra as $mitra)
-                                    <option value="{{ $mitra->id }}">{{ $mitra->nama }}</option>
+                                    <option value="{{ $mitra->id }}">{{ $mitra->nama_mitra }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -89,11 +89,11 @@ Tambah Lowongan
                             </div>
                             <div class="form-group">
                                 <label>Telepon</label>
-                                <input type="number" class="form-control" name="telepon" />
+                                <input type="number" class="form-control" name="telepon_low" />
                             </div>
                             <div class="form-group">
                                 <label>Foto</label>
-                                <input type="file" class="form-control" name="foto" />
+                                <input type="file" class="form-control" name="foto_low" />
                             </div>
                         </div>
                         <!-- /.card-body -->

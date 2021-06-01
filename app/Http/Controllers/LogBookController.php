@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Logbook;
+use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,6 +14,21 @@ class LogBookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function logbookDetail($id){
+        $data = Mahasiswa::join('logbook', 'mahasiswa.id', '=', 'logbook.mhs_id')
+        ->where('mahasiswa.id', $id)
+        ->find($id);
+        return view('spv.logbook.edit', compact('data'));
+    }
+
+    public function mhsLogbook(){
+        $data = Mahasiswa::join('logbook', 'mahasiswa.id', '=', 'logbook.mhs_id')
+        ->join('supervisor', 'logbook.spv_id', '=', 'supervisor.id')
+        ->where('supervisor.user_id', Auth::id())
+        ->get();
+        return view('spv.logbook.index', compact('data'));
+    }
+
     public function index()
     {
         $log = Logbook::join('magang', 'logbook.magang_id', '=', 'magang.id')

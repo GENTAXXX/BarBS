@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bimbingan;
+use App\Models\Departemen;
 use App\Models\Dosen;
 use App\Models\Logbook;
 use App\Models\Lowongan;
 use App\Models\Magang;
 use App\Models\Mahasiswa;
+use App\Models\Mitra;
+use App\Models\Supervisor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,7 +36,9 @@ class ApplyController extends Controller
         ->join('dosen', 'magang.dosen_id', '=', 'dosen.id')
         ->select('mahasiswa.*', 'lowongan.*', 'dosen.*')
         ->find($id);
-        return view('mitra.pendaftar.edit', compact('data'));
+        $idlogin = Mitra::where('user_id', Auth::id())->get();
+        $spv = Supervisor::where('mitra_id', $idlogin->id);
+        return view('mitra.pendaftar.edit', compact('data', 'spv'));
     }
 
     public function listPengajuan(){
@@ -42,11 +47,12 @@ class ApplyController extends Controller
     }
 
     public function pengajuan($id){
-        $data = Magang::join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
-        ->join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
-        ->select('mahasiswa.*', 'lowongan.*')
+        $data = Magang::join('mahasiswa as mhs', 'magang.mhs_id', '=', 'mhs.id')
+        ->join('lowongan as low', 'magang.lowongan_id', '=', 'low.id')
+        ->select('mhs.*', 'low.*')
         ->find($id);
-        $dosen = Dosen::where('depart_id', Auth::id());
+        $idlogin = Departemen::where('user_id', Auth::id())->get();
+        $dosen = Dosen::where('depart_id', $idlogin->id);
         return view('depart.pengajuan.edit', compact('data', 'dosen'));
     }
 
@@ -104,7 +110,7 @@ class ApplyController extends Controller
     }
     
     public function approval(Request $request, $id){
-        $magang = Magang::where('id', $id);
+        $magang = Magang::where('id', $id)->first();
         $magang->update([
             'tgl_mulai' => $request->tgl_mulai,
             'tgl_selesai' => $request->tgl_selesai,
@@ -121,9 +127,12 @@ class ApplyController extends Controller
                 Bimbingan::create([
                     'mhs_id' => $magang['mhs_id'],
                     'dosen_id' => $magang['dosen_id'],
+                    'magang_id' => $magang['id']
                 ]);
                 Logbook::create([
-                    'magang_id' => $magang['id']
+                    'magang_id' => $magang['id'],
+                    'mhs_id' => $magang['mhs_id'],
+                    'spv_id' => $magang['spv_id']
                 ]);
                 break;
             case '0':

@@ -52,7 +52,7 @@ Tambah Lowongan
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Nama Lowongan</label>
-                                <input type="text" class="form-control" name="nama" value="{{ $low->nama }}" />
+                                <input type="text" class="form-control" name="nama_low" value="{{ $low->nama_low }}" />
                             </div>
                             <div class=" form-group">
                                 <label>Deskripsi Lowongan</label>
@@ -75,7 +75,7 @@ Tambah Lowongan
                                 <select class="form-control" name="mitra_id">
                                     <option value="">- Pilih Mitra -</option>
                                     @foreach ($mitra as $mitra)
-                                    <option value="{{ $mitra->id }}">{{ $mitra->nama }}</option>
+                                    <option value="{{ $mitra->id }}">{{ $mitra->nama_mitra }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -84,17 +84,17 @@ Tambah Lowongan
                                 <select class="form-control" name="kategori_id">
                                     <option value="">- Pilih Kategori -</option>
                                     @foreach ($kategori as $kat)
-                                    <option value="{{ $kat->id }}">{{ $kat->nama }}</option>
+                                    <option value="{{ $kat->id }}">{{ $kat->kategori }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label>Telepon</label>
-                                <input type="number" class="form-control" name="telepon" value="{{ $low->telepon }}" />
+                                <input type="number" class="form-control" name="telepon_low" value="{{ $low->telepon_low }}" />
                             </div>
                             <div class="form-group">
                                 <label>Foto</label>
-                                <input type="file" class="form-control" name="foto" value="{{ $low->foto }}" />
+                                <input type="file" class="form-control" name="foto_low" value="{{ $low->foto_low }}" />
                             </div>
                         </div>
                         <!-- /.card-body -->

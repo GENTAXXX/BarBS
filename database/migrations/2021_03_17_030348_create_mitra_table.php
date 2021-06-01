@@ -16,11 +16,11 @@ class CreateMitraTable extends Migration
         Schema::create('mitra', function (Blueprint $table) {
             $table->id('id');
             $table->unsignedBigInteger('user_id');
-            $table->string('nama');
-            $table->string('alamat')->unique()->nullable();
-            $table->string('telepon')->unique()->nullable();
-            $table->string('fax')->unique()->nullable();
-            $table->string('foto')->nullable()->default('avatar.png');
+            $table->string('nama_mitra');
+            $table->string('alamat_mitra')->unique()->nullable();
+            $table->string('telepon_mitra')->unique()->nullable();
+            $table->string('fax_mitra')->unique()->nullable();
+            $table->string('foto_mitra')->nullable()->default('avatar.png');
             $table->unsignedBigInteger('kab_id')->nullable();
             $table->timestamps();
         });
