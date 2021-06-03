@@ -37,7 +37,7 @@ class ApplyController extends Controller
         ->select('mahasiswa.*', 'lowongan.*', 'dosen.*')
         ->find($id);
         $idlogin = Mitra::where('user_id', Auth::id())->get();
-        $spv = Supervisor::where('mitra_id', $idlogin->id);
+        $spv = Supervisor::where('mitra_id', $idlogin);
         return view('mitra.pendaftar.edit', compact('data', 'spv'));
     }
 
@@ -110,7 +110,7 @@ class ApplyController extends Controller
     }
     
     public function approval(Request $request, $id){
-        $magang = Magang::where('id', $id)->first();
+        $magang = Magang::find($id);
         $magang->update([
             'tgl_mulai' => $request->tgl_mulai,
             'tgl_selesai' => $request->tgl_selesai,
@@ -142,7 +142,7 @@ class ApplyController extends Controller
                 ]);
                 break;
         }
-        return redirect()->route('');
+        return redirect()->route('pendaftar.index');
     }
 
     /**
