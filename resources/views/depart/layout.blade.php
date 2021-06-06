@@ -10,10 +10,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
-    <link href="{{ asset('assets/img/sim-vertical-white.png') }}" rel="icon">
+    <link href="{{ asset('assets/img/sim-green-hat.png') }}" rel="icon">
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Theme style -->
@@ -22,10 +23,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-
-        <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
@@ -35,33 +33,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <!-- Brand Logo -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-1">
+        <!-- Brand Logo -->
             <a href="profile.html" class="">
-                <img src="{{ asset('assets/img/sim-horizontal-white.png') }}" alt="" class="e " style="height: 75px;">
+                <img src="{{ asset('assets/img/sim-green.png') }}" alt="" class="m-4 " style="height: 75px;">
             </a>
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="{{ asset('dist/img/logo-ugm.jpg') }}" class="img-circle elevation-2" alt="User Image">
+                        <img src="{{ asset('assets/img/logo-ugm.jpg') }}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="profile-departemen.html" class="d-block">{{ Auth::user()->name }}</a>
+                        <a href="{{ url('profile') }}" class="d-block">{{ Auth::user()->name }}</a>
                     </div>
                 </div>
-
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+                        with font-awesome or any other icon font library -->
                         <li class="nav-item menu-open">
-
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="dashboard-departemen-daftar.html" class="nav-link active">
+                                    <a href="{{ route('depart.mhs') }}" class="nav-link active">
                                         <i class="far fa-copy nav-icon"></i>
                                         <p>Daftar Mahasiswa</p>
                                     </a>
@@ -70,9 +66,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();" class="nav-link">
                                         <i class="nav-icon fas fa-power-off"></i>
-                                        <p>
-                                            {{ __('Logout') }}
-                                        </p>
+                                        <p>{{ __('Logout') }}</p>
                                     </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
@@ -84,7 +78,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </nav>
                 <!-- /.sidebar-menu -->
             </div>
-            <!-- /.sidebar -->
+        <!-- /.sidebar -->
         </aside>
         @yield('konteng')
         <footer class="main-footer">
@@ -100,5 +94,4 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- AdminLTE App -->
     <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 </body>
-
 </html>

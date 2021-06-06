@@ -49,7 +49,13 @@ List Mahasiswa
                             <td class="text-center">{{ $mhs->nama_mhs }}</td>
                             <td class="text-center">{{ $mhs->NIM }}</td>
                             <td class="text-center">
-                                <label class="badge badge-success">{{ $mhs->status['status'] }}</label>
+                                @if ($mhs->status_id == 1)
+                                    <label class="badge badge-warning">Belum Magang</label>
+                                @elseif ($mhs->status_id == 2)
+                                    <label class="badge badge-success">Sedang Magang</label>
+                                @elseif ($mhs->status_id == 3)
+                                    <label class="badge badge-danger">Sudah Magang</label>
+                                @endif
                             </td>
                             <td class="text-center">
                                 <a href="dashboard-departemen-detail.html" class="nav-link">Details</a>

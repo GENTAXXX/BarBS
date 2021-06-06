@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ApplyController;
 use App\Http\Controllers\BimbinganController;
+use App\Http\Controllers\LogBookController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,7 +38,7 @@ Route::group(['middleware' => 'is_depart'], function () {
     //CRUD Users
     Route::resource('users', UserController::class);
     //List Mahasiswa
-    Route::get('depart/mahasiswa', [DepartController::class, 'listMhs']);
+    Route::get('depart/mahasiswa', [DepartController::class, 'listMhs'])->name('depart.mhs');
     Route::get('depart/mahasiswa/{id}', [DepartController::class, 'show']);
     //List Lowongan
     Route::get('depart/lowongan', [LowonganController::class, 'index'])->name('depart.lowongan');

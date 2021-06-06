@@ -33,8 +33,10 @@ class LogBookController extends Controller
     {
         $log = Logbook::join('magang', 'logbook.magang_id', '=', 'magang.id')
         ->join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
+        ->join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
         ->where('mahasiswa.user_id', Auth::id())
         ->get();
+        dd($log);
         return view('mhs.logbook.index', compact('log'));
     }
 
@@ -61,7 +63,6 @@ class LogBookController extends Controller
             'kegiatan' => 'required',
             'deskripsi' => 'required',
             'saran' =>'required',
-            'magang_id' => 'required'
         ]);
 
         Logbook::create($request->all());
@@ -106,7 +107,6 @@ class LogBookController extends Controller
             'kegiatan' => 'required',
             'deskripsi' => 'required',
             'saran' =>'required',
-            'magang_id' => 'required'
         ]);
 
         $log = Logbook::find($id);

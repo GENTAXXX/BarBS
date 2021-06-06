@@ -14,7 +14,7 @@ class DepartController extends Controller
      */
     public function listMhs()
     {
-        $mhs = Mahasiswa::orderBy('nama', 'asc')->get();
+        $mhs = Mahasiswa::orderBy('nama_mhs', 'asc')->get();
 
         return view('depart.mhs.index', compact('mhs'));
 
