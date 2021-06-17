@@ -43,21 +43,27 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="index.html" class="nav-link">
+                            <a href="{{ route('mahasiswa.home') }}" class="nav-link">
+                            <i class="fa fa-home nav-icon"></i>
+                            <p>Beranda</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('/') }}" class="nav-link">
                             <i class="nav-icon fas fa-search"></i>
                             <p>Cari Lowongan</p>
                             </a>
                         </li>
                         <li class="nav-item menu-open">
                             <li class="nav-item">
-                                <a href="dashboard-mahasiswa-mitra.html" class="nav-link ">
+                                <a href="dashboard-mahasiswa-mitra.html" class="nav-link">
                                 <i class="far fa-copy nav-icon"></i>
                                 <p>Lamaran diajukan</p>
                                 </a>
                             </li>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('logbook.index') }}" class="nav-link active">
+                            <a href="{{ route('logbook.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-book-open"></i>
                             <p>Log Book</p>
                             </a>

@@ -1,7 +1,7 @@
-@extends('depart.layout')
+@extends('dosen.layout')
 
 @section('title')
-Daftar Mahasiswa
+Daftar Bimbingan Mahasiswa
 @endsection
 
 @section('konteng')
@@ -15,8 +15,8 @@ Daftar Mahasiswa
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="profile-departemen.html">Home</a></li>
-                        <li class="breadcrumb-item active">Daftar Mahasiswa</li>
+                        <li class="breadcrumb-item"><a href="{{ route('dospem.home') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Daftar Bimbingan Mahasiswa</li>
                     </ol>
                 </div>
             </div>
@@ -34,31 +34,18 @@ Daftar Mahasiswa
                 <table class="table table-striped table-valign-middle">
                     <thead>
                         <tr>
-                            <th class="text-center">No</th>
                             <th class="text-center">Nama</th>
                             <th class="text-center">NIM</th>
-                            <th class="text-center">Status</th>
                             <th class="text-center">Detail</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @php $no = 1; @endphp
-                        @foreach ($mhs as $mhs)
+                        @foreach ($data as $mhs)
                         <tr>
-                            <td class="text-center">{{ $no++ }}</td>
                             <td class="text-center">{{ $mhs->nama_mhs }}</td>
                             <td class="text-center">{{ $mhs->NIM }}</td>
                             <td class="text-center">
-                                @if ($mhs->status_id == 1)
-                                    <label class="badge badge-warning">Belum Magang</label>
-                                @elseif ($mhs->status_id == 2)
-                                    <label class="badge badge-success">Sedang Magang</label>
-                                @elseif ($mhs->status_id == 3)
-                                    <label class="badge badge-danger">Sudah Magang</label>
-                                @endif
-                            </td>
-                            <td class="text-center">
-                                <a href="{{ route('depart.detailMhs', $mhs->id) }}" class="nav-link">Lihat</a>
+                                <a href="{{ route('dospem.bimbingan', $mhs->id) }}" class="nav-link">Lihat</a>
                             </td>
                         </tr>
                         @endforeach

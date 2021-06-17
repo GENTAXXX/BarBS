@@ -15,10 +15,9 @@ class LogBookController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function logbookDetail($id){
-        $data = Mahasiswa::join('logbook', 'mahasiswa.id', '=', 'logbook.mhs_id')
-        ->where('mahasiswa.id', $id)
-        ->find($id);
-        return view('spv.logbook.edit', compact('data'));
+        $mhs = Mahasiswa::find($id);
+        $data = Logbook::where('mhs_id', $mhs->id)->get();
+        return view('spv.logbook.show', compact('data', 'mhs'));
     }
 
     public function mhsLogbook(){
@@ -33,10 +32,10 @@ class LogBookController extends Controller
     {
         $log = Logbook::join('magang', 'logbook.magang_id', '=', 'magang.id')
         ->join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
-        ->join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
+        // ->join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
         ->where('mahasiswa.user_id', Auth::id())
         ->get();
-        dd($log);
+        // dd($log);
         return view('mhs.logbook.index', compact('log'));
     }
 
@@ -61,7 +60,7 @@ class LogBookController extends Controller
         $request->validate([
             'tanggal' => 'required',
             'kegiatan' => 'required',
-            'deskripsi' => 'required',
+            'deskripsi_log' => 'required',
             'saran' =>'required',
         ]);
 
@@ -105,7 +104,7 @@ class LogBookController extends Controller
         $request->validate([
             'tanggal' => 'required',
             'kegiatan' => 'required',
-            'deskripsi' => 'required',
+            'deskripsi_log' => 'required',
             'saran' =>'required',
         ]);
 

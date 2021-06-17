@@ -41,13 +41,13 @@ Profile Mahasiswa
                             </a>
                         </div>
                         <div class="col-lg-6 pt-4 pt-lg-0">
-                            <h3>{{ $log->nama_low }}</h3>
+                            <h3></h3>
                             <ul class="list-unstyled ">
                                 <span>
-                                <li class="d-flex align-items-start m-3"><span><img src="{{ asset('assets/img/building.svg') }}" alt="" style="height: 20px;width: 20px;" class=""></span><span class="ml-3"></span></li>
+                                    <li class="d-flex align-items-start m-3"><span><img src="{{ asset('assets/img/building.svg') }}" alt="" style="height: 20px;width: 20px;" class=""></span><span class="ml-3"></span></li>
                                 </span>
                                 <span>
-                                <li class="d-flex align-items-start m-3"><span><img src="{{ asset('assets/img/placeholder.svg') }}" alt="" style="height: 20px;width: 20px;"></span><span class="ml-3">{{ $log->lokasi}}</span></li>
+                                    <li class="d-flex align-items-start m-3"><span><img src="{{ asset('assets/img/placeholder.svg') }}" alt="" style="height: 20px;width: 20px;"></span><span class="ml-3"></span></li>
                                 </span>
                                 <span>
                                     <li class="d-flex align-items-start m-3"><span><img src="{{ asset('assets/img/filter.svg') }}" alt="" style="height: 20px;width: 20px;"></span><span class="ml-3"></span></li>
@@ -84,12 +84,12 @@ Profile Mahasiswa
                             </thead>
                             <tbody>
                                 @php $no = 1; @endphp
-                                @foreach ($user as $user)
+                                @foreach ($log as $log)
                                 <tr>
                                     <td>{{ $no++ }}</a></td>
                                     <td>{{ $log->tanggal }}</td>
                                     <td>{{ $log->kegiatan }}</td>
-                                    <td>{{ $log->deskripsi }}</td>
+                                    <td>{{ $log->deskripsi_log }}</td>
                                     <td>{{ $log->saran }}</td>
                                 </tr>
                                 @endforeach

@@ -65,7 +65,7 @@ List Lowongan
                                 <tr>
                                     <td class="text-center">{{ $no++ }}</a></td>
                                     <td class="text-center">{{ $low->nama_low }}</td>
-                                    <td class="text-center">{{ $low->deskripsi }}</td>
+                                    <td class="text-center">{{ $low->deskripsi_low }}</td>
                                     <td class="text-center">{{ $low->lokasi }}</td>
                                     <td class="text-center"><span>
                                             <form action="{{ route('lowongan.destroy', $low->id) }}" method="post">

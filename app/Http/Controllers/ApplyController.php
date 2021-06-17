@@ -36,8 +36,8 @@ class ApplyController extends Controller
         ->join('dosen', 'magang.dosen_id', '=', 'dosen.id')
         ->select('mahasiswa.*', 'lowongan.*', 'dosen.*')
         ->find($id);
-        $idlogin = Mitra::where('user_id', Auth::id())->get();
-        $spv = Supervisor::where('mitra_id', $idlogin);
+        // $idlogin = Mitra::where('user_id', Auth::id())->get();
+        $spv = Supervisor::all();
         return view('mitra.pendaftar.edit', compact('data', 'spv'));
     }
 
@@ -51,8 +51,8 @@ class ApplyController extends Controller
         ->join('lowongan as low', 'magang.lowongan_id', '=', 'low.id')
         ->select('mhs.*', 'low.*')
         ->find($id);
-        $idlogin = Departemen::where('user_id', Auth::id())->get();
-        $dosen = Dosen::where('depart_id', $idlogin->id);
+        // $idlogin = Departemen::where('user_id', Auth::id())->get();
+        $dosen = Dosen::all();
         return view('depart.pengajuan.edit', compact('data', 'dosen'));
     }
 
@@ -115,7 +115,7 @@ class ApplyController extends Controller
             'tgl_mulai' => $request->tgl_mulai,
             'tgl_selesai' => $request->tgl_selesai,
             'spv_id' => $request->spv_id,
-            'approval' => $request->approval
+            'approval' => $request->approval,
         ]);
 
         switch ($magang->approval){

@@ -15,10 +15,9 @@ class BimbinganController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function bimbinganDetail($id){
-        $data = Mahasiswa::join('bimbingan', 'mahasiswa.id', '=', 'bimbingan.mhs_id')
-        ->where('mahasiswa.id', $id)
-        ->find($id);
-        return view('dosen.bimbingan.edit', compact('data'));
+        $mhs = Mahasiswa::find($id);
+        $data = Bimbingan::where('mhs_id', $mhs->id)->get();
+        return view('dosen.bimbingan.edit', compact('data', 'mhs'));
     }
 
     public function mhsBimbingan(){

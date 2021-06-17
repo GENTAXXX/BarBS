@@ -30,22 +30,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
-
-
             </ul>
-
-
         </nav>
         <!-- /.navbar -->
-
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="dashboard-mahasiswa.html" class="">
                 <img src="{{ asset('assets/img/sim-horizontal-white.png') }}" alt="" class="e " style="height: 75px;">
-
             </a>
-
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
@@ -57,31 +50,23 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <a href="profile.html" class="d-block">{{ Auth::user()->name }}</a>
                     </div>
                 </div>
-
                 <!-- Sidebar Menu -->
                 <nav class=" mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                        <li class="nav-item menu-open">
-                            <a href="#" class="nav-link active">
-                                <i class="nav-icon fas fa-pen"></i>
-                                <p>
-                                    Kelola Lowongan
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
+               <li class="nav-item menu-open">
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('lowongan.index') }}" class="nav-link active">
-                                        <i class="far fa-copy nav-icon"></i>
-                                        <p>Lowongan</p>
+                                    <a href="{{ route('supervisor.home') }}" class="nav-link">
+                                    <i class="fa fa-home nav-icon"></i>
+                                    <p>Beranda</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="dashboard-mitra-daftar.html" class="nav-link">
-                                        <i class="far fa-copy nav-icon"></i>
-                                        <p>Pendaftar</p>
+                                    <a href="{{ route('dospem.index') }}" class="nav-link">
+                                    <i class="far fa-copy nav-icon"></i>
+                                    <p>Bimbingan Mahasiswa</p>
                                     </a>
                                 </li>
                             </ul>

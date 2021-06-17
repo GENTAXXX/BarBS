@@ -39,7 +39,7 @@ Route::group(['middleware' => 'is_depart'], function () {
     Route::resource('users', UserController::class);
     //List Mahasiswa
     Route::get('depart/mahasiswa', [DepartController::class, 'listMhs'])->name('depart.mhs');
-    Route::get('depart/mahasiswa/{id}', [DepartController::class, 'show']);
+    Route::get('depart/mahasiswa/{id}', [DepartController::class, 'detailMhs'])->name('depart.detailMhs');
     //List Lowongan
     Route::get('depart/lowongan', [LowonganController::class, 'index'])->name('depart.lowongan');
     //Pengajuan

@@ -56,7 +56,7 @@ Tambah Lowongan
                             </div>
                             <div class=" form-group">
                                 <label>Deskripsi Lowongan</label>
-                                <textarea class="form-control" name="deskripsi" value="{{ $low->deskripsi }}"></textarea>
+                                <textarea class="form-control" name="deskripsi_low" value="{{ $low->deskripsi_low }}"></textarea>
                             </div>
                             <div class=" form-group">
                                 <label>Jumlah Mahasiswa</label>

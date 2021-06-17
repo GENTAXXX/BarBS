@@ -57,9 +57,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <li class="nav-item menu-open">
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('depart.mhs') }}" class="nav-link active">
-                                        <i class="far fa-copy nav-icon"></i>
-                                        <p>Daftar Mahasiswa</p>
+                                    <a href="{{ route('depart.home') }}" class="nav-link">
+                                    <i class="fa fa-home nav-icon"></i>
+                                    <p>Beranda</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('users.index') }}" class="nav-link">
+                                        <i class="fa fa-user nav-icon"></i>
+                                        <p>Users</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('depart.mhs') }}" class="nav-link">
+                                        <i class="fa fa-graduation-cap nav-icon"></i>
+                                        <p>Mahasiswa</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">

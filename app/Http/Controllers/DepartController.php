@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Mahasiswa;
+use App\Models\Magang;
 
 class DepartController extends Controller
 {
@@ -12,14 +13,20 @@ class DepartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function detailMhs($id){
+        $mhs = Mahasiswa::find($id);
+        $data = Magang::join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
+        ->where('mhs_id', $mhs->id)
+        ->get();
+        dd($data);
+        return view('depart.mhs.show', compact('mhs', 'data'));
+    }
+
     public function listMhs()
     {
         $mhs = Mahasiswa::orderBy('nama_mhs', 'asc')->get();
 
         return view('depart.mhs.index', compact('mhs'));
-
-        // return view('depart.listMhs', compact('mahasiswa'))
-        // ->with('i', (request()->input('page', 1) - 1) * 5);
     }
     
     public function departHome()

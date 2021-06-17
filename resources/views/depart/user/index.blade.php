@@ -13,15 +13,13 @@ Daftar User
                 <div class="col-sm-6">
                     <h1 class="m-0">Daftar User</h1>
                     <a href="{{ route('users.create') }}" class="nav-link">
-                        <button type="submit" class="btn btn-primary">
-                            Buat User
-                        </button>
+                        <button type="submit" class="btn btn-primary">Buat User</button>
                     </a>
 
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{ route('depart.home') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('depart.home') }}">Beranda</a></li>
                         <li class="breadcrumb-item active">Daftar User</li>
                     </ol>
                 </div><!-- /.col -->

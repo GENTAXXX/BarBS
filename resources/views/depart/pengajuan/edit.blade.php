@@ -128,7 +128,7 @@ Edit Pengajuan
                     <tr>
                       <td class="text-center"> 1</td>
                       <td class="text-center">{{ $data->nama_low }}</td>
-                      <td class="text-center">{{ $data->deskripsi }}</td>
+                      <td class="text-center">{{ $data->deskripsi_low }}</td>
                       <td class="text-center">{{ $data->lokasi }}</td>
                     </tr>
                     </tbody>

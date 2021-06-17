@@ -16,7 +16,7 @@ class CreateLowonganTable extends Migration
         Schema::create('lowongan', function (Blueprint $table) {
             $table->id('id');
             $table->string('nama_low')->unique();
-            $table->string('deskripsi');
+            $table->string('deskripsi_low');
             $table->string('telepon_low')->unique();
             $table->integer('jumlah_mhs');
             $table->string('durasi');

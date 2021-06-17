@@ -17,7 +17,7 @@ class CreateLogbookTable extends Migration
             $table->id('id');
             $table->date('tanggal')->nullable();
             $table->string('kegiatan')->nullable();
-            $table->string('deskripsi')->nullable();
+            $table->string('deskripsi_log')->nullable();
             $table->string('saran')->nullable();
             $table->unsignedBigInteger('magang_id')->nullable();
             $table->unsignedBigInteger('spv_id')->nullable();

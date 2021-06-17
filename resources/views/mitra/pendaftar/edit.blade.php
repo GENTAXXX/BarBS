@@ -132,9 +132,9 @@ Edit Pendaftar
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td><a href="#">1</a></td>
+                                                <td class="text-center">1</td>
                                                 <td class="text-center">{{ $data->nama_low }}</td>
-                                                <td class="text-center">{{ $data->deskripsi }}</td>
+                                                <td class="text-center">{{ $data->deskripsi_low }}</td>
                                                 <td class="text-center">{{ $data->lokasi }}</td>
                                             </tr>
                                         </tbody>

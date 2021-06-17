@@ -51,7 +51,7 @@ class LowonganController extends Controller
     {
         $request->validate([
             'nama_low' => 'required',
-            'deskripsi' => 'required',
+            'deskripsi_low' => 'required',
             'telepon_low' => 'required',
             'jumlah_mhs' => 'required',
             'durasi' => 'required',
@@ -105,7 +105,7 @@ class LowonganController extends Controller
     {
         $request->validate([
             'nama_low' => 'required',
-            'deskripsi' => 'required',
+            'deskripsi_low' => 'required',
             'telepon_low' => 'required',
             'jumlah_mhs' => 'required',
             'durasi' => 'required',
@@ -115,8 +115,8 @@ class LowonganController extends Controller
             'foto_low' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $imageName = time() . '.' . $request->foto->extension();
-        $request->foto->move(public_path('images'), $imageName);
+        $imageName = time() . '.' . $request->foto_low->extension();
+        $request->foto_low->move(public_path('images'), $imageName);
 
         $lowongan->update($request->all());
 

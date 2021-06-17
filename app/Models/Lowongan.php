@@ -12,7 +12,7 @@ class Lowongan extends Model
     protected $table = 'lowongan';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'nama_low','deskripsi','telepon_low','jumlah_mhs','durasi','mitra_id','kategori_id','lokasi','foto_low'
+        'nama_low','deskripsi_low','telepon_low','jumlah_mhs','durasi','mitra_id','kategori_id','lokasi','foto_low'
     ];
 
     public function kategori(){

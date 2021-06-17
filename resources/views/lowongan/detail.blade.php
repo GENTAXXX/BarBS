@@ -54,7 +54,7 @@ Detail Lowongan
             <div class=" container portfolio-info col-md-10">
                 <div class=" m-lg-5 icon-box card-list">
                     <p><strong>Deskripsi Lowongan</strong></p>
-                    <p>{{ $low->deskripsi }}</p>
+                    <p>{{ $low->deskripsi_low }}</p>
                     <strong> Kemampuan</strong>
                     <p>
                         <i>
