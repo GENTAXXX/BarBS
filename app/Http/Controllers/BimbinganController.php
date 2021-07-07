@@ -14,6 +14,10 @@ class BimbinganController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function feedbackBimbingan($id){
+        $bim = Bimbingan::find($id);
+    }
+
     public function bimbinganDetail($id){
         $mhs = Mahasiswa::find($id);
         $data = Bimbingan::where('mhs_id', $mhs->id)->get();

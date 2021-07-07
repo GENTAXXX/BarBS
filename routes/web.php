@@ -85,6 +85,7 @@ Route::group(['middleware' => 'is_mahasiswa'], function () {
         Route::put('mahasiswa/bimbingan/{id}', [BimbinganController::class, 'update'])->name('bimbingan.update');
         Route::delete('mahasiswa/bimbingan/{id}', [BimbinganController::class, 'delete'])->name('bimbingan.delete');
         //Logbook
+        Route::get('mahasiswa/logbook/cetak', [LogBookController::class, 'print'])->name('logbook.print');
         Route::get('mahasiswa/logbook', [LogBookController::class, 'index'])->name('logbook.index');
         Route::get('mahasiswa/logbook/{id}', [LogBookController::class, 'show'])->name('logbook.show');
         Route::post('mahasiswa/logbook', [LogBookController::class, 'store'])->name('logbook.store');

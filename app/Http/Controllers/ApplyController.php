@@ -124,16 +124,6 @@ class ApplyController extends Controller
                 $mhs->update([
                     'status_id' => '2'
                 ]);
-                Bimbingan::create([
-                    'mhs_id' => $magang['mhs_id'],
-                    'dosen_id' => $magang['dosen_id'],
-                    'magang_id' => $magang['id']
-                ]);
-                Logbook::create([
-                    'magang_id' => $magang['id'],
-                    'mhs_id' => $magang['mhs_id'],
-                    'spv_id' => $magang['spv_id']
-                ]);
                 break;
             case '0':
                 $mhs = Mahasiswa::where('id', $magang->mhs_id);

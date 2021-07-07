@@ -93,9 +93,9 @@ Detail Logbook Mahasiswa
                                 </button>
                             </div>
                         </div>
-                        <div class="card-body p-0">
+                        <div class="card-body p-6">
                             <div class="table-responsive">
-                                <table class="table m-0">
+                                <table id="logbook" class="table m-0">
                                     <thead>
                                         <tr>
                                             <th>Nomor</th>
@@ -112,7 +112,7 @@ Detail Logbook Mahasiswa
                                             <td>{{ $no++ }}</td>
                                             <td>{{ $log->tanggal }}</td>
                                             <td>{{ $log->kegiatan }}</td>
-                                            <td>{{ $log->deskripsi }}</td>
+                                            <td>{{ $log->deskripsi_log }}</td>
                                             <td>{{ $log->saran }}</td>
                                         </tr>
                                         @endforeach
@@ -126,4 +126,9 @@ Detail Logbook Mahasiswa
         </div>
     </section>
 </div>
+<script>
+$(document).ready( function () {
+    $('#logbook').DataTable();
+} );
+</script>
 @endsection

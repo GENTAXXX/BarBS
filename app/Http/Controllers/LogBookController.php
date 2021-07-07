@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Logbook;
+use App\Models\Lowongan;
+use App\Models\Magang;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Dompdf\Dompdf;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class LogBookController extends Controller
 {
@@ -14,15 +18,28 @@ class LogBookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function print(){
+        $logs = Logbook::join('magang', 'logbook.magang_id', '=', 'magang.id')
+        ->join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
+        ->where('mahasiswa.user_id', Auth::id())
+        ->get();
+        // dd($logs);
+        // view()->share('logs', $logs);
+        $pdf = PDF::loadView('mhs.logbook.print', compact('logs'));
+        return $pdf->download('Logbook.pdf');
+        // return view('mhs.logbook.print', compact('logs'));
+    }
+
     public function logbookDetail($id){
         $mhs = Mahasiswa::find($id);
-        $data = Logbook::where('mhs_id', $mhs->id)->get();
+        $data = Logbook::join('magang', 'logbook.magang_id', '=', 'magang.id')
+        ->where('magang.mhs_id', $mhs->id)->get();
         return view('spv.logbook.show', compact('data', 'mhs'));
     }
 
     public function mhsLogbook(){
-        $data = Mahasiswa::join('logbook', 'mahasiswa.id', '=', 'logbook.mhs_id')
-        ->join('supervisor', 'logbook.spv_id', '=', 'supervisor.id')
+        $data = Mahasiswa::join('magang', 'mahasiswa.id', '=', 'magang.mhs_id')
+        ->join('supervisor', 'magang.spv_id', '=', 'supervisor.id')
         ->where('supervisor.user_id', Auth::id())
         ->get();
         return view('spv.logbook.index', compact('data'));
@@ -30,13 +47,13 @@ class LogBookController extends Controller
 
     public function index()
     {
-        $log = Logbook::join('magang', 'logbook.magang_id', '=', 'magang.id')
+        $low = Lowongan::join('magang', 'lowongan.id', '=', 'magang.lowongan_id')->first();
+        $logs = Logbook::join('magang', 'logbook.magang_id', '=', 'magang.id')
         ->join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
-        // ->join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
         ->where('mahasiswa.user_id', Auth::id())
         ->get();
-        // dd($log);
-        return view('mhs.logbook.index', compact('log'));
+        // dd($logs);
+        return view('mhs.logbook.index', compact('logs', 'low'));
     }
 
     /**
@@ -57,14 +74,22 @@ class LogBookController extends Controller
      */
     public function store(Request $request)
     {
+        $magang = Magang::join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
+        ->where('mahasiswa.user_id', Auth::id())->first();
+
         $request->validate([
             'tanggal' => 'required',
             'kegiatan' => 'required',
             'deskripsi_log' => 'required',
             'saran' =>'required',
         ]);
-
-        Logbook::create($request->all());
+        Logbook::create([
+            'tanggal' => $request->tanggal,
+            'kegiatan' => $request->kegiatan,
+            'deskripsi_log' => $request->deskripsi_log,
+            'saran' => $request->saran,
+            'magang_id' => $magang->id,
+        ]);
         return redirect()->route('logbook.index');
     }
 

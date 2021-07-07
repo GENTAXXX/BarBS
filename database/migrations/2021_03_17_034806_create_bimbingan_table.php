@@ -19,15 +19,11 @@ class CreateBimbinganTable extends Migration
             $table->date('tgl_bimbingan')->nullable();
             $table->string('file')->nullable();
             $table->string('feedback')->nullable();
-            $table->unsignedBigInteger('mhs_id')->nullable();
-            $table->unsignedBigInteger('dosen_id')->nullable();
             $table->unsignedBigInteger('magang_id')->nullable();
             $table->timestamps();
         });
 
         Schema::table('bimbingan', function ($table) {
-            $table->foreign('mhs_id')->references('id')->on('mahasiswa')->onDelete('cascade');
-            $table->foreign('dosen_id')->references('id')->on('dosen')->onDelete('cascade');
             $table->foreign('magang_id')->references('id')->on('magang')->onDelete('cascade');
         });
     }

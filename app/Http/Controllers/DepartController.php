@@ -17,8 +17,8 @@ class DepartController extends Controller
         $mhs = Mahasiswa::find($id);
         $data = Magang::join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
         ->where('mhs_id', $mhs->id)
-        ->get();
-        dd($data);
+        ->first();
+        // dd($data);
         return view('depart.mhs.show', compact('mhs', 'data'));
     }
 

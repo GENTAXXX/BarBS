@@ -1,7 +1,7 @@
 @extends('mhs.layout')
 
 @section('title')
-Profile Mahasiswa
+Logbook
 @endsection
 
 @section('konteng')
@@ -44,13 +44,13 @@ Profile Mahasiswa
                             <h3></h3>
                             <ul class="list-unstyled ">
                                 <span>
-                                    <li class="d-flex align-items-start m-3"><span><img src="{{ asset('assets/img/building.svg') }}" alt="" style="height: 20px;width: 20px;" class=""></span><span class="ml-3"></span></li>
+                                    <li class="d-flex align-items-start m-3"><span><img src="{{ asset('assets/img/building.svg') }}" alt="" style="height: 20px;width: 20px;" class=""></span><span class="ml-3">{{ $low->nama_low }}</span></li>
                                 </span>
                                 <span>
-                                    <li class="d-flex align-items-start m-3"><span><img src="{{ asset('assets/img/placeholder.svg') }}" alt="" style="height: 20px;width: 20px;"></span><span class="ml-3"></span></li>
+                                    <li class="d-flex align-items-start m-3"><span><img src="{{ asset('assets/img/placeholder.svg') }}" alt="" style="height: 20px;width: 20px;"></span><span class="ml-3">{{ $low->lokasi }}</span></li>
                                 </span>
                                 <span>
-                                    <li class="d-flex align-items-start m-3"><span><img src="{{ asset('assets/img/filter.svg') }}" alt="" style="height: 20px;width: 20px;"></span><span class="ml-3"></span></li>
+                                    <li class="d-flex align-items-start m-3"><span><img src="{{ asset('assets/img/filter.svg') }}" alt="" style="height: 20px;width: 20px;"></span><span class="ml-3">{{ $low->kategori['kategori']}}</span></li>
                                 </span>  
                             </ul>
                         </div>
@@ -65,32 +65,32 @@ Profile Mahasiswa
   <!-- TABLE: PROPOSAL -->
     <section class="content">
         <div class="container-fluid">
-            <div class="card">
+            <div class="card card-primary">
                 <div class="card-header border-transparent">
                     <h3 class="card-title">Kegiatan Dilaksanakan</h3>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body p-0">
+                <div class="card-body p-6">
                     <div class="table-responsive">
-                        <table class="table m-0">
+                        <table id="logbook" class="table m-0">
                             <thead>
                                 <tr>
-                                    <th>Nomor</th>
-                                    <th>Tanggal</th>
-                                    <th>Kegiatan</th>
-                                    <th>Deskripsi</th>
-                                    <th>Saran</th>
+                                    <th class="text-center">Nomor</th>
+                                    <th class="text-center">Tanggal</th>
+                                    <th class="text-center">Kegiatan</th>
+                                    <th class="text-center">Deskripsi</th>
+                                    <th class="text-center">Saran</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @php $no = 1; @endphp
-                                @foreach ($log as $log)
+                                @foreach ($logs as $log)
                                 <tr>
-                                    <td>{{ $no++ }}</a></td>
-                                    <td>{{ $log->tanggal }}</td>
-                                    <td>{{ $log->kegiatan }}</td>
-                                    <td>{{ $log->deskripsi_log }}</td>
-                                    <td>{{ $log->saran }}</td>
+                                    <td class="text-center">{{ $no++ }}</a></td>
+                                    <td class="text-center">{{ $log['tanggal'] }}</td>
+                                    <td class="text-center">{{ $log['kegiatan'] }}</td>
+                                    <td class="text-center">{{ $log['deskripsi_log'] }}</td>
+                                    <td class="text-center">{{ $log['saran'] }}</td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -120,8 +120,8 @@ Profile Mahasiswa
                                 <input type="text" class="form-control" id="kegiatan" placeholder="Kegiatan" name="kegiatan">
                             </div>
                             <div class="form-group">
-                                <label for="deskripsi">Deskripsi</label>
-                                <textarea name="deskripsi" id="deskripsi" class="form-control" placeholder="Deskripsi Kegiatan"></textarea>
+                                <label for="deskripsi_log">Deskripsi</label>
+                                <textarea name="deskripsi_log" id="deskripsi_log" class="form-control" placeholder="Deskripsi Kegiatan"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="saran">Saran</label>
@@ -134,7 +134,13 @@ Profile Mahasiswa
                     </form>
                 </div>
             </div>
+            <a class="btn btn-success" href="{{ route('logbook.print') }}">Print PDF</a>
         </div>
     </section>
 </div>
+<script>
+$(document).ready( function () {
+    $('#logbook').DataTable();
+} );
+</script>
 @endsection
