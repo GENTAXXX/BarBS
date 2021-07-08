@@ -56,6 +56,8 @@ Route::group(['middleware' => 'is_mitra'], function () {
     Route::get('mitra/pendaftar', [ApplyController::class, 'listPendaftar'])->name('pendaftar.index');
     Route::get('mitra/pendaftar/{id}', [ApplyController::class, 'pendaftar'])->name('pendaftar.edit');
     Route::post('mitra/pendaftar/{id}', [ApplyController::class, 'approval'])->name('pendaftar.approval');
+    //Mhs Magang
+    Route::get('mitra/magang', [ApplyController::class, 'listMagang'])->name('magang.index');
 });
 
 Route::group(['middleware' => 'is_dospem'], function () {

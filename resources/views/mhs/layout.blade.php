@@ -74,6 +74,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('bimbingan.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-book-open"></i>
+                            <p>Bimbingan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('logout') }}" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();" class="nav-link">
                                 <i class="nav-icon fas fa-power-off"></i>

@@ -28,7 +28,7 @@ Edit Pendaftar
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-3">
-                    <form action="{{ route('pendaftar.approval', $data->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('pendaftar.approval', $data->magang_id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                         <div class="card card-primary card-outline">
                             <div class="card-body box-profile">
@@ -140,8 +140,8 @@ Edit Pendaftar
                                         </tbody>
                                     </table>
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary-m2">Terima</button>
-                                        <button type="submit" class="btn btn-danger-m2">Tolak</button>
+                                        <button type="submit" class="btn btn-primary">Terima</button>
+                                        <button type="submit" class="btn btn-danger">Tolak</button>
                                     </div>
                                 </div>
                             <!-- /.table-responsive -->

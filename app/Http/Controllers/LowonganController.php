@@ -115,7 +115,7 @@ class LowonganController extends Controller
             'foto_low' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $imageName = time() . '.' . $request->foto_low->extension();
+        $imageName = $request->nama_low . '.' . $request->foto_low->extension();
         $request->foto_low->move(public_path('images'), $imageName);
 
         $lowongan->update($request->all());

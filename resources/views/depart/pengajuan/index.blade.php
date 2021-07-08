@@ -50,7 +50,7 @@ List Pengajuan
                                     <th class="text-center">Nama Mahasiswa</th>
                                     <th class="text-center">NIM</th>
                                     <th class="text-center">Nama Lowongan</th>
-                                    <th class="text-center">More</th>
+                                    <th class="text-center">Detail</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -62,7 +62,7 @@ List Pengajuan
                                     <td class="text-center">{{ $data->mahasiswa['NIM']}}</td>
                                     <td class="text-center">{{ $data->lowongan['nama_low'] }}</td>
                                     <td class="text-center">
-                                        <a href="{{ route('pengajuan.edit', $data->id) }}" class="btn btn-primary-m2">Details</a>
+                                        <a href="{{ route('pengajuan.edit', $data->id) }}" class="btn btn-primary">Lihat</a>
                                     </td>
                                 </tr>
                                 @endforeach

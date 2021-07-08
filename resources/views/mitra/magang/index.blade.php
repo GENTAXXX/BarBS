@@ -1,7 +1,7 @@
 @extends('mitra.layout')
 
 @section('title')
-List Pendaftar
+List Mahasiswa Magang
 @endsection
 
 @section('konteng')
@@ -11,12 +11,12 @@ List Pendaftar
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">List Pendaftar</h1>
+                    <h1 class="m-0">List Mahasiswa Magang</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">List Pendaftar</li>
+                        <li class="breadcrumb-item active">List Mahasiswa Magang</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -31,7 +31,7 @@ List Pendaftar
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header border-transparent">
-                    <h3 class="card-title">List Pendaftar</h3>
+                    <h3 class="card-title">List Mahasiswa Magang</h3>
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
                             <i class="fas fa-minus"></i>

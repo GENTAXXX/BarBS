@@ -75,16 +75,22 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();" class="nav-link">
-                                        <i class="nav-icon fas fa-power-off"></i>
-                                        <p>{{ __('Logout') }}</p>
+                                    <a href="{{ route('depart.mhs') }}" class="nav-link">
+                                        <i class="fa fa-graduation-cap nav-icon"></i>
+                                        <p>Pengajuan <span class="badge badge-danger">9</span></p>
                                     </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
                                 </li>
                             </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();" class="nav-link">
+                                <i class="nav-icon fas fa-power-off"></i>
+                                <p>{{ __('Logout') }}</p>
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </li>
                     </ul>
                 </nav>

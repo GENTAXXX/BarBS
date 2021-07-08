@@ -45,7 +45,7 @@ Daftar Bimbingan Mahasiswa
                             <td class="text-center">{{ $mhs->nama_mhs }}</td>
                             <td class="text-center">{{ $mhs->NIM }}</td>
                             <td class="text-center">
-                                <a href="{{ route('dospem.bimbingan', $mhs->id) }}" class="nav-link">Lihat</a>
+                                <a href="{{ route('dospem.bimbingan', $mhs->id) }}" class="btn btn-primary">Lihat</a>
                             </td>
                         </tr>
                         @endforeach

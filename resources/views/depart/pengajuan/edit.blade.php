@@ -29,7 +29,7 @@ Edit Pengajuan
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-3">
-            <form action="{{ route('pengajuan.dospem', $data->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('pengajuan.dospem', $data->magang_id) }}" method="POST" enctype="multipart/form-data">
               @csrf
               <div class="card card-primary card-outline">
                 <div class="card-body box-profile">

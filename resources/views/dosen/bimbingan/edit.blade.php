@@ -93,9 +93,9 @@ Detail Bimbingan Mahasiswa
                                 </button>
                             </div>
                         </div>
-                        <div class="card-body p-0">
+                        <div class="card-body p-6">
                             <div class="table-responsive">
-                                <table class="table m-0">
+                                <table id="bimbingan" class="table m-0">
                                     <thead>
                                         <tr>
                                             <th>Nomor</th>
@@ -126,4 +126,9 @@ Detail Bimbingan Mahasiswa
         </div>
     </section>
 </div>
+<script>
+$(document).ready( function () {
+    $('#bimbingan').DataTable();
+} );
+</script>
 @endsection

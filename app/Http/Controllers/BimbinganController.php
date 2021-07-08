@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Bimbingan;
 use App\Models\Mahasiswa;
+use App\Models\Magang;
+use App\Models\Lowongan;
 
 class BimbinganController extends Controller
 {
@@ -14,19 +16,20 @@ class BimbinganController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function feedbackBimbingan($id){
-        $bim = Bimbingan::find($id);
-    }
+    // public function feedbackBimbingan($id){
+    //     $bim = Bimbingan::find($id);
+    // }
 
     public function bimbinganDetail($id){
         $mhs = Mahasiswa::find($id);
-        $data = Bimbingan::where('mhs_id', $mhs->id)->get();
+        $data = Bimbingan::join('magang', 'bimbingan.magang_id', '=', 'magang.id')
+        ->where('magang.mhs_id', $mhs->id)->get();
         return view('dosen.bimbingan.edit', compact('data', 'mhs'));
     }
 
     public function mhsBimbingan(){
-        $data = Mahasiswa::join('bimbingan', 'mahasiswa.id', '=', 'bimbingan.mhs_id')
-        ->join('dosen', 'bimbingan.dosen_id', '=', 'dosen.id')
+        $data = Mahasiswa::join('magang', 'mahasiswa.id', '=', 'magang.mhs_id')
+        ->join('dosen', 'magang.dosen_id', '=', 'dosen.id')
         ->where('dosen.user_id', Auth::id())
         ->get();
         return view('dosen.bimbingan.index', compact('data'));
@@ -34,11 +37,12 @@ class BimbinganController extends Controller
 
     public function index()
     {
-        $bimbingan = Bimbingan::join('mahasiswa', 'bimbingan.mhs_id', '=', 'mahasiswa.id')
-        ->join('dosen', 'bimbingan.dosen_id', '=', 'dosen.id')
+        $low = Lowongan::join('magang', 'lowongan.id', '=', 'magang.lowongan_id')->first();
+        $bimbingan = Bimbingan::join('magang', 'bimbingan.magang_id', '=', 'magang.id')
+        ->join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
         ->where('mahasiswa.user_id', Auth::id())
         ->get();
-        return view('mhs.bimbingan.index', compact('bimbingan'));
+        return view('mhs.bimbingan.index', compact('bimbingan', 'low'));
     }
 
     /**
@@ -59,14 +63,25 @@ class BimbinganController extends Controller
      */
     public function store(Request $request)
     {
+        $magang = Magang::join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
+        ->where('mahasiswa.user_id', Auth::id())->first();
+
         $request->validate([
             'catatan' => 'required',
             'tgl_bimbingan' => 'required',
-            'mhs_id' => 'required',
-            'dosen_id' =>'required'
+            'file' => 'required'
         ]);
 
-        Bimbingan::create($request->all());
+        $fileName = 'Bimbingan' . $request->tgl_bimbingan . time() . '.' . $request->file->extension();
+        $request->file->move(public_path('file'), $fileName);
+
+        Bimbingan::create([
+            'catatan' => $request->catatan,
+            'tgl_bimbingan' => $request->tgl_bimbingan,
+            'file' => $fileName,
+            'magang_id' => $magang->id
+        ]);
+
         return redirect()->route('bimbingan.index');
     }
 

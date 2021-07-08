@@ -57,30 +57,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <p>Beranda</p>
                             </a>
                         </li>
-                        <li class="nav-item menu-open">
-                            <a href="#" class="nav-link active">
-                                <i class="nav-icon fas fa-pen"></i>
-                                <p>Kelola Lowongan
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
+                        <li class="nav-item">
+                            <a href="{{ route('lowongan.index') }}" class="nav-link ">
+                                <i class="far fa-copy nav-icon"></i>
+                                <p>Lowongan</p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('lowongan.index') }}" class="nav-link ">
-                                        <i class="far fa-copy nav-icon"></i>
-                                        <p>Lowongan</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('pendaftar.index') }}" class="nav-link">
-                                        <i class="far fa-copy nav-icon"></i>
-                                        <p>Pendaftar</p>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="dashboard-mitra-daftar-aktif.html" class="nav-link">
+                            <a href="{{ route('pendaftar.index') }}" class="nav-link">
+                                <i class="far fa-copy nav-icon"></i>
+                                <p>Pendaftar <span class="badge badge-danger">{{ $count }}</span></p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('magang.index') }}" class="nav-link">
                             <i class="nav-icon fas fa-user"></i>
                             <p>Mahasiswa Magang</p>
                             </a>

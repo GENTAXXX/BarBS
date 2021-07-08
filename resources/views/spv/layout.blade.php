@@ -71,7 +71,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <li class="nav-item">
                                     <a href="{{ route('dospem.index') }}" class="nav-link">
                                     <i class="far fa-copy nav-icon"></i>
-                                    <p>Logbook Mahasiswa</p>
+                                    <p>Logbook Mahasiswa <span class="badge badge-danger">0</span></p>
                                     </a>
                                 </li>
                             </ul>

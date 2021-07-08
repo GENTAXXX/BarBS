@@ -21,39 +21,61 @@ class ApplyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function countPendaftar(){
+        $data = Magang::where('spv_id', null)->get();
+        return $data->count();
+    }
+
+    public function listMagang(){
+        $data = Magang::join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
+        ->join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
+        ->join('mitra', 'lowongan.mitra_id', '=', 'mitra.id')
+        ->where('mitra.user_id', Auth::id())
+        ->select('mahasiswa.*', 'lowongan.*', 'mitra.*', 'magang.id as magang_id')
+        ->get();
+        $count = $this->countPendaftar();
+        return view('mitra.magang.index', compact('data', 'count'));
+    }
+
     public function listPendaftar(){
         $data = Magang::join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
         ->join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
         ->join('mitra', 'lowongan.mitra_id', '=', 'mitra.id')
         ->where('mitra.user_id', Auth::id())
+        ->where('spv_id', null)
+        ->select('mahasiswa.*', 'lowongan.*', 'mitra.*', 'magang.id as magang_id')
         ->get();
-        return view('mitra.pendaftar.index', compact('data'));
+        $count = $this->countPendaftar();
+        return view('mitra.pendaftar.index', compact('data', 'count'));
     }
 
     public function pendaftar($id){
         $data = Magang::join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
         ->join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
-        ->join('dosen', 'magang.dosen_id', '=', 'dosen.id')
-        ->select('mahasiswa.*', 'lowongan.*', 'dosen.*')
+        ->select('mahasiswa.*', 'lowongan.*', 'magang.id as magang_id')
         ->find($id);
         // $idlogin = Mitra::where('user_id', Auth::id())->get();
         $spv = Supervisor::all();
-        return view('mitra.pendaftar.edit', compact('data', 'spv'));
+        $count = $this->countPendaftar();
+        return view('mitra.pendaftar.edit', compact('data', 'spv', 'count'));
     }
 
     public function listPengajuan(){
-        $magang = Magang::all();
-        return view('depart.pengajuan.index', compact('magang'));
+        $magang = Magang::where('dosen_id', null)->get();
+        $count = $this->countPendaftar();
+        // dd($magang);
+        return view('depart.pengajuan.index', compact('magang', 'count'));
     }
 
     public function pengajuan($id){
         $data = Magang::join('mahasiswa as mhs', 'magang.mhs_id', '=', 'mhs.id')
         ->join('lowongan as low', 'magang.lowongan_id', '=', 'low.id')
-        ->select('mhs.*', 'low.*')
+        ->select('mhs.*', 'low.*','magang.id as magang_id')
         ->find($id);
         // $idlogin = Departemen::where('user_id', Auth::id())->get();
         $dosen = Dosen::all();
-        return view('depart.pengajuan.edit', compact('data', 'dosen'));
+        $count = $this->countPendaftar();
+        return view('depart.pengajuan.edit', compact('data', 'dosen', 'count'));
     }
 
     public function apply($id){
@@ -101,10 +123,11 @@ class ApplyController extends Controller
     }
 
     public function updateDospem(Request $request, $id){
-        $magang = Magang::where('id', $id);
+        $magang = Magang::find($id);
         $magang->update([
-            'dosen_id' => $request->dosen_id
+            'dosen_id' => $request->dosen_id,
         ]);
+        // dd($request);
         
         return redirect()->route('pengajuan.index');
     }

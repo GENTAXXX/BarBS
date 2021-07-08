@@ -104,7 +104,7 @@ Logbook
         <div class="container-fluid">
             <div class="card card-primary">
                 <div class="card-header border-transparent">
-                    <h3 class="card-title">Kegiatan Dilaksanakan</h3>
+                    <h3 class="card-title">Tambah Logbook</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body p-0">
