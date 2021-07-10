@@ -18,13 +18,26 @@ class BimbinganController extends Controller
      */
     // public function feedbackBimbingan($id){
     //     $bim = Bimbingan::find($id);
-    // }
+    // }[]
+    public function feedbackBimbingan(Request $request, $id){
+        $bim = Bimbingan::find($id);
+        $bim->update([
+            'feedback' => $request->feedback
+        ]);
+        return redirect()->route('dospem.bimbingan');
+    }
 
     public function bimbinganDetail($id){
         $mhs = Mahasiswa::find($id);
         $data = Bimbingan::join('magang', 'bimbingan.magang_id', '=', 'magang.id')
         ->where('magang.mhs_id', $mhs->id)->get();
-        return view('dosen.bimbingan.edit', compact('data', 'mhs'));
+        $mag = Magang::join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
+        ->join('mitra', 'lowongan.mitra_id', '=', 'lowongan.id')
+        ->join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
+        ->join('status', 'mahasiswa.status_id', '=', 'status.id')
+        ->first();
+        // dd($data);
+        return view('dosen.bimbingan.edit', compact('data', 'mhs', 'mag'));
     }
 
     public function mhsBimbingan(){

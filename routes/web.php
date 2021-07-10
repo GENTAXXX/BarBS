@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ApplyController;
 use App\Http\Controllers\BimbinganController;
 use App\Http\Controllers\LogBookController;
+use App\Models\Bimbingan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -65,6 +66,7 @@ Route::group(['middleware' => 'is_dospem'], function () {
     //Bimbingan
     Route::get('dosen/bimbingan', [BimbinganController::class, 'mhsBimbingan'])->name('dospem.index');
     Route::get('dosen/bimbingan/{id}', [BimbinganController::class, 'bimbinganDetail'])->name('dospem.bimbingan');
+    Route::post('dosen/bimbingan/{id}', [BimbinganController::class, 'feedbackBimbingan'])->name('dospem.feedback');
 });
 
 Route::group(['middleware' => 'is_supervisor'], function () {

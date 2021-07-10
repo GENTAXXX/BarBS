@@ -30,7 +30,7 @@ Detail Bimbingan Mahasiswa
                         <div class="card-body box-profile">
                             <div class="text-center">
                             <img class="profile-user-img img-fluid img-circle"
-                                src="{{ asset('dist/img/user8-128x128.jpg') }}"
+                                src="{{ asset('images/'.$mhs->foto_mhs) }}"
                                 alt="User profile picture">
                             </div>
                             <h3 class="profile-username text-center">{{ $mhs->nama_mhs }}</h3>
@@ -79,46 +79,117 @@ Detail Bimbingan Mahasiswa
                         </div>
                     </div>
                 </div>
-            
-                <div class="card col-md-9">
-                    <div class="card-header border-transparent">
-                        <h3 class="card-title">Bimbingan</h3>
-                    </div>
-                    <div class="card">
+
+                <div class="col-md-9">
+                    <div class="card card-primary">
                         <div class="card-header border-transparent">
-                            <h3 class="card-title">Daftar Bimbingan</h3>
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                                </button>
-                            </div>
+                            <h3 class="card-title">Detail Magang</h3>
                         </div>
-                        <div class="card-body p-6">
-                            <div class="table-responsive">
-                                <table id="bimbingan" class="table m-0">
-                                    <thead>
-                                        <tr>
-                                            <th>Nomor</th>
-                                            <th>Tanggal Bimbingan</th>
-                                            <th>Catatan</th>
-                                            <th>File Bimbingan</th>
-                                            <th>Feedback Dosen</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @php $no = 1; @endphp
-                                        @foreach ($data as $bim)
-                                        <tr>
-                                            <td>{{ $no++ }}</td>
-                                            <td>{{ $bim->tgl_bimbingan }}</td>
-                                            <td>{{ $bim->catatan }}</td>
-                                            <td>{{ $bim->file }}</td>
-                                            <td>{{ $bim->Feedback }}</td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table m-0">
+                                <thead>
+                                    <tr>
+                                        <th>Nomor</th>
+                                        <th>Lokasi</th>
+                                        <th>Lowongan Diambil</th>
+                                        <th>Status</th>
+                                        <th>Waktu</th>                                    
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>{{ $mag->nama_mitra }}</td>
+                                        <td>{{ $mag->nama_low }} </td>
+                                        <td>
+                                            @if ($mag->status_id == 1)
+                                                <label class="badge badge-warning">Belum Magang</label>
+                                            @elseif ($mag->status_id == 2)
+                                                <label class="badge badge-success">Sedang Magang</label>
+                                            @elseif ($mag->status_id == 3)
+                                                <label class="badge badge-danger">Sudah Magang</label>
+                                            @endif
+                                        </td>
+                                        <td>{{ $mag->durasi }}</td>
+                                    </tr>                                
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-primary">
+                    <div class="card-header border-transparent">
+                        <h3 class="card-title">Bimbingan </h3>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table m-0">
+                                <thead>
+                                    <tr>
+                                        <th>Nomor</th>
+                                        <th>Tanggal</th>
+                                        <th>Catatan</th>
+                                        <th>Berkas lampiran</th>
+                                        <th>Feedback</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php $no = 1; @endphp
+                                    @foreach ($data as $bim)
+                                    <tr>
+                                        <td>{{ $no++ }}</td>
+                                        <td>{{ $bim->tgl_bimbingan }}</td>
+                                        <td>{{ $bim->catatan }}</td>
+                                        <td>
+                                            <a href="{{ asset('file/'.$bim->file) }}" class="btn btn-primary btn-file">Unduh </a> 
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                            Unggah
+                                            </button>
+                                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="card card-primary">
+                                                            <div class="card-header border-transparent">
+                                                                <h3 class="card-title">Input Feedback</h3>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button> 
+                                                            </div>
+                                                            <div class="card-body p-0">
+                                                                <form action="{{ route('dospem.feedback', $bim->id) }}" method="POST" enctype="multipart/form-data">
+                                                                @csrf
+                                                                    <div class="card-body">
+                                                                    <div class="form-group">
+                                                                        <label for="feedback">Catatan</label>
+                                                                        <input type="text" name="feedback" class="form-control" placeholder="Catatan">
+                                                                    </div>
+                                                                    <!-- <div class="form-group">
+                                                                        <label for="feedback">File input</label>
+                                                                        <div class="input-group">
+                                                                        <div class="custom-file">
+                                                                            <input type="file" name="feedback" class="custom-file-input" id="feedback">
+                                                                            <label class="custom-file-label" for="feedback">Choose file</label>
+                                                                        </div>
+                                                                        </div>
+                                                                    </div> -->
+                                                                    </div>
+                                                                    <div class="card-footer">
+                                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
