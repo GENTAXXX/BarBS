@@ -22,7 +22,6 @@ class CreateMahasiswaTable extends Migration
             $table->string('pengalaman')->nullable();
             $table->unsignedBigInteger('jurusan_id')->nullable();
             $table->unsignedBigInteger('status_id')->default('1')->nullable();
-            $table->unsignedBigInteger('skill_id')->nullable();
             $table->enum('jenis_kelamin',['Laki-laki','Perempuan'])->nullable();
             $table->date('tgl_lahir')->nullable();
             $table->string('foto_mhs')->nullable()->default('avatar.png');
@@ -32,7 +31,6 @@ class CreateMahasiswaTable extends Migration
         Schema::table('mahasiswa', function ($table) {
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('status_id')->references('id')->on('status')->onDelete('cascade');
-            $table->foreign('skill_id')->references('id')->on('skill')->onDelete('cascade');
             $table->foreign('jurusan_id')->references('id')->on('jurusan')->onDelete('cascade');
         });
     }

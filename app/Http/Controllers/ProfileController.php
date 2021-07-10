@@ -9,6 +9,7 @@ use App\Models\Kabupaten;
 use App\Models\Mahasiswa;
 use App\Models\Mitra;
 use App\Models\Skill;
+use App\Models\SkillMhs;
 use App\Models\Supervisor;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -43,8 +44,14 @@ class ProfileController extends Controller
                 return view('spv.profile.index', compact('spv'));
                 break;
             case '5':
-                $mhs = Mahasiswa::where("user_id", $idUserLogin)->first();
-                return view('mhs.profile.index', compact('mhs'));
+                $mhs = Mahasiswa::join('skill_mhs', 'mahasiswa.id', '=', 'skill_mhs.mhs_id')
+                ->join('skill', 'skill_mhs.skill_id', '=', 'skill.id')
+                ->where("user_id", $idUserLogin)->first();
+
+                $skill = SkillMhs::join('skill', 'skill_mhs.skill_id', '=', 'skill.id')
+                ->where('mhs_id', $mhs->id)
+                ->select('skill')->get();
+                return view('mhs.profile.index', compact('mhs', 'skill'));
                 break;
         };
     }
@@ -143,9 +150,15 @@ class ProfileController extends Controller
                     'foto_depart' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ]);
 
-                $imageName = time() . '.' . $request->foto_depart->extension();
+                $imageName = $request->nama_depart . '.' . $request->foto_depart->extension();
                 $request->foto_depart->move(public_path('images'), $imageName);
-                $depart->update($request->all());
+                $depart->update([
+                    'nama_depart' => $request->nama_depart,
+                    'alamat_depart' => $request->alamat_depart,
+                    'telepon_depart' => $request->telepon_depart,
+                    'NIDN' => $request->NIDN,
+                    'foto_depart' => $imageName,
+                ]);
                 return redirect()->route('profile.index');
                 break;
             case '2':
@@ -159,9 +172,16 @@ class ProfileController extends Controller
                     'kab_id' => 'required',
                 ]);
 
-                $imageName = time() . '.' . $request->foto_mitra->extension();
+                $imageName = $request->nama_mitra . '.' . $request->foto_mitra->extension();
                 $request->foto_mitra->move(public_path('images'), $imageName);
-                $mitra->update($request->all());
+                $mitra->update([
+                    'nama_mitra' => $request->nama_mitra,
+                    'alamat_mitra' => $request->alamat_mitra,
+                    'fax_mitra' => $request->fax_mitra,
+                    'telepon_mitra' => $request->telepon_mitra,
+                    'kab_id' => $request->kab_id,
+                    'foto_mitra' => $imageName,
+                ]);
                 return redirect()->route('profile.index');
                 break;
             case '3':
@@ -174,9 +194,15 @@ class ProfileController extends Controller
                     'depart_id' => 'required',
                 ]);
 
-                $imageName = time() . '.' . $request->foto_dosen->extension();
+                $imageName = $request->nama_dosen . '.' . $request->foto_dosen->extension();
                 $request->foto_dosen->move(public_path('images'), $imageName);
-                $dosen->update($request->all());
+                $dosen->update([
+                    'nama_dosen' => $request->nama_dosen,
+                    'telepon_dosen' => $request->telepon_dosen,
+                    'NIP' => $request->NIP,
+                    'depart_id' => $request->depart_id,
+                    'foto_dosen' => $imageName,
+                ]);
                 return redirect()->route('profile.index');
                 break;
             case '4':
@@ -189,9 +215,15 @@ class ProfileController extends Controller
                     'mitra_id' => 'required',
                 ]);
 
-                $imageName = time() . '.' . $request->foto_spv->extension();
+                $imageName = $request->nama_spv . '.' . $request->foto_spv->extension();
                 $request->foto_spv->move(public_path('images'), $imageName);
-                $spv->update($request->all());
+                $spv->update([
+                    'nama_spv' => $request->nama_spv,
+                    'telepon_spv' => $request->telepon_spv,
+                    'no_pegawai' => $request->no_pegawai,
+                    'mitra_id' => $request->mitra_id,
+                    'foto_spv' => $imageName,
+                ]);
                 return redirect()->route('profile.index');
                 break;
             case '5':
@@ -202,15 +234,31 @@ class ProfileController extends Controller
                     'telepon_mhs' => 'required',
                     'pengalaman' => 'required',
                     'jurusan_id' => 'required',
-                    'skill_id' => 'required',
                     'jenis_kelamin' => 'required',
                     'tgl_lahir' => 'required',
                     'foto_mhs' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ]);
 
-                $imageName = time() . '.' . $request->foto_mhs->extension();
+                foreach ($request->skill_id as $skill){
+                    // dd($skill);
+                    SkillMhs::create([
+                        'skill_id' => $skill,
+                        'mhs_id' => $mhs->id
+                    ]);
+                }
+
+                $imageName = $request->nama_mhs . '.' . $request->foto_mhs->extension();
                 $request->foto_mhs->move(public_path('images'), $imageName);
-                $mhs->update($request->all());
+                $mhs->update([
+                    'nama_mhs' => $request->nama_mhs,
+                    'NIM' => $request->NIM,
+                    'telepon_mhs' => $request->telepon_mhs,
+                    'pengalaman' => $request->pengalaman,
+                    'jurusan_id' => $request->jurusan_id,
+                    'jenis_kelamin' => $request->jenis_kelamin,
+                    'tgl_lahir' => $request->tgl_lahir,
+                    'foto_mhs' => $imageName,
+                ]);
                 return redirect()->route('profile.index');
                 break;
         }

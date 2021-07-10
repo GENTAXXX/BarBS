@@ -145,11 +145,9 @@ class UserController extends Controller
         ]);
 
         $request = new Request($request->all());
-
         $request->merge([
             'password' => Hash::make($request->password)
         ]);
-
         $user->update($request->all());
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
@@ -162,7 +160,6 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        dd($user->role_id);
         switch ($user->role_id) {
             case '1':
                 $depart = Departemen::where('user_id', $user->id);
@@ -182,6 +179,8 @@ class UserController extends Controller
                 break;
             case '5':
                 $mhs = Mahasiswa::where('user_id', $user->id);
+                $mhs->delete();
+                User::find($user->id)->delete();
                 break;
         }
 

@@ -27,12 +27,12 @@ Detail Lowongan
         <div class="container">
             <div class=" row d-flex justify-content-center">
                 <div class="col-md-12 ">
-                    <img src="{{ asset('assets/img/work.png') }}" class="container-fluid d-flex justify-content-center" alt="">
+                    <img src="{{ asset('images/'.$low->foto_low) }}" class="container-fluid d-flex justify-content-center" alt="">
                 </div>
                 <div class="portfolio-info d-flex justify-content-center col-md-10">
                     <div class="row  icon-box card-list">
                         <div class="col-sm-3">
-                            <img src="{{ asset('assets/img/sim-vertical-black.png') }}" class="img-fluid" alt="">
+                            <img src="{{ asset('images/'.$low->foto_mitra) }}" class="img-fluid" alt="">
                         </div>
                         <div class="col-lg-6 pt-4 pt-lg-0">
                             <h3>{{ $low->nama_low }}</h3>

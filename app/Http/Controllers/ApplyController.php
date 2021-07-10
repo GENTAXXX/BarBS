@@ -86,7 +86,8 @@ class ApplyController extends Controller
     }
 
     public function detail($id){
-        $low = Lowongan::find($id);
+        $low = Lowongan::join('mitra', 'lowongan.mitra_id', 'mitra.id')
+        ->find($id);
         return view('lowongan.detail', compact('low'));
     }
     

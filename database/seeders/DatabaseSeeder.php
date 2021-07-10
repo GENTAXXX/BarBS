@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             KategoriSeeder::class,
             StatusSeeder::class,
             JurusanSeeder::class,
+            SkillSeeder::class
         ]);
     }
 }

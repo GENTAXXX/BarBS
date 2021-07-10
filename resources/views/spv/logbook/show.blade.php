@@ -30,7 +30,7 @@ Detail Logbook Mahasiswa
                         <div class="card-body box-profile">
                             <div class="text-center">
                             <img class="profile-user-img img-fluid img-circle"
-                                src="{{ asset('dist/img/user8-128x128.jpg') }}"
+                                src="{{ asset('images/'.$mhs->foto_mhs) }}"
                                 alt="User profile picture">
                             </div>
                             <h3 class="profile-username text-center">{{ $mhs->nama_mhs }}</h3>

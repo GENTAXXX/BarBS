@@ -33,7 +33,7 @@ Profile Supervisor
                     <div class="card card-primary card-outline">
                         <div class="card-body box-profile">
                             <div class="text-center">
-                                <img class="profile-user-img img-fluid img-circle" src="{{ asset('$spv->foto') }}" alt="User profile picture">
+                                <img class="profile-user-img img-fluid img-circle" src="{{ asset('images/'.$spv->foto) }}" alt="User profile picture">
                             </div>
 
                             <h3 class="profile-username text-center">{{ $spv->nama_spv }}</h3>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Lowongan;
 use App\Models\Kategori;
 use App\Models\Mitra;
+use App\Models\Magang;
 use Illuminate\Support\Facades\Auth;
 
 class LowonganController extends Controller
@@ -15,18 +16,25 @@ class LowonganController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function countPendaftar(){
+        $data = Magang::where('spv_id', null)->get();
+        return $data->count();
+    }
+
     public function AllLowongan(Request $request){
         $cari = $request->cari;
         $low = Lowongan::where('nama_low','like','%'.$cari.'%')
         ->paginate();
         return view('welcome', compact('low'));
     }
+
     public function index()
     {
         $idUserLogin = Auth::id();
         $mitra = Mitra::where("user_id", $idUserLogin)->first();
         $low = Lowongan::where("mitra_id", $mitra->id)->get();
-        return view('mitra.lowongan.index', compact('low'));
+        $count = $this->countPendaftar();
+        return view('mitra.lowongan.index', compact('low', 'count'));
     }
 
     /**
@@ -38,7 +46,8 @@ class LowonganController extends Controller
     {
         $kategori = Kategori::all();
         $mitra = Mitra::all();
-        return view('mitra.lowongan.create', compact('mitra', 'kategori'));
+        $count = $this->countPendaftar();
+        return view('mitra.lowongan.create', compact('mitra', 'kategori', 'count'));
     }
 
     /**
@@ -61,10 +70,20 @@ class LowonganController extends Controller
             'foto_low' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $imageName = time() . '.' . $request->foto_low->extension();
+        $imageName = $request->nama_low . '.' . $request->foto_low->extension();
         $request->foto_low->move(public_path('images'), $imageName);
 
-        Lowongan::create($request->all());
+        Lowongan::create([
+            'nama_low' => $request->nama_low,
+            'deskripsi_low' => $request->deskripsi_low,
+            'telepon_low' => $request->telepon_low,
+            'jumlah_mhs' => $request->jumlah_mhs,
+            'durasi' => $request->durasi,
+            'mitra_id' => $request->mitra_id,
+            'kategori_id' => $request->kategori_id,
+            'lokasi' => $request->lokasi,
+            'foto_low' => $imageName,
+        ]);
        
         return redirect()->route('lowongan.index')->with('success','Lowongan created successfully.');
     }
@@ -91,7 +110,8 @@ class LowonganController extends Controller
         $low = Lowongan::find($lowongan->id);
         $kategori = Kategori::all();
         $mitra = Mitra::all();
-        return view('mitra.lowongan.edit', compact('low', 'kategori', 'mitra'));
+        $count = $this->countPendaftar();
+        return view('mitra.lowongan.edit', compact('low', 'kategori', 'mitra', 'count'));
     }
 
     /**

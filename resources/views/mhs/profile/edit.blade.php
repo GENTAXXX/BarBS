@@ -27,8 +27,8 @@ Profile Mahasiswa
     <section class="content">
         <div class="col-md-9">
             <div class="card">
-                <div class="card-header p-2">
-                    <a class="nav-link" href="#settings" data-toggle="tab">Pengaturan</a>
+                <div class="card-header p-6">
+                    <h5> Edit Profile </h5>
                 </div><!-- /.card-header -->
                 @if ($errors->any())
                 <div class="alert alert-danger">
@@ -74,7 +74,7 @@ Profile Mahasiswa
                                     </div>
                                     <div class="form-group">
                                         <label for="skill_id">Skill:</label>
-                                        <select name="skill_id" class="form-control">
+                                        <select id="skillMhs" name="skill_id[]" class="form-control" multiple>
                                             <option value="">- Pilih Skill -</option>
                                             @foreach($skill as $skill)
                                             <option value="{{ $skill['id'] }}">{{ $skill->skill }}</option>
@@ -117,4 +117,12 @@ Profile Mahasiswa
     </section>
     <!-- /.content -->
 </div>
+<script>
+$('#skillMhs').select2();
+
+$('#skillMhs').on('select2:opening select2:closing', function( event ) {
+    var $searchfield = $(this).parent().find('.select2-search__field');
+    $searchfield.prop('disabled', true);
+});
+</script>
 @endsection

@@ -34,7 +34,7 @@ Edit Pengajuan
               <div class="card card-primary card-outline">
                 <div class="card-body box-profile">
                     <div class="text-center">
-                        <img class="profile-user-img img-fluid img-circle"src="dist/img/user8-128x128.jpg"alt="User profile picture">
+                        <img class="profile-user-img img-fluid img-circle" src="{{ asset('images/'.$data->foto_mhs) }}" alt="User profile picture">
                     </div>
                         <h3 class="profile-username text-center">{{ $data->nama_mhs }}</h3>
 

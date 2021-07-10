@@ -33,7 +33,7 @@ Profile Mahasiswa
                     <div class="card card-primary card-outline">
                         <div class="card-body box-profile">
                             <div class="text-center">
-                                <img class="profile-user-img img-fluid img-circle" src="{{ asset('$mhs->foto_mhs') }}" alt="User profile picture">
+                                <img class="profile-user-img img-fluid img-circle" src="{{ asset('images/'.$mhs->foto_mhs) }}" alt="User profile picture">
                             </div>
 
                             <h3 class="profile-username text-center">{{ $mhs->nama_mhs }}</h3>
@@ -66,7 +66,9 @@ Profile Mahasiswa
 
                             <strong><i class="far fa-file-alt mr-1"></i> Skill</strong>
 
-                            <p class="text-muted">{{ $mhs->skill['skill'] }}</p>
+                            @foreach ($skill as $s)
+                            <p class="text-muted">{{ $s->skill }}</p>
+                            @endforeach
 
                             <hr>
 

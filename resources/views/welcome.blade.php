@@ -39,7 +39,7 @@ SIMAGANG
                 <div class="testimonial-item">
                     <a href="{{ route('detail.show', $data->id) }}">
                     <h3>{{ $data->nama_low }}</h3 >
-                        <img src="assets/img/sim-vertical-black.png" class="testimonial-img" alt="">
+                        <img src="{{ asset('images/'.$data->foto_low) }}" class="testimonial-img" alt="">
                         <div class="icon-box container">
                         <ul class="list-unstyled ">
                             <li class="d-flex align-items-start m-3"><span><img src="assets/img/building.svg" alt="" style="height: 20px;width: 20px;" class="img-fluid"></span><span class="ml-3">{{ $data->mitra['nama_mitra'] }}</span></li>
