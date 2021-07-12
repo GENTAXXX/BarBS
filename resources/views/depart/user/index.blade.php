@@ -71,7 +71,7 @@ Daftar User
                                                 @csrf
                                                 @method('DELETE')
                                                 <a href="{{ route('users.edit', $user->id) }}" class="btn btn-primary m-2">Ubah</a>
-                                                <button type="submit" class="btn btn-danger m-2">Hapus</button>
+                                                <button type="submit" class="btn btn-danger m-2">Hapus {{$user->id}}</button>
                                         </span>
                                     </td>
                                 </tr>

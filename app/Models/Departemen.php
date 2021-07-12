@@ -18,4 +18,8 @@ class Departemen extends Model
     public function dosen(){
         return $this->hasMany(Dosen::class);
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

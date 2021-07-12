@@ -43,7 +43,7 @@ SIMAGANG
                         <div class="icon-box container">
                         <ul class="list-unstyled ">
                             <li class="d-flex align-items-start m-3"><span><img src="assets/img/building.svg" alt="" style="height: 20px;width: 20px;" class="img-fluid"></span><span class="ml-3">{{ $data->mitra['nama_mitra'] }}</span></li>
-                            <li class="d-flex align-items-start m-3"><span><img src="assets/img/placeholder.svg" alt="" style="height: 20px;width: 20px;"></span><span class="ml-3">{{ $data->lokasi}}</span></li>
+                            <li class="d-flex align-items-start m-3"><span><img src="assets/img/placeholder.svg" alt="" style="height: 20px;width: 20px;"></span><span class="ml-3">{{ $data->mitra->kabupaten['nama']}}</span></li>
                             <li class="d-flex align-items-start m-3"><span><img src="assets/img/filter.svg" alt="" style="height: 20px;width: 20px;"></span><span class="ml-3">{{ $data->kategori['kategori'] }}</span></li>
                         </ul>
                         </div>
@@ -66,7 +66,7 @@ SIMAGANG
                 <div class="row m-5  card-list border" >
                     <div class="col-sm-2">
                         <a href="{{ route('detail.show', $data->id) }}">
-                            <img src="assets/img/sim-vertical-black.png" class="img-fluid" alt="">
+                            <img src="{{ asset('images/'.$data->foto_low) }}" class="img-fluid" alt="">
                         </a>
                     </div>
                     <div class="col-lg-6 pt-4 pt-lg-0">
@@ -76,7 +76,7 @@ SIMAGANG
                             <li class="d-flex align-items-start m-3"><span><img src="assets/img/building.svg" alt="" style="height: 20px;width: 20px;" class=""></span><span class="ml-3">{{ $data->mitra['nama_mitra'] }}</span></li>
                             </span>
                         <span>
-                            <li class="d-flex align-items-start m-3"><span><img src="assets/img/placeholder.svg" alt="" style="height: 20px;width: 20px;"></span><span class="ml-3">{{ $data->lokasi}}</span></li>
+                            <li class="d-flex align-items-start m-3"><span><img src="assets/img/placeholder.svg" alt="" style="height: 20px;width: 20px;"></span><span class="ml-3">{{ $data->mitra->kabupaten['nama']}}</span></li>
                         </span>
                             <span>
                             <li class="d-flex align-items-start m-3"><span><img src="assets/img/filter.svg" alt="" style="height: 20px;width: 20px;"></span><span class="ml-3">{{ $data->kategori['kategori'] }}</span></li>

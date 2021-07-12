@@ -18,4 +18,8 @@ class Dosen extends Model
     public function depart(){
         return $this->belongsTo(Departemen::class, 'depart_id');
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

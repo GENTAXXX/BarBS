@@ -140,8 +140,10 @@ Edit Pendaftar
                                         </tbody>
                                     </table>
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary">Terima</button>
-                                        <button type="submit" class="btn btn-danger">Tolak</button>
+                                        <!-- <a href="{{ route('pendaftar.approve', $data->id) }}" class="btn btn-primary">Terima</a>
+                                        <a href="{{ route('pendaftar.reject', $data->id) }}" class="btn btn-danger">Tolak</a> -->
+                                        <button type="submit" name="action" value="approve" class="btn btn-primary">Terima</button>
+                                        <button type="submit" name="action" value="reject" class="btn btn-danger">Tolak</button>
                                     </div>
                                 </div>
                             <!-- /.table-responsive -->

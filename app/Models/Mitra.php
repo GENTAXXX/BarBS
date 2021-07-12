@@ -26,7 +26,7 @@ class Mitra extends Model
     }
 
     public function user(){
-        return $this->belongsTo(Mitra::class);
+        return $this->belongsTo(User::class);
     }
 
     public function spv(){

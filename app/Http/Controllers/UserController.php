@@ -158,32 +158,27 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        switch ($user->role_id) {
+        $user = User::find($id);
+        dd($id);
+        switch ($user->role_id){
             case '1':
-                $depart = Departemen::where('user_id', $user->id);
-                $depart->delete();
+                Departemen::where('user_id', $user->id)->delete();
                 break;
             case '2':
-                $mitra = Mitra::where('user_id', $user->id);
-                $mitra->delete();
+                Mitra::where('user_id', $user->id)->delete();
                 break;
             case '3':
-                $dospem = Dosen::where('user_id', $user->id);
-                $dospem->delete();
+                Dosen::where('user_id', $user->id)->delete();
                 break;
             case '4':
-                $spv = Supervisor::where('user_id', $user->id);
-                $spv->delete();
+                Supervisor::where('user_id', $user->id)->delete();
                 break;
             case '5':
-                $mhs = Mahasiswa::where('user_id', $user->id);
-                $mhs->delete();
-                User::find($user->id)->delete();
+                Mahasiswa::where('user_id', $user->id)->delete();
                 break;
         }
-
         return redirect()->route('users.index')->with('success', 'Post deleted successfully.');
     }
 }

@@ -16,13 +16,15 @@ use Illuminate\Support\Facades\Auth;
 
 class ApplyController extends Controller
 {
-    /**
+    /*
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function countPendaftar(){
-        $data = Magang::where('spv_id', null)->get();
+        $data = Magang::whereNull('spv_id')
+        ->whereNotNull('dosen_id')
+        ->get();
         return $data->count();
     }
 
@@ -31,6 +33,7 @@ class ApplyController extends Controller
         ->join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
         ->join('mitra', 'lowongan.mitra_id', '=', 'mitra.id')
         ->where('mitra.user_id', Auth::id())
+        ->where('approval', '1')
         ->select('mahasiswa.*', 'lowongan.*', 'mitra.*', 'magang.id as magang_id')
         ->get();
         $count = $this->countPendaftar();
@@ -42,7 +45,8 @@ class ApplyController extends Controller
         ->join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
         ->join('mitra', 'lowongan.mitra_id', '=', 'mitra.id')
         ->where('mitra.user_id', Auth::id())
-        ->where('spv_id', null)
+        ->whereNull('spv_id')
+        ->whereNotNull('dosen_id')
         ->select('mahasiswa.*', 'lowongan.*', 'mitra.*', 'magang.id as magang_id')
         ->get();
         $count = $this->countPendaftar();
@@ -61,7 +65,7 @@ class ApplyController extends Controller
     }
 
     public function listPengajuan(){
-        $magang = Magang::where('dosen_id', null)->get();
+        $magang = Magang::whereNull('dosen_id')->get();
         $count = $this->countPendaftar();
         // dd($magang);
         return view('depart.pengajuan.index', compact('magang', 'count'));
@@ -87,6 +91,7 @@ class ApplyController extends Controller
 
     public function detail($id){
         $low = Lowongan::join('mitra', 'lowongan.mitra_id', 'mitra.id')
+        ->select('mitra.*', 'lowongan.*')
         ->find($id);
         return view('lowongan.detail', compact('low'));
     }
@@ -132,6 +137,22 @@ class ApplyController extends Controller
         
         return redirect()->route('pengajuan.index');
     }
+
+    public function approve($id){
+        $magang = Magang::find($id);
+        $magang->update([
+            'approval' => '1'
+        ]);
+        return redirect()->route('pendaftar.index');
+    }
+
+    public function reject($id){
+        $magang = Magang::find($id);
+        $magang->update([
+            'approval' => '0'
+        ]);
+        return redirect()->route('pendaftar.index');
+    }
     
     public function approval(Request $request, $id){
         $magang = Magang::find($id);
@@ -139,23 +160,35 @@ class ApplyController extends Controller
             'tgl_mulai' => $request->tgl_mulai,
             'tgl_selesai' => $request->tgl_selesai,
             'spv_id' => $request->spv_id,
-            'approval' => $request->approval,
         ]);
 
-        switch ($magang->approval){
-            case '1':
-                $mhs = Mahasiswa::where('id', $magang->mhs_id);
-                $mhs->update([
-                    'status_id' => '2'
-                ]);
-                break;
-            case '0':
-                $mhs = Mahasiswa::where('id', $magang->mhs_id);
-                $mhs->update([
-                    'status_id' => '1'
-                ]);
-                break;
+        // dd($request);
+        if($request->action == "approve"){
+            $this->approve($id);
+            $mhs = Mahasiswa::where('id', $magang->mhs_id);
+            $mhs->update([
+                'status_id' => '2'
+            ]);
+            $low = Lowongan::find($magang->lowongan_id);
+            $jumlah = $low->jumlah_mhs -= 1;
+            $low->update([
+                'jumlah_mhs' => $jumlah
+            ]);
+        } else {
+            $this->reject($id);
         }
+
+        // switch ($magang->approval){
+        //     case '1':
+                
+        //         break;
+        //     case '0':
+        //         $mhs = Mahasiswa::where('id', $magang->mhs_id);
+        //         $mhs->update([
+        //             'status_id' => '1'
+        //         ]);
+        //         break;
+        // }
         return redirect()->route('pendaftar.index');
     }
 

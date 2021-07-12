@@ -18,4 +18,8 @@ class Supervisor extends Model
     public function mitra(){
         return $this->belongsTo(Mitra::class, 'mitra_id');
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

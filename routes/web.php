@@ -37,7 +37,14 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'is_depart'], function () {
     Route::get('depart/home', [DepartController::class, 'departHome'])->name('depart.home');
     //CRUD Users
-    Route::resource('users', UserController::class);
+    // Route::resource('users', UserController::class);
+    Route::get('users', [UserController::class, 'index'])->name('users.index');
+    Route::get('users/create', [UserController::class, 'create'])->name('users.create');
+    Route::get('users/{id}', [UserController::class, 'show'])->name('users.show');
+    Route::post('users', [UserController::class, 'store'])->name('users.store');
+    Route::get('users/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('users/{id}', [UserController::class, 'update'])->name('users.update');
+    Route::delete('users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
     //List Mahasiswa
     Route::get('depart/mahasiswa', [DepartController::class, 'listMhs'])->name('depart.mhs');
     Route::get('depart/mahasiswa/{id}', [DepartController::class, 'detailMhs'])->name('depart.detailMhs');
@@ -56,6 +63,8 @@ Route::group(['middleware' => 'is_mitra'], function () {
     //Pendaftar
     Route::get('mitra/pendaftar', [ApplyController::class, 'listPendaftar'])->name('pendaftar.index');
     Route::get('mitra/pendaftar/{id}', [ApplyController::class, 'pendaftar'])->name('pendaftar.edit');
+    Route::get('mitra/approve/{id}', [ApplyController::class, 'approve'])->name('pendaftar.approve');
+    Route::get('mitra/reject/{id}', [ApplyController::class, 'reject'])->name('pendaftar.reject');
     Route::post('mitra/pendaftar/{id}', [ApplyController::class, 'approval'])->name('pendaftar.approval');
     //Mhs Magang
     Route::get('mitra/magang', [ApplyController::class, 'listMagang'])->name('magang.index');

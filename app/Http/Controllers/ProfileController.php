@@ -12,6 +12,7 @@ use App\Models\Skill;
 use App\Models\SkillMhs;
 use App\Models\Supervisor;
 use App\Models\User;
+use App\Models\Magang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,6 +23,13 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function countPendaftar(){
+        $data = Magang::whereNull('spv_id')
+        ->whereNotNull('dosen_id')
+        ->get();
+        return $data->count();
+    }
     public function index()
     {
         $idUserLogin = Auth::id();
@@ -33,7 +41,8 @@ class ProfileController extends Controller
                 break;
             case '2':
                 $mitra = Mitra::where("user_id", $idUserLogin)->first();
-                return view('mitra.profile.index', compact('mitra'));
+                $count = $this->countPendaftar();
+                return view('mitra.profile.index', compact('mitra', 'count'));
                 break;
             case '3':
                 $dosen = Dosen::where("user_id", $idUserLogin)->first();
@@ -44,13 +53,12 @@ class ProfileController extends Controller
                 return view('spv.profile.index', compact('spv'));
                 break;
             case '5':
-                $mhs = Mahasiswa::join('skill_mhs', 'mahasiswa.id', '=', 'skill_mhs.mhs_id')
-                ->join('skill', 'skill_mhs.skill_id', '=', 'skill.id')
-                ->where("user_id", $idUserLogin)->first();
-
+                $mhs = Mahasiswa::where("user_id", $idUserLogin)->first();
+                // dd($mhs);
                 $skill = SkillMhs::join('skill', 'skill_mhs.skill_id', '=', 'skill.id')
-                ->where('mhs_id', $mhs->id)
+                ->where('skill_mhs.mhs_id', $mhs->id)
                 ->select('skill')->get();
+                
                 return view('mhs.profile.index', compact('mhs', 'skill'));
                 break;
         };
@@ -106,7 +114,8 @@ class ProfileController extends Controller
             case '2':
                 $mitra = Mitra::where("user_id", $idUserLogin)->first();
                 $kabupatens = Kabupaten::all();
-                return view('mitra.profile.edit', compact('mitra', 'kabupatens'));
+                $count = $this->countPendaftar();
+                return view('mitra.profile.edit', compact('mitra', 'kabupatens', 'count'));
                 break;
             case '3':
                 $dosen = Dosen::where("user_id", $idUserLogin)->first();

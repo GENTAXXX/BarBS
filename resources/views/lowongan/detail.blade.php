@@ -41,7 +41,7 @@ Detail Lowongan
                                     <li class=" d-flex align-items-start m-3"><span><img src="{{ asset('assets/img/building.svg') }}" alt="" style="height: 20px;width: 20px;"></span><span class="ml-3">{{ $low->mitra['nama_mitra'] }}</span></li>
                                 </span>
                                 <span>
-                                    <li class="d-flex align-items-start m-3"><span><img src="{{ asset('assets/img/placeholder.svg') }}" alt="" style="height: 20px;width: 20px;"></span><span class="ml-3">{{ $low->lokasi}}</span></li>
+                                    <li class="d-flex align-items-start m-3"><span><img src="{{ asset('assets/img/placeholder.svg') }}" alt="" style="height: 20px;width: 20px;"></span><span class="ml-3">{{ $low->mitra->kabupaten['nama']}}</span></li>
                                 </span>
                                 <span>
                                     <li class="d-flex align-items-start m-3"><span><img src="{{ asset('assets/img/filter.svg') }}" alt="" style="height: 20px;width: 20px;"></span><span class="ml-3">{{ $low->kategori['kategori'] }}</span></li>
@@ -51,21 +51,35 @@ Detail Lowongan
                     </div>
                 </div>
             </div>
-            <div class=" container portfolio-info col-md-10">
+            <div class="container portfolio-info col-md-10">
                 <div class=" m-lg-5 icon-box card-list">
                     <p><strong>Deskripsi Lowongan</strong></p>
                     <p>{{ $low->deskripsi_low }}</p>
-                    <strong> Kemampuan</strong>
-                    <p>
-                        <i>
-                            <button type="button" class="btn btn-outline-info icofont-close">Design</button>
-                            <button type="button" class="btn btn-outline-info icofont-close">HTML</button>
-                            <button type="button" class="btn btn-outline-info icofont-close">UI Design</button>
-                        </i>
-                    </p>
+                    <p><strong>No. Telepon</strong></p>
+                    <p>{{ $low->telepon_low }}</p>
+                    <p><strong>Jumlah Mahasiswa</strong></p>
+                    <p>{{ $low->jumlah_mhs }} Mahasiswa/i</p>
+                    <p><strong>Durasi Magang</strong></p>
+                    <p>{{ $low->durasi }}</p>
+                    <p><strong>Lokasi</strong></p>
+                    <p>{{ $low->lokasi }}</p>
+                    <form action="#" onsubmit="showAddress(this.address.value); return false">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input id="address" type="hidden" value="{{ $low->lokasi }}"/>
+                                <button type="button" class="btn btn-primary" id="submit">Locate</button>
+                                <p id="error-msg"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 the-map">
+                                <iframe id="map-canvas" src="{{ $low->lokasi }}" allowfullscreen></iframe>
+                            </div>
+                        </div>             
+                    </form>
                     <div>
                         <a href="{{ route('lowongan.apply', $low->id) }}">
-                            <button type="submit" class="btn btn-info icofont-save"> Apply</button>
+                            <button type="submit" class="btn btn-primary"> Apply</button>
                         </a>
                     </div>
                 </div>
@@ -74,6 +88,46 @@ Detail Lowongan
     </section><!-- End Portfolio Details Section -->
 
 </main><!-- End #main -->
+<script>
+var q = "";
+var linkKey = "https://www.google.com/maps/embed/v1/search?key=AIzaSyBK73HewkhHBVVs9nI98-HY_N7cZM_kdjE" 
+var zoom = 14;
+var defaultLoc = "New York, NY"
+
+//Get users geolocation
+if (navigator.geolocation) {
+    q = navigator.geolocation.getCurrentPosition(handleGetCurrentPosition, onError);
+
+    function handleGetCurrentPosition(location) {
+        location.coords.latitude;
+        location.coords.longitude;
+    }
+
+    function onError() {
+        q = defaultLoc;
+    }
+}
+
+//Set initial map based on user geolocation or NY, NY
+var srcContent = linkKey + "&q=" + q + "&zoom=" + zoom;
+$("#map-canvas").attr("src", srcContent);
+
+//Change map based on user input in textbox and a click or enter key submission. 
+$(function () {
+    $('#submit').on('keypress click', function (e) {
+        if ($('#address').val().length === 0) {
+            q = defaultLoc;
+        }
+        else {
+            q = $('#address').val();
+        }
+        srcContent = linkKey + "&q=" + q + "&zoom=" + zoom;
+        if (e.which === 13 || e.type === 'click') {
+            $("#map-canvas").attr("src", srcContent);
+        }
+    });
+});
+</script>
 @endsection
 
 <!-- ======= Footer ======= -->
