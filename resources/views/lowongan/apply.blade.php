@@ -24,6 +24,15 @@ Pengajuan Data Diri
     </section>
 
     <!-- Main content -->
+    @if ($button == 'disabled'){
+        <div class="alert alert-danger text-center">
+            <strong>Perhatian!</strong> Kamu harus <a href="{{ url('profile') }}" class="alert-link">lengkapi data diri</a>.
+        </div>
+    } @elseif ($button == 'enable') {
+        <div class="alert alert-success text-center">
+            <strong>Berhasil!</strong> Kamu sudah melengkapi data diri.
+        </div>
+    } @endif
     <section class="content ">
         <div class="container ">
             <div class="row">
@@ -92,7 +101,7 @@ Pengajuan Data Diri
                             <div class="form-group row">
                                 <div class="offset-sm-5 ">
                                     <a href="{{ route('mahasiswa.home') }}">
-                                        <button type="submit" class="btn btn-danger">Ajukan</button>
+                                        <button type="submit" class="btn btn-danger" {{ $button }}>Ajukan</button>
                                     </a>
                                 </div>
                             </div>

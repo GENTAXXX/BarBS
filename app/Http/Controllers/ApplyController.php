@@ -27,6 +27,21 @@ class ApplyController extends Controller
         ->get();
         return $data->count();
     }
+    
+    public function countPengajuan(){
+        $data = Magang::whereNull('dosen_id')
+        ->get();
+        return $data->count();
+    }
+
+    public function detailMagang($id){
+        $data = Magang::join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
+        ->join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
+        ->select('mahasiswa.*', 'lowongan.*', 'magang.id as magang_id', 'magang.*')
+        ->find($id);
+        $count = $this->countPendaftar();
+        return view('mitra.magang.show', compact('data', 'count'));
+    }
 
     public function listMagang(){
         $data = Magang::join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
@@ -34,7 +49,7 @@ class ApplyController extends Controller
         ->join('mitra', 'lowongan.mitra_id', '=', 'mitra.id')
         ->where('mitra.user_id', Auth::id())
         ->where('approval', '1')
-        ->select('mahasiswa.*', 'lowongan.*', 'mitra.*', 'magang.id as magang_id')
+        ->select('mahasiswa.*', 'lowongan.*', 'mitra.*', 'magang.id as magang_id', 'magang.*')
         ->get();
         $count = $this->countPendaftar();
         return view('mitra.magang.index', compact('data', 'count'));
@@ -66,7 +81,7 @@ class ApplyController extends Controller
 
     public function listPengajuan(){
         $magang = Magang::whereNull('dosen_id')->get();
-        $count = $this->countPendaftar();
+        $count = $this->countPengajuan();
         // dd($magang);
         return view('depart.pengajuan.index', compact('magang', 'count'));
     }
@@ -78,7 +93,7 @@ class ApplyController extends Controller
         ->find($id);
         // $idlogin = Departemen::where('user_id', Auth::id())->get();
         $dosen = Dosen::all();
-        $count = $this->countPendaftar();
+        $count = $this->countPengajuan();
         return view('depart.pengajuan.edit', compact('data', 'dosen', 'count'));
     }
 
@@ -86,7 +101,12 @@ class ApplyController extends Controller
         $idUserLogin = Auth::id();
         $mhs = Mahasiswa::where('user_id', $idUserLogin)->first();
         $low = Lowongan::find($id);
-        return view('lowongan.apply', compact('mhs', 'low'));
+        $button = 'enable';
+        if ($mhs->NIM == null || $mhs->telepon_mhs == null || $mhs->pengalaman == null || $mhs->jurusan_id == null || $mhs->status_id == null || $mhs->jenis_kelamin == null || $mhs->tgl_lahir == null || $mhs->foto_mhs == null){
+            $button = 'disabled';
+            dd($mhs);
+        };
+        return view('lowongan.apply', compact('mhs', 'low', 'button'));
     }
 
     public function detail($id){

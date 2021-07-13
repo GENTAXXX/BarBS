@@ -82,7 +82,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <li class="nav-item">
                                     <a href="{{ route('pengajuan.index') }}" class="nav-link">
                                         <i class="fa fa-graduation-cap nav-icon"></i>
-                                        <p>Pengajuan <span class="badge badge-danger">9</span></p>
+                                        <p>Pengajuan <span class="badge badge-danger">{{ $count }}</span></p>
                                     </a>
                                 </li>
                             </ul>

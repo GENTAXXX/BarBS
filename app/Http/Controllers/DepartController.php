@@ -13,25 +13,33 @@ class DepartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function countPengajuan(){
+        $data = Magang::whereNull('dosen_id')
+        ->get();
+        return $data->count();
+    }
+    
     public function detailMhs($id){
         $mhs = Mahasiswa::find($id);
         $data = Magang::join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
         ->where('mhs_id', $mhs->id)
-        ->first();
+        ->get();
         // dd($data);
+        $count = $this->countPengajuan();
         return view('depart.mhs.show', compact('mhs', 'data'));
     }
 
     public function listMhs()
     {
         $mhs = Mahasiswa::orderBy('nama_mhs', 'asc')->get();
-
+        $count = $this->countPengajuan();
         return view('depart.mhs.index', compact('mhs'));
     }
     
     public function departHome()
     {
         return view('depart.home');
+        $count = $this->countPengajuan();
     }
 
     public function index()

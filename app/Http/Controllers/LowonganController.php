@@ -23,7 +23,8 @@ class LowonganController extends Controller
 
     public function AllLowongan(Request $request){
         $cari = $request->cari;
-        $low = Lowongan::where('nama_low','like','%'.$cari.'%')
+        $low = Lowongan::where('jumlah_mhs', '>', 0)
+        ->where('nama_low','like','%'.$cari.'%')
         ->paginate();
         return view('welcome', compact('low'));
     }

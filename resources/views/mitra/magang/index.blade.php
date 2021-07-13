@@ -48,6 +48,7 @@ List Mahasiswa Magang
                                     <th class="text-center">Nama Mahasiswa</th>
                                     <th class="text-center">Jurusan</th>
                                     <th class="text-center">Nama Lowongan</th>
+                                    <th class="text-center">Status</th>
                                     <th class="text-center">Detail</th>
                                 </tr>
                             </thead>
@@ -60,7 +61,14 @@ List Mahasiswa Magang
                                     <td class="text-center">{{ $data->jurusan['jurusan'] }}</td>
                                     <td class="text-center">{{ $data->nama_low }}</td>
                                     <td class="text-center">
-                                        <a href="{{ url('mitra/pendaftar', $data->magang_id) }}" class="btn btn-primary">Lihat</a>
+                                        @if ($data->approval == 1)
+                                            <label class="badge badge-success">Magang</label>
+                                        @elseif ($data->approval == 2)
+                                            <label class="badge badge-danger">Selesai</label>
+                                        @endif
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="{{ route('magang.show', $data->magang_id) }}" class="btn btn-primary">Lihat</a>
                                     </td>
                                 </tr>
                                 @endforeach

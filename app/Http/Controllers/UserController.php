@@ -10,6 +10,7 @@ use App\Models\Role;
 use App\Models\Supervisor;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Magang;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -19,10 +20,17 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function countPengajuan(){
+        $data = Magang::whereNull('dosen_id')
+        ->get();
+        return $data->count();
+    }
+
     public function index()
     {
         $user = User::all();
-        return view('depart.user.index', compact('user'));
+        $count = $this->countPengajuan();
+        return view('depart.user.index', compact('user', 'count'));
     }
 
     /**
@@ -33,7 +41,8 @@ class UserController extends Controller
     public function create()
     {
         $role = Role::all();
-        return view('depart.user.create', compact('role'));
+        $count = $this->countPengajuan();
+        return view('depart.user.create', compact('role', 'count'));
     }
 
     /**
@@ -125,6 +134,7 @@ class UserController extends Controller
     {
         $user = User::find($user->id);
         $role = Role::all();
+        $count = $this->countPengajuan();
         return view('depart.user.edit', compact('user', 'role'));
     }
 
@@ -161,7 +171,6 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-        dd($id);
         switch ($user->role_id){
             case '1':
                 Departemen::where('user_id', $user->id)->delete();
