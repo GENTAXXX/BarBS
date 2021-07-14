@@ -91,6 +91,8 @@ Route::group(['middleware' => 'is_mahasiswa'], function () {
     //Lowongan
     Route::get('mahasiswa/apply/{id}', [ApplyController::class, 'apply'])->name('lowongan.apply');
     Route::post('mahasiswa/apply', [ApplyController::class, 'store'])->name('apply.store');
+    //Diajukan
+    Route::get('mahasiswa/diajukan', [ApplyController::class, 'diajukan'])->name('lowongan.diajukan');
     Route::group(['middleware' => 'is_approve'], function() {
         //Bimbingan
         Route::get('mahasiswa/bimbingan', [BimbinganController::class, 'index'])->name('bimbingan.index');

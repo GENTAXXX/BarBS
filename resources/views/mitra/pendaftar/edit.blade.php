@@ -33,7 +33,7 @@ Edit Pendaftar
                         <div class="card card-primary card-outline">
                             <div class="card-body box-profile">
                                 <div class="text-center">
-                                    <img class="profile-user-img img-fluid img-circle"src="{{ ('images/'.$data->foto_mhs) }}"alt="User profile picture">
+                                    <img class="profile-user-img img-fluid img-circle"src="{{ asset('images/'.$data->foto_mhs) }}"alt="User profile picture">
                                 </div>
                                     <h3 class="profile-username text-center">{{ $data->nama_mhs }}</h3>
 
@@ -58,7 +58,7 @@ Edit Pendaftar
 
                                     <strong><i class="fas fa-pencil-alt mr-1"></i> Jurusan</strong>
 
-                                    <p class="text-muted"> {{ $data->jurusan['jurusan'] }}</p>
+                                    <p class="text-muted"> {{ $data->jurusan['nama'] }}</p>
 
                                     <hr>
 
@@ -140,8 +140,6 @@ Edit Pendaftar
                                         </tbody>
                                     </table>
                                     <div class="card-footer">
-                                        <!-- <a href="{{ route('pendaftar.approve', $data->id) }}" class="btn btn-primary">Terima</a>
-                                        <a href="{{ route('pendaftar.reject', $data->id) }}" class="btn btn-danger">Tolak</a> -->
                                         <button type="submit" name="action" value="approve" class="btn btn-primary">Terima</button>
                                         <button type="submit" name="action" value="reject" class="btn btn-danger">Tolak</button>
                                     </div>

@@ -34,6 +34,14 @@ class ApplyController extends Controller
         return $data->count();
     }
 
+    public function diajukan(){
+        $data = Magang::join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
+        ->join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
+        ->where('mahasiswa.user_id', Auth::id())
+        ->get();
+        return view('mhs.ajukan.index', compact('data'));
+    }
+
     public function detailMagang($id){
         $data = Magang::join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
         ->join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
@@ -104,7 +112,6 @@ class ApplyController extends Controller
         $button = 'enable';
         if ($mhs->NIM == null || $mhs->telepon_mhs == null || $mhs->pengalaman == null || $mhs->jurusan_id == null || $mhs->status_id == null || $mhs->jenis_kelamin == null || $mhs->tgl_lahir == null || $mhs->foto_mhs == null){
             $button = 'disabled';
-            dd($mhs);
         };
         return view('lowongan.apply', compact('mhs', 'low', 'button'));
     }
@@ -185,15 +192,20 @@ class ApplyController extends Controller
         // dd($request);
         if($request->action == "approve"){
             $this->approve($id);
-            $mhs = Mahasiswa::where('id', $magang->mhs_id);
+            $mhs = Mahasiswa::find($magang->mhs_id);
             $mhs->update([
                 'status_id' => '2'
             ]);
+
             $low = Lowongan::find($magang->lowongan_id);
             $jumlah = $low->jumlah_mhs -= 1;
             $low->update([
                 'jumlah_mhs' => $jumlah
             ]);
+
+            $mgn = Magang::where('mhs_id', $mhs->id)
+            ->where('id', '!=', $magang->id);
+            $mgn->delete();
         } else {
             $this->reject($id);
         }

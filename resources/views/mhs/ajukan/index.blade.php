@@ -1,7 +1,7 @@
-@extends('mitra.layout')
+@extends('mhs.layout')
 
 @section('title')
-Pendaftar
+Lowongan Diajukan
 @endsection
 
 @section('konteng')
@@ -11,12 +11,12 @@ Pendaftar
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Pendaftar</h1>
+                    <h1 class="m-0">Lowongan Diajukan</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Pendaftar</li>
+                        <li class="breadcrumb-item active">Lowongan Diajukan</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -31,7 +31,7 @@ Pendaftar
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header border-transparent">
-                    <h3 class="card-title">List Pendaftar</h3>
+                    <h3 class="card-title">Lowongan Diajukan</h3>
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
                             <i class="fas fa-minus"></i>
@@ -46,8 +46,9 @@ Pendaftar
                                 <tr>
                                     <th class="text-center">Nomor</th>
                                     <th class="text-center">Nama Mahasiswa</th>
-                                    <th class="text-center">Jurusan</th>
-                                    <th class="text-center">Nama Lowongan</th>
+                                    <th class="text-center">Melamar</th>
+                                    <th class="text-center">Nama Mitra</th>
+                                    <th class="text-center">Status</th>
                                     <th class="text-center">Detail</th>
                                 </tr>
                             </thead>
@@ -57,8 +58,15 @@ Pendaftar
                                 <tr>
                                     <td class="text-center">{{ $no++ }}</a></td>
                                     <td class="text-center">{{ $data->nama_mhs }}</td>
-                                    <td class="text-center">{{ $data->jurusan['jurusan'] }}</td>
                                     <td class="text-center">{{ $data->nama_low }}</td>
+                                    <td class="text-center">{{ $data->lowongan->mitra['nama_mitra'] }}</td>
+                                    <td class="text-center">
+                                        @if ($data->approval == 1)
+                                            <label class="badge badge-success">Diterima</label>
+                                        @elseif ($data->approval == 'null')
+                                            <label class="badge badge-warning">Menunggu</label>
+                                        @endif
+                                    </td>
                                     <td class="text-center">
                                         <a href="{{ url('mitra/pendaftar', $data->magang_id) }}" class="btn btn-primary">Lihat</a>
                                     </td>

@@ -21985,7 +21985,8 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
   margin: 0 auto;
   padding: 3px;
   width: 100px;
-  object-fit: contain;
+  height: 100px;
+  object-fit: cover;
 }
 
 .profile-username {

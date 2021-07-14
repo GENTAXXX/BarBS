@@ -127,6 +127,10 @@ $(function () {
         }
     });
 });
+
+$(document).ready(function () {
+        $('#submit').click()
+    })
 </script>
 @endsection
 

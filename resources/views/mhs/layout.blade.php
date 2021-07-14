@@ -71,7 +71,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </li>
                         <li class="nav-item menu-open">
                             <li class="nav-item">
-                                <a href="dashboard-mahasiswa-mitra.html" class="nav-link">
+                                <a href="{{ route('lowongan.diajukan') }}" class="nav-link">
                                 <i class="far fa-copy nav-icon"></i>
                                 <p>Lamaran diajukan</p>
                                 </a>

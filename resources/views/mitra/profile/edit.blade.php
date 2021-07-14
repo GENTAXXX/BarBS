@@ -52,7 +52,7 @@ Edit Profile
                                     </div>
                                     <div class="form-group">
                                         <label for="alamat">Alamat:</label>
-                                        <textarea class="form-control" name="alamat_mitra" value="{{ $mitra->alamat_mitra }}"></textarea>
+                                        <textarea class="form-control" name="alamat_mitra">{{ $mitra->alamat_mitra }}</textarea>
                                     </div>
 
                                     <div class="form-group">
@@ -68,7 +68,7 @@ Edit Profile
                                         <select class="form-control" name="kab_id">
                                             <option value="">- Pilih Kabupaten -</option>
                                             @foreach ($kabupatens as $kabupaten)
-                                            <option value="{{ $kabupaten->id }}">{{ $kabupaten->nama }}</option>
+                                                    <option value="{{ $kabupaten->id }}" @if ($mitra->kab_id == $kabupaten->id) selected @endif>{{ $kabupaten->nama }}</option>
                                             @endforeach
                                         </select>
                                     </div>
