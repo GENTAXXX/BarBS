@@ -25,6 +25,7 @@ class CreateMahasiswaTable extends Migration
             $table->enum('jenis_kelamin',['Laki-laki','Perempuan'])->nullable();
             $table->date('tgl_lahir')->nullable();
             $table->string('foto_mhs')->nullable()->default('avatar.png');
+            $table->unsignedBigInteger('depart_id')->nullable();
             $table->timestamps();
         });
 
@@ -32,6 +33,7 @@ class CreateMahasiswaTable extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('status_id')->references('id')->on('status')->onDelete('cascade');
             $table->foreign('jurusan_id')->references('id')->on('jurusan')->onDelete('cascade');
+            $table->foreign('depart_id')->references('id')->on('departemen')->onDelete('cascade');
         });
     }
 

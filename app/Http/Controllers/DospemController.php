@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Dosen;
 
 class DospemController extends Controller
 {
@@ -14,7 +16,8 @@ class DospemController extends Controller
 
     public function dospemHome()
     {
-        return view('dosen.home');
+        $dosen = Dosen::where("user_id", Auth::id())->first();
+        return view('dosen.home', compact('dosen'));
     }
 
     public function index()

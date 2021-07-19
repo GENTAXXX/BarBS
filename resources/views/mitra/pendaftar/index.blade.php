@@ -46,7 +46,7 @@ Pendaftar
                                 <tr>
                                     <th class="text-center">Nomor</th>
                                     <th class="text-center">Nama Mahasiswa</th>
-                                    <th class="text-center">Jurusan</th>
+                                    <th class="text-center">Departemen</th>
                                     <th class="text-center">Nama Lowongan</th>
                                     <th class="text-center">Detail</th>
                                 </tr>
@@ -57,7 +57,7 @@ Pendaftar
                                 <tr>
                                     <td class="text-center">{{ $no++ }}</a></td>
                                     <td class="text-center">{{ $data->nama_mhs }}</td>
-                                    <td class="text-center">{{ $data->jurusan['jurusan'] }}</td>
+                                    <td class="text-center">{{ $data->mahasiswa->jurusan['jurusan'] }}</td>
                                     <td class="text-center">{{ $data->nama_low }}</td>
                                     <td class="text-center">
                                         <a href="{{ url('mitra/pendaftar', $data->magang_id) }}" class="btn btn-primary">Lihat</a>

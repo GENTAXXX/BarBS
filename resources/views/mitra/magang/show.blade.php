@@ -112,6 +112,9 @@ Detail Mahasiswa Magang
                                 </div>
                             </div>
                         </div>
+                        <div class="card-footer">
+                            <a href="{{ route('pendaftar.end', $data->magang_id) }}" class="btn btn-danger"> Akhiri</a>
+                        </div>
                 </div>
             </div>
         </div>

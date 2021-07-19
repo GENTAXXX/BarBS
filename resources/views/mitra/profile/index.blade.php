@@ -38,7 +38,7 @@ Profile Mitra
 
                             <h3 class="profile-username text-center">{{ $mitra->nama_mitra }}</h3>
 
-                            <p class="text-muted text-center">Software Engineer</p>
+                            <p class="text-muted text-center">{{ Auth::user()->email }}</p>
                             <strong><i class="fas fa-book mr-1"></i> Alamat</strong>
 
                             <p class="text-muted">{{ $mitra->alamat_mitra }}</p>

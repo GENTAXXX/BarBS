@@ -12,8 +12,7 @@ class Mahasiswa extends Model
     protected $table = 'mahasiswa';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'user_id', 'nama_mhs', 'NIM', 'telepon_mhs', 'pengalaman', 'jurusan_id', 'status_id', 'jenis_kelamin',
-        'tgl_lahir', 'foto_mhs'
+        'user_id', 'nama_mhs', 'NIM', 'telepon_mhs', 'pengalaman', 'jurusan_id', 'status_id', 'jenis_kelamin', 'tgl_lahir', 'foto_mhs', 'depart_id'
     ];
 
     public function status(){
@@ -26,5 +25,9 @@ class Mahasiswa extends Model
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function depart(){
+        return $this->belongsTo(Departemen::class);
     }
 }

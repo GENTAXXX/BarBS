@@ -56,7 +56,7 @@ Tambah Lowongan
                             </div>
                             <div class=" form-group">
                                 <label>Deskripsi Lowongan</label>
-                                <textarea class="form-control" name="deskripsi_low" value="{{ $low->deskripsi_low }}"></textarea>
+                                <textarea class="form-control" name="deskripsi_low">{{ $low->deskripsi_low }}</textarea>
                             </div>
                             <div class=" form-group">
                                 <label>Jumlah Mahasiswa</label>
@@ -75,7 +75,7 @@ Tambah Lowongan
                                 <select class="form-control" name="mitra_id">
                                     <option value="">- Pilih Mitra -</option>
                                     @foreach ($mitra as $mitra)
-                                    <option value="{{ $mitra->id }}">{{ $mitra->nama_mitra }}</option>
+                                    <option value="{{ $mitra->id }}" @if ($low->mitra_id == $mitra->id) selected @endif>{{ $mitra->nama_mitra }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -84,7 +84,7 @@ Tambah Lowongan
                                 <select class="form-control" name="kategori_id">
                                     <option value="">- Pilih Kategori -</option>
                                     @foreach ($kategori as $kat)
-                                    <option value="{{ $kat->id }}">{{ $kat->kategori }}</option>
+                                    <option value="{{ $kat->id }}" @if ($low->kategori_id == $kat->id) selected @endif>{{ $kat->kategori }}</option>
                                     @endforeach
                                 </select>
                             </div>

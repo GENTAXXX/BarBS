@@ -135,7 +135,7 @@ class UserController extends Controller
         $user = User::find($user->id);
         $role = Role::all();
         $count = $this->countPengajuan();
-        return view('depart.user.edit', compact('user', 'role'));
+        return view('depart.user.edit', compact('user', 'role', 'count'));
     }
 
     /**
@@ -158,7 +158,7 @@ class UserController extends Controller
         $request->merge([
             'password' => Hash::make($request->password)
         ]);
-        $user->update($request->all());
+        $user->update([$request->all()]);
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
 

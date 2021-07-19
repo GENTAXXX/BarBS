@@ -63,7 +63,7 @@ Edit Profile
                                         <select class="form-control" name="depart_id">
                                             <option value="">- Pilih Departemen -</option>
                                             @foreach ($depart as $dep)
-                                            <option value="{{ $dep->id }}">{{ $dep->nama_depart }}</option>
+                                            <option value="{{ $dep->id }}" @if ($dosen->depart_id == $dep->id) selected @endif>{{ $dep->nama_depart }}</option>
                                             @endforeach
                                         </select>
                                     </div>

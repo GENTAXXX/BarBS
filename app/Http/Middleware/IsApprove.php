@@ -22,7 +22,7 @@ class IsApprove
         if ($mhs->status_id == '2'){
             return $next($request);
         }else{
-            return view('redirect');
+            return redirect()->route('redirect');
         }
     }
 }

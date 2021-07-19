@@ -38,7 +38,7 @@ Profile Mahasiswa
 
                             <h3 class="profile-username text-center">{{ $mhs->nama_mhs }}</h3>
 
-                            <p class="text-muted text-center">Software Engineer</p>
+                            <p class="text-muted text-center">{{ Auth::user()->email }}</p>
                             <strong><i class="fas fa-book mr-1"></i> NIM</strong>
 
                             <p class="text-muted">{{ $mhs->NIM }}</p>
@@ -54,6 +54,12 @@ Profile Mahasiswa
                             <strong><i class="fas fa-mail-bulk mr-1"></i> Pengalaman</strong>
 
                             <p class="text-muted">{{ $mhs->pengalaman }}</p>
+
+                            <hr>
+
+                            <strong><i class="far fa-file-alt mr-1"></i> Departemen</strong>
+
+                            <p class="text-muted">{{ $mhs->depart['nama_depart'] }}</p>
 
                             <hr>
 
@@ -84,8 +90,7 @@ Profile Mahasiswa
                         </div>
                         <div class="form-group row">
                             <div class="offset-sm-5 ">
-                                <a class="btn btn-danger" href="{{ route('profile.edit', $mhs->id) }}">
-                                    Ubah
+                                <a class="btn btn-danger" href="{{ route('profile.edit', $mhs->id) }}">Ubah
                                 </a>
                             </div>
                         </div>

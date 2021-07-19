@@ -10,6 +10,7 @@ use App\Models\Lowongan;
 use App\Models\Magang;
 use App\Models\Mahasiswa;
 use App\Models\Mitra;
+use App\Models\SkillMhs;
 use App\Models\Supervisor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,10 +44,15 @@ class ApplyController extends Controller
     }
 
     public function detailMagang($id){
-        $data = Magang::join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
-        ->join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
+        $data = Magang::join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
         ->select('mahasiswa.*', 'lowongan.*', 'magang.id as magang_id', 'magang.*')
         ->find($id);
+
+        $mhs = Mahasiswa::where('id', $data->mhs_id)->first();
+        $skill = SkillMhs::join('skill', 'skill_mhs.skill_id', '=', 'skill.id')
+                ->where('skill_mhs.mhs_id', $mhs->id)
+                ->select('skill')->get();
+
         $count = $this->countPendaftar();
         return view('mitra.magang.show', compact('data', 'count'));
     }
@@ -70,21 +76,27 @@ class ApplyController extends Controller
         ->where('mitra.user_id', Auth::id())
         ->whereNull('spv_id')
         ->whereNotNull('dosen_id')
-        ->select('mahasiswa.*', 'lowongan.*', 'mitra.*', 'magang.id as magang_id')
+        ->select('mahasiswa.*', 'lowongan.*', 'mitra.*', 'magang.id as magang_id', 'magang.*')
         ->get();
         $count = $this->countPendaftar();
         return view('mitra.pendaftar.index', compact('data', 'count'));
     }
-
+    
     public function pendaftar($id){
-        $data = Magang::join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
-        ->join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
-        ->select('mahasiswa.*', 'lowongan.*', 'magang.id as magang_id')
+        $data = Magang::join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
+        ->select('lowongan.*', 'magang.id as magang_id', 'magang.*')
         ->find($id);
-        // $idlogin = Mitra::where('user_id', Auth::id())->get();
-        $spv = Supervisor::all();
+
+        $mhs = Mahasiswa::where('id', $data->mhs_id)->first();
+        $skill = SkillMhs::join('skill', 'skill_mhs.skill_id', '=', 'skill.id')
+                ->where('skill_mhs.mhs_id', $mhs->id)
+                ->select('skill')->get();
+
+        $mitra = Mitra::where('user_id', Auth::id())->first();
+        $spv = Supervisor::where('mitra_id', $mitra->id)->get();
+
         $count = $this->countPendaftar();
-        return view('mitra.pendaftar.edit', compact('data', 'spv', 'count'));
+        return view('mitra.pendaftar.edit', compact('data', 'spv', 'count', 'mhs', 'skill'));
     }
 
     public function listPengajuan(){
@@ -95,25 +107,35 @@ class ApplyController extends Controller
     }
 
     public function pengajuan($id){
-        $data = Magang::join('mahasiswa as mhs', 'magang.mhs_id', '=', 'mhs.id')
-        ->join('lowongan as low', 'magang.lowongan_id', '=', 'low.id')
-        ->select('mhs.*', 'low.*','magang.id as magang_id')
+        $data = Magang::join('lowongan as low', 'magang.lowongan_id', '=', 'low.id')
+        ->join('mitra', 'low.mitra_id', '=', 'mitra.id')
+        ->select('low.*','magang.id as magang_id', 'magang.*', 'mitra.nama_mitra')
         ->find($id);
-        // $idlogin = Departemen::where('user_id', Auth::id())->get();
-        $dosen = Dosen::all();
+
+        $mhs = Mahasiswa::where('id', $data->mhs_id)->first();
+        $skill = SkillMhs::join('skill', 'skill_mhs.skill_id', '=', 'skill.id')
+                ->where('skill_mhs.mhs_id', $mhs->id)
+                ->select('skill')->get();
+
+        $depart = Departemen::where('user_id', Auth::id())->first();
+        $dosen = Dosen::where('depart_id', $depart->id)->get();
+
         $count = $this->countPengajuan();
-        return view('depart.pengajuan.edit', compact('data', 'dosen', 'count'));
+        return view('depart.pengajuan.edit', compact('data', 'dosen', 'count', 'mhs', 'skill'));
     }
 
     public function apply($id){
         $idUserLogin = Auth::id();
         $mhs = Mahasiswa::where('user_id', $idUserLogin)->first();
+        $skill = SkillMhs::join('skill', 'skill_mhs.skill_id', '=', 'skill.id')
+                ->where('skill_mhs.mhs_id', $mhs->id)
+                ->select('skill')->get();
         $low = Lowongan::find($id);
         $button = 'enable';
         if ($mhs->NIM == null || $mhs->telepon_mhs == null || $mhs->pengalaman == null || $mhs->jurusan_id == null || $mhs->status_id == null || $mhs->jenis_kelamin == null || $mhs->tgl_lahir == null || $mhs->foto_mhs == null){
             $button = 'disabled';
         };
-        return view('lowongan.apply', compact('mhs', 'low', 'button'));
+        return view('lowongan.apply', compact('mhs', 'low', 'button', 'skill'));
     }
 
     public function detail($id){
@@ -189,7 +211,6 @@ class ApplyController extends Controller
             'spv_id' => $request->spv_id,
         ]);
 
-        // dd($request);
         if($request->action == "approve"){
             $this->approve($id);
             $mhs = Mahasiswa::find($magang->mhs_id);
@@ -221,6 +242,20 @@ class ApplyController extends Controller
         //         ]);
         //         break;
         // }
+        return redirect()->route('pendaftar.index');
+    }
+
+    public function end($id){
+        $magang = Magang::find($id);
+        $magang->update([
+            'approval' => '2'
+        ]);
+
+        $mhs = Mahasiswa::find($magang->mhs_id);
+        $mhs->update([
+            'status_id' => '3'
+        ]);
+
         return redirect()->route('pendaftar.index');
     }
 

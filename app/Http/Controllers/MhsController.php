@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Mahasiswa;
+use App\Models\SkillMhs;
+use Illuminate\Support\Facades\Auth;
 
 class MhsController extends Controller
 {
@@ -13,7 +16,12 @@ class MhsController extends Controller
      */
     public function mahasiswaHome()
     {
-        return view('mhs.home');
+        $mhs = Mahasiswa::where("user_id", Auth::id())->first();
+        $skill = SkillMhs::join('skill', 'skill_mhs.skill_id', '=', 'skill.id')
+        ->where('skill_mhs.mhs_id', $mhs->id)
+        ->select('skill')
+        ->get();
+        return view('mhs.home', compact('mhs', 'skill'));
     }
     
     public function index()

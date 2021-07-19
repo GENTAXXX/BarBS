@@ -37,14 +37,14 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['middleware' => 'is_depart'], function () {
     Route::get('depart/home', [DepartController::class, 'departHome'])->name('depart.home');
     //CRUD Users
-    // Route::resource('users', UserController::class);
-    Route::get('users', [UserController::class, 'index'])->name('users.index');
-    Route::get('users/create', [UserController::class, 'create'])->name('users.create');
-    Route::get('users/{id}', [UserController::class, 'show'])->name('users.show');
-    Route::post('users', [UserController::class, 'store'])->name('users.store');
-    Route::get('users/edit', [UserController::class, 'edit'])->name('users.edit');
-    Route::put('users/{id}', [UserController::class, 'update'])->name('users.update');
-    Route::delete('users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+    Route::resource('users', UserController::class);
+    // Route::get('users', [UserController::class, 'index'])->name('users.index');
+    // Route::get('users/create', [UserController::class, 'create'])->name('users.create');
+    // Route::get('users/{id}', [UserController::class, 'show'])->name('users.show');
+    // Route::post('users', [UserController::class, 'store'])->name('users.store');
+    // Route::get('users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
+    // Route::put('users/edit/{id}', [UserController::class, 'update'])->name('users.update');
+    // Route::delete('users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
     //List Mahasiswa
     Route::get('depart/mahasiswa', [DepartController::class, 'listMhs'])->name('depart.mhs');
     Route::get('depart/mahasiswa/{id}', [DepartController::class, 'detailMhs'])->name('depart.detailMhs');
@@ -66,6 +66,7 @@ Route::group(['middleware' => 'is_mitra'], function () {
     Route::get('mitra/approve/{id}', [ApplyController::class, 'approve'])->name('pendaftar.approve');
     Route::get('mitra/reject/{id}', [ApplyController::class, 'reject'])->name('pendaftar.reject');
     Route::post('mitra/pendaftar/{id}', [ApplyController::class, 'approval'])->name('pendaftar.approval');
+    Route::post('mitra/end/{id}', [ApplyController::class, 'end'])->name('pendaftar.end');
     //Mhs Magang
     Route::get('mitra/magang', [ApplyController::class, 'listMagang'])->name('magang.index');
     Route::get('mitra/magang/{id}', [ApplyController::class, 'detailMagang'])->name('magang.show');
@@ -93,6 +94,10 @@ Route::group(['middleware' => 'is_mahasiswa'], function () {
     Route::post('mahasiswa/apply', [ApplyController::class, 'store'])->name('apply.store');
     //Diajukan
     Route::get('mahasiswa/diajukan', [ApplyController::class, 'diajukan'])->name('lowongan.diajukan');
+    //Redirect
+    Route::get('/redirect', function () {
+        return view('redirect');
+    })->name('redirect');
     Route::group(['middleware' => 'is_approve'], function() {
         //Bimbingan
         Route::get('mahasiswa/bimbingan', [BimbinganController::class, 'index'])->name('bimbingan.index');

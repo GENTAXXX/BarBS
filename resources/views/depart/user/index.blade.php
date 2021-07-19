@@ -13,7 +13,7 @@ Daftar User
                 <div class="col-sm-6">
                     <h1 class="m-0">Daftar User</h1>
                     <a href="{{ route('users.create') }}" class="nav-link">
-                        <button type="submit" class="btn btn-primary">Buat User</button>
+                        <button type="submit" class="btn btn-primary">Buat</button>
                     </a>
 
                 </div><!-- /.col -->

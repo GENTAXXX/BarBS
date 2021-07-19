@@ -64,7 +64,7 @@ Edit User
                                 <select class="form-control" name="role_id">
                                     <option value="">- Pilih Role -</option>
                                     @foreach ($role as $role)
-                                    <option value="{{ $role->id }}">{{ $role->role }}</option>
+                                    <option value="{{ $role->id }}" @if ($user->role_id == $role->id) selected @endif>{{ $role->role }}</option>
                                     @endforeach
                                 </select>
 
@@ -77,7 +77,7 @@ Edit User
                         <!-- /.card-body -->
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <button type="submit" class="btn btn-primary">Ubah</button>
                         </div>
                     </form>
                 </div>

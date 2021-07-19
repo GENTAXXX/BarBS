@@ -61,14 +61,23 @@ Profile Mahasiswa
                                     </div>
                                     <div class="form-group">
                                         <label for="pengalaman">Pengalaman:</label>
-                                        <textarea class="form-control" name="pengalaman" value="{{ $mhs->pengalaman }}"></textarea>
+                                        <textarea class="form-control" name="pengalaman">{{ $mhs->pengalaman }}</textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="depart_id">Departemen:</label>
+                                        <select name="depart_id" class="form-control">
+                                            <option value="">- Pilih Departemen -</option>
+                                            @foreach($depart as $dep)
+                                            <option value="{{ $dep['id'] }}" @if ($mhs->depart_id == $dep->id) selected @endif>{{ $dep->nama_depart }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="jurusan_id">Jurusan:</label>
                                         <select name="jurusan_id" class="form-control">
                                             <option value="">- Pilih Jurusan -</option>
                                             @foreach($jurusan as $jur)
-                                            <option value="{{ $jur['id'] }}">{{ $jur->jurusan }}</option>
+                                            <option value="{{ $jur['id'] }}" @if ($mhs->jurusan_id == $jur->id) selected @endif>{{ $jur->jurusan }}</option>
                                             @endforeach
                                         </select>
                                     </div>

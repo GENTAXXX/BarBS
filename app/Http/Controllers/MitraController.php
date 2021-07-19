@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Magang;
+use App\Models\Mitra;
 
 class MitraController extends Controller
 {
@@ -11,9 +14,18 @@ class MitraController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function countPendaftar(){
+        $data = Magang::whereNull('spv_id')
+        ->whereNotNull('dosen_id')
+        ->get();
+        return $data->count();
+    }
+
     public function mitraHome()
     {
-        return view('mitra.home');
+        $mitra = Mitra::where("user_id", Auth::id())->first();
+        $count = $this->countPendaftar();
+        return view('mitra.home', compact('mitra', 'count'));
     }
 
     public function index()

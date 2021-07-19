@@ -21,7 +21,8 @@ class CreateMagangTable extends Migration
             $table->unsignedBigInteger('dosen_id')->nullable();
             $table->unsignedBigInteger('spv_id')->nullable();
             $table->unsignedBigInteger('lowongan_id')->nullable();
-            $table->boolean('approval')->default('0')->nullable();
+            $table->integer('approval')->default('0')->nullable();
+            $table->string('sertifikat')->nullable();
             $table->timestamps();
         });
 

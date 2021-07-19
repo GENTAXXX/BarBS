@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Supervisor;
+use Illuminate\Support\Facades\Auth;
 
 class SpvController extends Controller
 {
@@ -11,8 +13,10 @@ class SpvController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function supervisorHome(){
-        return view('spv.home');
+    public function supervisorHome()
+    {
+        $spv = Supervisor::where("user_id", Auth::id())->first();
+        return view('spv.home', compact('spv'));
     }
 
     public function index()

@@ -33,50 +33,52 @@ Edit Pendaftar
                         <div class="card card-primary card-outline">
                             <div class="card-body box-profile">
                                 <div class="text-center">
-                                    <img class="profile-user-img img-fluid img-circle"src="{{ asset('images/'.$data->foto_mhs) }}"alt="User profile picture">
+                                    <img class="profile-user-img img-fluid img-circle"src="{{ asset('images/'.$mhs->foto_mhs) }}"alt="User profile picture">
                                 </div>
-                                    <h3 class="profile-username text-center">{{ $data->nama_mhs }}</h3>
+                                    <h3 class="profile-username text-center">{{ $mhs->nama_mhs }}</h3>
 
-                                    <p class="text-muted text-center">Software Engineer</p>
+                                    <p class="text-muted text-center">{{ $mhs->depart['nama_depart']}}</p>
                                     <strong><i class="fas fa-book mr-1"></i> NIM</strong>
 
-                                    <p class="text-muted">{{ $data->NIM }}</p>
+                                    <p class="text-muted">{{ $mhs->NIM }}</p>
 
                                     <hr>
 
                                     <strong><i class="fas fa-mail-bulk mr-1"></i> Telepon</strong>
 
-                                    <p class="text-muted">{{ $data->telepon_mhs }}</p>
+                                    <p class="text-muted">{{ $mhs->telepon_mhs }}</p>
 
                                     <hr>
 
                                     <strong><i class="fas fa-mail-bulk mr-1"></i> Pengalaman</strong>
 
-                                    <p class="text-muted">{{ $data->pengalaman }}</p>
+                                    <p class="text-muted">{{ $mhs->pengalaman }}</p>
 
                                     <hr>
 
                                     <strong><i class="fas fa-pencil-alt mr-1"></i> Jurusan</strong>
 
-                                    <p class="text-muted"> {{ $data->jurusan['nama'] }}</p>
+                                    <p class="text-muted"> {{ $mhs->jurusan['jurusan'] }}</p>
 
                                     <hr>
 
                                     <strong><i class="far fa-file-alt mr-1"></i> Skill</strong>
 
-                                    <p class="text-muted">{{ $data->skill['skill'] }}</p>
+                                    @foreach ($skill as $s)
+                                    <p class="text-muted">{{ $s->skill }}</p>
+                                    @endforeach
 
                                     <hr>
 
                                     <strong><i class="far fa-file-alt mr-1"></i> Jenis Kelamin</strong>
 
-                                    <p class="text-muted">{{ $data->jenis_kelamin }}</p>
+                                    <p class="text-muted">{{ $mhs->jenis_kelamin }}</p>
 
                                     <hr>
 
                                     <strong><i class="far fa-file-alt mr-1"></i> Tanggal Lahir</strong>
 
-                                    <p class="text-muted">{{ $data->tgl_lahir }}</p>
+                                    <p class="text-muted">{{ $mhs->tgl_lahir }}</p>
                                 </div>
                             </div>
                     <!-- /.card-body -->

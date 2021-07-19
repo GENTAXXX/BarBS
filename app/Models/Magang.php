@@ -12,7 +12,7 @@ class Magang extends Model
     protected $table = 'magang';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'tgl_mulai','tgl_selesai','mhs_id','dosen_id','spv_id','lowongan_id', 'approval'
+        'tgl_mulai','tgl_selesai','mhs_id','dosen_id','spv_id','lowongan_id', 'approval', 'sertifikat'
     ];
 
     public function mahasiswa(){

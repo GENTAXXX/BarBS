@@ -63,7 +63,7 @@ Edit Profile
                                         <select class="form-control" name="mitra_id">
                                             <option value="">- Pilih Mitra -</option>
                                             @foreach ($mitra as $mit)
-                                            <option value="{{ $mit->id }}">{{ $mit->nama_mitra }}</option>
+                                            <option value="{{ $mit->id }}" @if ($spv->mitra_id == $mit->id) selected @endif>{{ $mit->nama_mitra }}</option>
                                             @endforeach
                                         </select>
                                     </div>

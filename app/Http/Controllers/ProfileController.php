@@ -23,6 +23,11 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function countPengajuan(){
+        $data = Magang::whereNull('dosen_id')
+        ->get();
+        return $data->count();
+    }
 
     public function countPendaftar(){
         $data = Magang::whereNull('spv_id')
@@ -37,7 +42,8 @@ class ProfileController extends Controller
         switch ($user->role_id) {
             case '1':
                 $depart = Departemen::where("user_id", $idUserLogin)->first();
-                return view('depart.profile.index', compact('depart'));
+                $count = $this->countPengajuan();
+                return view('depart.profile.index', compact('depart', 'count'));
                 break;
             case '2':
                 $mitra = Mitra::where("user_id", $idUserLogin)->first();
@@ -109,7 +115,8 @@ class ProfileController extends Controller
         switch ($user->role_id) {
             case '1':
                 $depart = Departemen::where("user_id", $idUserLogin)->first();
-                return view('depart.profile.edit', compact('depart'));
+                $count = $this->countPengajuan();
+                return view('depart.profile.edit', compact('depart', 'count'));
                 break;
             case '2':
                 $mitra = Mitra::where("user_id", $idUserLogin)->first();
@@ -132,7 +139,8 @@ class ProfileController extends Controller
                 $jurusan = Jurusan::all();
                 $skill = Skill::all();
                 $gender = ['Laki-laki','Perempuan'];
-                return view('mhs.profile.edit', compact('mhs', 'jurusan', 'skill', 'gender'));
+                $depart = Departemen::all();
+                return view('mhs.profile.edit', compact('mhs', 'jurusan', 'skill', 'gender', 'depart'));
                 break;
         };
     }
@@ -246,6 +254,7 @@ class ProfileController extends Controller
                     'jenis_kelamin' => 'required',
                     'tgl_lahir' => 'required',
                     'foto_mhs' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'depart_id' => 'required'
                 ]);
 
                 foreach ($request->skill_id as $skill){
@@ -267,6 +276,7 @@ class ProfileController extends Controller
                     'jenis_kelamin' => $request->jenis_kelamin,
                     'tgl_lahir' => $request->tgl_lahir,
                     'foto_mhs' => $imageName,
+                    'depart_id' => $request->depart_id
                 ]);
                 return redirect()->route('profile.index');
                 break;

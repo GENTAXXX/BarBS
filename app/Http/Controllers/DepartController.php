@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Departemen;
 use App\Models\Mahasiswa;
 use App\Models\Magang;
+use Illuminate\Support\Facades\Auth;
 
 class DepartController extends Controller
 {
@@ -26,20 +28,24 @@ class DepartController extends Controller
         ->get();
         // dd($data);
         $count = $this->countPengajuan();
-        return view('depart.mhs.show', compact('mhs', 'data'));
+        return view('depart.mhs.show', compact('mhs', 'data', 'count'));
     }
 
     public function listMhs()
     {
-        $mhs = Mahasiswa::orderBy('nama_mhs', 'asc')->get();
+        $depart = Departemen::where('user_id', Auth::id())->first();
+        $mhs = Mahasiswa::where('depart_id', $depart->id)
+        ->orderBy('nama_mhs', 'asc')
+        ->get();
         $count = $this->countPengajuan();
-        return view('depart.mhs.index', compact('mhs'));
+        return view('depart.mhs.index', compact('mhs', 'count'));
     }
     
     public function departHome()
     {
-        return view('depart.home');
+        $depart = Departemen::where("user_id", Auth::id())->first();
         $count = $this->countPengajuan();
+        return view('depart.home', compact('depart', 'count'));
     }
 
     public function index()

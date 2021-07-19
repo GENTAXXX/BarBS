@@ -33,12 +33,12 @@ Profile Dosen
                     <div class="card card-primary card-outline">
                         <div class="card-body box-profile">
                             <div class="text-center">
-                                <img class="profile-user-img img-fluid img-circle" src="{{ asset('images/'.$dosen->foto) }}" alt="User profile picture">
+                                <img class="profile-user-img img-fluid img-circle" src="{{ asset('images/'.$dosen->foto_dosen) }}" alt="User profile picture">
                             </div>
 
                             <h3 class="profile-username text-center">{{ $dosen->nama_dosen }}</h3>
 
-                            <p class="text-muted text-center">Software Engineer</p>
+                            <p class="text-muted text-center">{{ Auth::user()->email }}</p>
 
                             <strong><i class="fas fa-mail-bulk mr-1"></i> Telepon</strong>
 
