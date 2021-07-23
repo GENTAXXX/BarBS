@@ -52,25 +52,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="{{ route('mitra.home') }}" class="nav-link">
+                            <a href="{{ route('mitra.home') }}" class="nav-link @if(Route::is('mitra.home')) {{ 'active' }} @endif">
                             <i class="fa fa-home nav-icon"></i>
                             <p>Beranda</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('lowongan.index') }}" class="nav-link ">
+                            <a href="{{ route('lowongan.index') }}" class="nav-link @if(Route::is('lowongan.index')) {{ 'active' }} @endif">
                                 <i class="far fa-copy nav-icon"></i>
                                 <p>Lowongan</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('pendaftar.index') }}" class="nav-link">
+                            <a href="{{ route('pendaftar.index') }}" class="nav-link @if(Route::is('pendaftar.index')) {{ 'active' }} @endif">
                                 <i class="far fa-copy nav-icon"></i>
                                 <p>Pendaftar <span class="badge badge-danger">{{ $count }}</span></p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('magang.index') }}" class="nav-link">
+                            <a href="{{ route('magang.index') }}" class="nav-link @if(Route::is('magang.index')) {{ 'active' }} @endif">
                             <i class="nav-icon fas fa-user"></i>
                             <p>Mahasiswa Magang</p>
                             </a>

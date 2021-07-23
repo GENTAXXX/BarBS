@@ -52,11 +52,11 @@ Tambah User
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Nama User:</label>
-                                <input type="text" class="form-control" name="name" autofocus />
+                                <input type="text" class="form-control" name="name" autofocus placeholder="Nama User"/>
                             </div>
                             <div class=" form-group">
                                 <label>Email User:</label>
-                                <input type="email" class="form-control" name="email" />
+                                <input type="email" class="form-control" name="email" placeholder="Email User"/>
                             </div>
                             <div class=" form-group">
                                 <label>Role:</label>
@@ -70,7 +70,7 @@ Tambah User
                             </div>
                             <div class="form-group">
                                 <label>Password:</label>
-                                <input type="password" class="form-control" name="password" />
+                                <input type="password" class="form-control" name="password" placeholder="Password"/>
                             </div>
                         </div>
                         <!-- /.card-body -->

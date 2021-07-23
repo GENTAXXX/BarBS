@@ -58,7 +58,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="{{ route('mahasiswa.home') }}" class="nav-link">
+                            <a href="{{ route('mahasiswa.home') }}" class="nav-link @if(Route::is('mahasiswa.home')) {{ 'active' }} @endif">
                             <i class="fa fa-home nav-icon"></i>
                             <p>Beranda</p>
                             </a>
@@ -69,22 +69,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <p>Cari Lowongan</p>
                             </a>
                         </li>
-                        <li class="nav-item menu-open">
-                            <li class="nav-item">
-                                <a href="{{ route('lowongan.diajukan') }}" class="nav-link">
-                                <i class="far fa-copy nav-icon"></i>
-                                <p>Lamaran diajukan</p>
-                                </a>
-                            </li>
+                        <li class="nav-item">
+                            <a href="{{ route('lowongan.diajukan') }}" class="nav-link @if(Route::is('lowongan.diajukan')) {{ 'active' }} @endif">
+                            <i class="far fa-copy nav-icon"></i>
+                            <p>Lamaran diajukan</p>
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('logbook.index') }}" class="nav-link">
+                            <a href="{{ route('logbook.index') }}" class="nav-link @if(Route::is('logbook.index')) {{ 'active' }} @endif">
                             <i class="nav-icon fas fa-book-open"></i>
                             <p>Log Book</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('bimbingan.index') }}" class="nav-link">
+                            <a href="{{ route('bimbingan.index') }}" class="nav-link @if(Route::is('bimbingan.index')) {{ 'active' }} @endif">
                             <i class="nav-icon fas fa-book-open"></i>
                             <p>Bimbingan</p>
                             </a>

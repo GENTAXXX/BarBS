@@ -124,9 +124,9 @@ Detail Bimbingan Mahasiswa
                     <div class="card-header border-transparent">
                         <h3 class="card-title">Bimbingan </h3>
                     </div>
-                    <div class="card-body p-0">
+                    <div class="card-body p-6">
                         <div class="table-responsive">
-                            <table class="table m-0">
+                            <table id="bimbingan" class="table m-0">
                                 <thead>
                                     <tr>
                                         <th>Nomor</th>
@@ -144,10 +144,10 @@ Detail Bimbingan Mahasiswa
                                         <td>{{ $bim->tgl_bimbingan }}</td>
                                         <td>{{ $bim->catatan }}</td>
                                         <td>
-                                            <a href="{{ asset('file/'.$bim->file) }}" class="btn btn-primary btn-file">Unduh </a> 
+                                            <a href="{{ asset('file/'.$bim->file) }}" class="btn btn-primary btn-file">Unduh</a> 
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" {{ $button }}>
                                             Unggah
                                             </button>
                                             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -161,12 +161,13 @@ Detail Bimbingan Mahasiswa
                                                                 </button> 
                                                             </div>
                                                             <div class="card-body p-0">
-                                                                <form action="{{ route('dospem.feedback', $bim->id) }}" method="POST" enctype="multipart/form-data">
+                                                                <form action="{{ route('dospem.feedback', $bim->bim_id) }}" method="POST" enctype="multipart/form-data">
                                                                 @csrf
                                                                     <div class="card-body">
                                                                         <div class="form-group">
                                                                             <label for="feedback">Catatan</label>
                                                                             <input type="text" name="feedback" class="form-control" placeholder="Catatan">
+                                                                            <input type="hidden" name="mhs_id" value="{{ $mhs->id }}">
                                                                         </div>
                                                                     <!-- <div class="form-group">
                                                                         <label for="feedback">File input</label>

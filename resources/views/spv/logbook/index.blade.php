@@ -4,6 +4,10 @@
 List Logbook Mahasiswa
 @endsection
 
+@section('logbookMhs')
+active
+@endsection
+
 @section('konteng')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -34,18 +38,23 @@ List Logbook Mahasiswa
                 <table class="table table-striped table-valign-middle">
                     <thead>
                         <tr>
+                            <th class="text-center">Nomor</th>
                             <th class="text-center">Nama</th>
-                            <th class="text-center">NIM</th>
+                            <th class="text-center">Asal</th>
+                            <th class="text-center">Lowongan</th>
                             <th class="text-center">Detail</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @php $no = 1; @endphp
                         @foreach ($data as $mhs)
                         <tr>
+                            <td class="text-center">{{ $no++ }}</td>
                             <td class="text-center">{{ $mhs->nama_mhs }}</td>
-                            <td class="text-center">{{ $mhs->NIM }}</td>
+                            <td class="text-center">{{ $mhs->depart['nama_depart'] }}</td>
+                            <td class="text-center">{{ $mhs->nama_low }}</td>
                             <td class="text-center">
-                                <a href="{{ route('spv.logbook', $mhs->id) }}" class="nav-link">Lihat</a>
+                                <a href="{{ route('spv.logbook', $mhs->id) }}" class="btn btn-primary">Lihat</a>
                             </td>
                         </tr>
                         @endforeach

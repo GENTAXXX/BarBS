@@ -39,8 +39,10 @@ class LogBookController extends Controller
 
     public function mhsLogbook(){
         $data = Mahasiswa::join('magang', 'mahasiswa.id', '=', 'magang.mhs_id')
+        ->join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
         ->join('supervisor', 'magang.spv_id', '=', 'supervisor.id')
         ->where('supervisor.user_id', Auth::id())
+        ->where('magang.approval', '1')
         ->get();
         return view('spv.logbook.index', compact('data'));
     }

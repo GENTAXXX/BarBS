@@ -51,23 +51,23 @@ Tambah Lowongan
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Nama Lowongan</label>
-                                <input type="text" class="form-control" name="nama_low" autofocus />
+                                <input type="text" class="form-control" name="nama_low" autofocus placeholder="Nama Lowongan"/>
                             </div>
                             <div class=" form-group">
                                 <label>Deskripsi Lowongan</label>
-                                <textarea class="form-control" name="deskripsi_low"></textarea>
+                                <textarea class="form-control" name="deskripsi_low" placeholder="Deskripsi Lowongan"></textarea>
                             </div>
                             <div class=" form-group">
                                 <label>Jumlah Mahasiswa</label>
-                                <input type="number" class="form-control" name="jumlah_mhs" />
+                                <input type="number" class="form-control" name="jumlah_mhs" placeholder="Contoh: 1"/>
                             </div>
                             <div class="form-group">
                                 <label>Durasi Magang</label>
-                                <input type="text" class="form-control" name="durasi" />
+                                <input type="text" class="form-control" name="durasi" placeholder="Contoh: 1 Bulan"/>
                             </div>
                             <div class="form-group">
                                 <label>Lokasi</label>
-                                <input type="text" class="form-control" name="lokasi" />
+                                <input type="text" class="form-control" name="lokasi" placeholder="Lokasi sesuai Google Maps"/>
                             </div>
                             <div class="form-group">
                                 <label>Mitra</label>
@@ -89,15 +89,13 @@ Tambah Lowongan
                             </div>
                             <div class="form-group">
                                 <label>Telepon</label>
-                                <input type="number" class="form-control" name="telepon_low" />
+                                <input type="number" class="form-control" name="telepon_low" placeholder="Nomor Telepon"/>
                             </div>
                             <div class="form-group">
                                 <label>Foto</label>
                                 <input type="file" class="form-control" name="foto_low" />
                             </div>
                         </div>
-                        <!-- /.card-body -->
-
                         <div class="card-footer">
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>

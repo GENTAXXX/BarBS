@@ -63,15 +63,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
                <li class="nav-item menu-open">
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('supervisor.home') }}" class="nav-link">
+                                    <a href="{{ route('supervisor.home') }}" class="nav-link @if(Route::is('supervisor.home')) {{ 'active' }} @endif">
                                     <i class="fa fa-home nav-icon"></i>
                                     <p>Beranda</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('spv.index') }}" class="nav-link">
+                                    <a href="{{ route('spv.index') }}" class="nav-link @if(Route::is('spv.index')) {{ 'active' }} @endif">
                                     <i class="far fa-copy nav-icon"></i>
-                                    <p>Logbook Mahasiswa <span class="badge badge-danger">0</span></p>
+                                    <p>Logbook Mahasiswa</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('spv.penilaian') }}" class="nav-link @if(Route::is('spv.penilaian')) {{ 'active' }} @endif">
+                                    <i class="far fa-copy nav-icon"></i>
+                                    <p>Penilaian</p>
                                     </a>
                                 </li>
                             </ul>

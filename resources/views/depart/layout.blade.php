@@ -62,25 +62,25 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <li class="nav-item menu-open">
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('depart.home') }}" class="nav-link">
+                                    <a href="{{ route('depart.home') }}" class="nav-link @if(Route::is('depart.home')) {{ 'active' }} @endif">
                                     <i class="fa fa-home nav-icon"></i>
                                     <p>Beranda</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('users.index') }}" class="nav-link">
+                                    <a href="{{ route('users.index') }}" class="nav-link @if(Route::is('users.index')) {{ 'active' }} @endif">
                                         <i class="fa fa-user nav-icon"></i>
                                         <p>Users</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('depart.mhs') }}" class="nav-link">
+                                    <a href="{{ route('depart.mhs') }}" class="nav-link @if(Route::is('depart.mhs')) {{ 'active' }} @endif">
                                         <i class="fa fa-graduation-cap nav-icon"></i>
                                         <p>Mahasiswa</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('pengajuan.index') }}" class="nav-link">
+                                    <a href="{{ route('pengajuan.index') }}" class="nav-link @if(Route::is('pengajuan.index')) {{ 'active' }} @endif">
                                         <i class="fa fa-graduation-cap nav-icon"></i>
                                         <p>Pengajuan <span class="badge badge-danger">{{ $count }}</span></p>
                                     </a>

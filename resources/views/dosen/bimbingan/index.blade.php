@@ -34,18 +34,23 @@ Daftar Bimbingan Mahasiswa
                 <table class="table table-striped table-valign-middle">
                     <thead>
                         <tr>
+                            <th class="text-center">Nomor</th>
                             <th class="text-center">Nama</th>
-                            <th class="text-center">NIM</th>
+                            <th class="text-center">Asal</th>
+                            <th class="text-center">Jurusan</th>
                             <th class="text-center">Detail</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @php $no = 1; @endphp
                         @foreach ($data as $mhs)
                         <tr>
+                            <td class="text-center">{{ $no++ }}</td>
                             <td class="text-center">{{ $mhs->nama_mhs }}</td>
-                            <td class="text-center">{{ $mhs->NIM }}</td>
+                            <td class="text-center">Departemen {{ $mhs->depart['nama_depart'] }}</td>
+                            <td class="text-center">{{ $mhs->jurusan['jurusan'] }}</td>
                             <td class="text-center">
-                                <a href="{{ route('dospem.bimbingan', $mhs->id) }}" class="btn btn-primary">Lihat</a>
+                                <a href="{{ route('dospem.bimbingan', $mhs->mhs_id) }}" class="btn btn-primary">Lihat</a>
                             </td>
                         </tr>
                         @endforeach

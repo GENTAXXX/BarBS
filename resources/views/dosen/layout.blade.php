@@ -67,13 +67,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <li class="nav-item menu-open">
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="{{ route('dospem.home') }}" class="nav-link">
+                                    <a href="{{ route('dospem.home') }}" class="nav-link @if(Route::is('dospem.home')) {{ 'active' }} @endif">
                                     <i class="fa fa-home nav-icon"></i>
                                     <p>Beranda</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('dospem.index') }}" class="nav-link">
+                                    <a href="{{ route('dospem.index') }}" class="nav-link @if(Route::is('dospem.index')) {{ 'active' }} @endif">
                                     <i class="far fa-copy nav-icon"></i>
                                     <p>Bimbingan Mahasiswa</p>
                                     </a>

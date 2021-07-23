@@ -82,6 +82,9 @@ Route::group(['middleware' => 'is_supervisor'], function () {
     //Logbook
     Route::get('supervisor/logbook', [LogBookController::class, 'mhsLogbook'])->name('spv.index');
     Route::get('supervisor/logbook/{id}', [LogBookController::class, 'logbookDetail'])->name('spv.logbook');
+    //Penilaian
+    Route::get('supervisor/penilaian', [ApplyController::class, 'penilaian'])->name('spv.penilaian');
+    Route::post('supervisor/penilaian/{id}', [ApplyController::class, 'score'])->name('spv.score');
 });
 
 Route::group(['middleware' => 'is_mahasiswa'], function () {

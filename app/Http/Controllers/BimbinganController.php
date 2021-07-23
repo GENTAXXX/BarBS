@@ -22,33 +22,42 @@ class BimbinganController extends Controller
     // }[]
     public function feedbackBimbingan(Request $request, $id){
         $bim = Bimbingan::find($id);
-        // dd($bim);
         $bim->update([
             'feedback' => $request->feedback
         ]);
-        return redirect()->route('dospem.bimbingan');
+        return redirect()->route('dospem.bimbingan', $request->mhs_id);
     }
 
     public function bimbinganDetail($id){
         $mhs = Mahasiswa::find($id);
+        // dd($mhs);
         $data = Bimbingan::join('magang', 'bimbingan.magang_id', '=', 'magang.id')
-        ->where('magang.mhs_id', $mhs->id)->get();
+        ->where('magang.mhs_id', $mhs->id)
+        ->select('bimbingan.*', 'magang.*', 'bimbingan.id as bim_id')
+        ->get();
         $mag = Magang::join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
-        ->join('mitra', 'lowongan.mitra_id', '=', 'lowongan.id')
+        ->join('mitra', 'lowongan.mitra_id', '=', 'mitra.id')
         ->join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
         ->join('status', 'mahasiswa.status_id', '=', 'status.id')
+        ->where('magang.mhs_id', $id)
         ->first();
+        // dd($mag->nama_mitra);
         $skill = SkillMhs::join('skill', 'skill_mhs.skill_id', '=', 'skill.id')
-                ->where('skill_mhs.mhs_id', $mhs->id)
-                ->select('skill')->get();
+        ->where('skill_mhs.mhs_id', $mhs->id)
+        ->select('skill')->get();
         // dd($data);
-        return view('dosen.bimbingan.edit', compact('data', 'mhs', 'mag', 'skill'));
+        // $button = 'enable';
+        if (!isset($data->feedback)){
+            $button = 'disabled';
+        };
+        return view('dosen.bimbingan.edit', compact('data', 'mhs', 'mag', 'skill', 'button'));
     }
 
     public function mhsBimbingan(){
         $data = Mahasiswa::join('magang', 'mahasiswa.id', '=', 'magang.mhs_id')
         ->join('dosen', 'magang.dosen_id', '=', 'dosen.id')
         ->where('dosen.user_id', Auth::id())
+        ->select('mahasiswa.*', 'magang.*', 'dosen.*', 'mahasiswa.id as mhs_id')
         ->get();
         return view('dosen.bimbingan.index', compact('data'));
     }

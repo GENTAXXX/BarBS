@@ -22,7 +22,6 @@ class ApplyController extends Controller
      */
     public function countPendaftar(){
         $data = Magang::whereNull('spv_id')
-        ->whereNotNull('dosen_id')
         ->get();
         return $data->count();
     }
@@ -31,6 +30,31 @@ class ApplyController extends Controller
         $data = Magang::whereNull('dosen_id')
         ->get();
         return $data->count();
+    }
+
+    public function score(Request $request, $id){
+        $data = Magang::find($id);
+        // dd($data);
+        $data->update([
+            'keterangan' => $request->keterangan,
+            'nilai' => $request->nilai,
+        ]);
+        return redirect()->route('spv.penilaian');
+    }
+
+    public function penilaian(){
+        $data = Magang::join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
+        ->join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
+        ->join('supervisor', 'magang.spv_id', '=', 'supervisor.id')
+        ->where('supervisor.user_id', Auth::id())
+        ->where('approval', '3')
+        ->select('magang.*', 'magang.id as mag_id', 'supervisor.*', 'mahasiswa.*', 'lowongan.nama_low')
+        ->get();
+        
+        if (!isset($data->keterangan) && !isset($data->nilai)){
+            $button = 'disabled';
+        };
+        return view('spv.penilaian.index', compact('data', 'button'));
     }
 
     public function diajukan(){
@@ -100,7 +124,6 @@ class ApplyController extends Controller
     public function listPengajuan(){
         $magang = Magang::whereNull('dosen_id')->get();
         $count = $this->countPengajuan();
-        // dd($magang);
         return view('depart.pengajuan.index', compact('magang', 'count'));
     }
 
