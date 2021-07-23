@@ -29,12 +29,12 @@ Detail Mahasiswa
                         <div class="card-body box-profile">
                             <div class="text-center">
                             <img class="profile-user-img img-fluid img-circle"
-                                src="{{ asset('dist/img/user8-128x128.jpg') }}"
+                                src="{{ asset('images/'.$mhs->foto_mhs) }}"
                                 alt="User profile picture">
                             </div>
                             <h3 class="profile-username text-center">{{ $mhs->nama_mhs }}</h3>
 
-                            <p class="text-muted text-center">Software Engineer</p>
+                            <p class="text-muted text-center">{{ $mhs->depart['nama_depart'] }}</p>
                             <strong><i class="fas fa-book mr-1"></i> NIM</strong>
 
                             <p class="text-muted">{{ $mhs->NIM }}</p>
@@ -62,7 +62,9 @@ Detail Mahasiswa
 
                             <strong><i class="far fa-file-alt mr-1"></i> Skill</strong>
 
-                            <p class="text-muted">{{ $mhs->skill['skill'] }}</p>
+                            @foreach ($skill as $s)
+                            <p class="text-muted">{{ $s->skill }}</p>
+                            @endforeach
 
                             <hr>
 
@@ -100,11 +102,13 @@ Detail Mahasiswa
                                         <td class="col-4">{{ $mhs->jurusan['jurusan'] }}</td>
                                         <td class="col-2">
                                         @if ($mhs->status_id == 1)
-                                            <label class="badge badge-warning">Belum Magang</label>
+                                            <label class="badge">Belum Magang</label>
                                         @elseif ($mhs->status_id == 2)
                                             <label class="badge badge-success">Sedang Magang</label>
                                         @elseif ($mhs->status_id == 3)
                                             <label class="badge badge-danger">Sudah Magang</label>
+                                        @elseif ($mhs->status_id == 4)
+                                            <label class="badge badge-warning">Sedang Mengajukan</label>
                                         @endif
                                         </td>
                                     </tr>

@@ -52,7 +52,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <img src="{{ asset('dist/img/sim-vertical-orange.png') }}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="profile.html" class="d-block">{{ Auth::user()->name }}</a>
+                        <a href="{{ route('profile.index') }}" class="d-block">{{ Auth::user()->name }}</a>
                     </div>
                 </div>
                 <!-- Sidebar Menu -->
@@ -69,7 +69,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="{{ route('dospem.index') }}" class="nav-link">
+                                    <a href="{{ route('spv.index') }}" class="nav-link">
                                     <i class="far fa-copy nav-icon"></i>
                                     <p>Logbook Mahasiswa <span class="badge badge-danger">0</span></p>
                                     </a>

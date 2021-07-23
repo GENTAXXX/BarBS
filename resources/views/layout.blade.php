@@ -51,7 +51,7 @@
 
         <nav class="nav-menu d-none d-lg-block">
             <ul>
-            <li class="#"><a href="profile.html">Dashboard</a></li>
+            <li><a href="{{ route('profile.index') }}">Dashboard</a></li>
             <li><a href="contact">Contact Us</a></li>
             <li><a href="{{ route('login') }}" ><i class="icofont-logout"></i>Log In</a></li>
 

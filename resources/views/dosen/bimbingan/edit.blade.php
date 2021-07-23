@@ -63,7 +63,9 @@ Detail Bimbingan Mahasiswa
 
                             <strong><i class="far fa-file-alt mr-1"></i> Skill</strong>
 
-                            <p class="text-muted">{{ $mhs->skill['skill'] }}</p>
+                            @foreach ($skill as $s)
+                                <p class="text-muted">{{ $s->skill }}</p>
+                            @endforeach
 
                             <hr>
 
@@ -162,10 +164,10 @@ Detail Bimbingan Mahasiswa
                                                                 <form action="{{ route('dospem.feedback', $bim->id) }}" method="POST" enctype="multipart/form-data">
                                                                 @csrf
                                                                     <div class="card-body">
-                                                                    <div class="form-group">
-                                                                        <label for="feedback">Catatan</label>
-                                                                        <input type="text" name="feedback" class="form-control" placeholder="Catatan">
-                                                                    </div>
+                                                                        <div class="form-group">
+                                                                            <label for="feedback">Catatan</label>
+                                                                            <input type="text" name="feedback" class="form-control" placeholder="Catatan">
+                                                                        </div>
                                                                     <!-- <div class="form-group">
                                                                         <label for="feedback">File input</label>
                                                                         <div class="input-group">

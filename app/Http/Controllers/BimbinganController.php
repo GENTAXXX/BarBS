@@ -8,6 +8,7 @@ use App\Models\Bimbingan;
 use App\Models\Mahasiswa;
 use App\Models\Magang;
 use App\Models\Lowongan;
+use App\Models\SkillMhs;
 
 class BimbinganController extends Controller
 {
@@ -21,6 +22,7 @@ class BimbinganController extends Controller
     // }[]
     public function feedbackBimbingan(Request $request, $id){
         $bim = Bimbingan::find($id);
+        // dd($bim);
         $bim->update([
             'feedback' => $request->feedback
         ]);
@@ -36,8 +38,11 @@ class BimbinganController extends Controller
         ->join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
         ->join('status', 'mahasiswa.status_id', '=', 'status.id')
         ->first();
+        $skill = SkillMhs::join('skill', 'skill_mhs.skill_id', '=', 'skill.id')
+                ->where('skill_mhs.mhs_id', $mhs->id)
+                ->select('skill')->get();
         // dd($data);
-        return view('dosen.bimbingan.edit', compact('data', 'mhs', 'mag'));
+        return view('dosen.bimbingan.edit', compact('data', 'mhs', 'mag', 'skill'));
     }
 
     public function mhsBimbingan(){

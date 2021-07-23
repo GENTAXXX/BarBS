@@ -61,9 +61,11 @@ List Mahasiswa Magang
                                     <td class="text-center">{{ $data->mahasiswa->depart['nama_depart'] }}</td>
                                     <td class="text-center">{{ $data->nama_low }}</td>
                                     <td class="text-center">
-                                        @if ($data->approval == 1)
+                                        @if ($data->approval == 1 && $data->tgl_selesai >= $todayDate )
                                             <label class="badge badge-success">Magang</label>
-                                        @elseif ($data->approval == 2)
+                                        @elseif ($data->approval == 1 && $data->tgl_selesai <= $todayDate )
+                                            <label class="badge badge-warning">Kadaluarsa</label>
+                                        @elseif ($data->approval == 3 )
                                             <label class="badge badge-danger">Selesai</label>
                                         @endif
                                     </td>

@@ -176,6 +176,11 @@ class ProfileController extends Controller
                     'NIDN' => $request->NIDN,
                     'foto_depart' => $imageName,
                 ]);
+
+                $user = User::where('id', Auth::id())->first();
+                $user->update([
+                    'name' => $request->nama_depart
+                ]);
                 return redirect()->route('profile.index');
                 break;
             case '2':
@@ -199,6 +204,11 @@ class ProfileController extends Controller
                     'kab_id' => $request->kab_id,
                     'foto_mitra' => $imageName,
                 ]);
+
+                $user = User::where('id', Auth::id())->first();
+                $user->update([
+                    'name' => $request->nama_mitra
+                ]);
                 return redirect()->route('profile.index');
                 break;
             case '3':
@@ -220,6 +230,11 @@ class ProfileController extends Controller
                     'depart_id' => $request->depart_id,
                     'foto_dosen' => $imageName,
                 ]);
+
+                $user = User::where('id', Auth::id())->first();
+                $user->update([
+                    'name' => $request->nama_dosen
+                ]);
                 return redirect()->route('profile.index');
                 break;
             case '4':
@@ -240,6 +255,11 @@ class ProfileController extends Controller
                     'no_pegawai' => $request->no_pegawai,
                     'mitra_id' => $request->mitra_id,
                     'foto_spv' => $imageName,
+                ]);
+
+                $user = User::where('id', Auth::id())->first();
+                $user->update([
+                    'name' => $request->nama_spv
                 ]);
                 return redirect()->route('profile.index');
                 break;
@@ -277,6 +297,11 @@ class ProfileController extends Controller
                     'tgl_lahir' => $request->tgl_lahir,
                     'foto_mhs' => $imageName,
                     'depart_id' => $request->depart_id
+                ]);
+
+                $user = User::where('id', Auth::id())->first();
+                $user->update([
+                    'name' => $request->nama_mhs
                 ]);
                 return redirect()->route('profile.index');
                 break;

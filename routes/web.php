@@ -25,26 +25,23 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//Lowongan
 Route::get('/', [LowonganController::class, 'AllLowongan']);
 
-Route::get('detail/{id}', [ApplyController::class, 'detail'])->name('detail.show');
+Route::get('/permit', function () {
+    return view('v_redirect');
+})->name('permit');
 
+//Profile
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('profile', ProfileController::class);
+    Route::get('detail/{id}', [ApplyController::class, 'detail'])->name('detail.show');
 });
 
 Route::group(['middleware' => 'is_depart'], function () {
     Route::get('depart/home', [DepartController::class, 'departHome'])->name('depart.home');
     //CRUD Users
     Route::resource('users', UserController::class);
-    // Route::get('users', [UserController::class, 'index'])->name('users.index');
-    // Route::get('users/create', [UserController::class, 'create'])->name('users.create');
-    // Route::get('users/{id}', [UserController::class, 'show'])->name('users.show');
-    // Route::post('users', [UserController::class, 'store'])->name('users.store');
-    // Route::get('users/edit/{id}', [UserController::class, 'edit'])->name('users.edit');
-    // Route::put('users/edit/{id}', [UserController::class, 'update'])->name('users.update');
-    // Route::delete('users/{id}', [UserController::class, 'destroy'])->name('users.destroy');
     //List Mahasiswa
     Route::get('depart/mahasiswa', [DepartController::class, 'listMhs'])->name('depart.mhs');
     Route::get('depart/mahasiswa/{id}', [DepartController::class, 'detailMhs'])->name('depart.detailMhs');
@@ -66,10 +63,10 @@ Route::group(['middleware' => 'is_mitra'], function () {
     Route::get('mitra/approve/{id}', [ApplyController::class, 'approve'])->name('pendaftar.approve');
     Route::get('mitra/reject/{id}', [ApplyController::class, 'reject'])->name('pendaftar.reject');
     Route::post('mitra/pendaftar/{id}', [ApplyController::class, 'approval'])->name('pendaftar.approval');
-    Route::post('mitra/end/{id}', [ApplyController::class, 'end'])->name('pendaftar.end');
     //Mhs Magang
     Route::get('mitra/magang', [ApplyController::class, 'listMagang'])->name('magang.index');
     Route::get('mitra/magang/{id}', [ApplyController::class, 'detailMagang'])->name('magang.show');
+    Route::post('mitra/magang/{id}', [ApplyController::class, 'end'])->name('pendaftar.end');
 });
 
 Route::group(['middleware' => 'is_dospem'], function () {
@@ -96,7 +93,7 @@ Route::group(['middleware' => 'is_mahasiswa'], function () {
     Route::get('mahasiswa/diajukan', [ApplyController::class, 'diajukan'])->name('lowongan.diajukan');
     //Redirect
     Route::get('/redirect', function () {
-        return view('redirect');
+        return view('mhs.redirect');
     })->name('redirect');
     Route::group(['middleware' => 'is_approve'], function() {
         //Bimbingan
@@ -105,6 +102,7 @@ Route::group(['middleware' => 'is_mahasiswa'], function () {
         Route::post('mahasiswa/bimbingan', [BimbinganController::class, 'store'])->name('bimbingan.store');
         Route::put('mahasiswa/bimbingan/{id}', [BimbinganController::class, 'update'])->name('bimbingan.update');
         Route::delete('mahasiswa/bimbingan/{id}', [BimbinganController::class, 'delete'])->name('bimbingan.delete');
+
         //Logbook
         Route::get('mahasiswa/logbook/cetak', [LogBookController::class, 'print'])->name('logbook.print');
         Route::get('mahasiswa/logbook', [LogBookController::class, 'index'])->name('logbook.index');

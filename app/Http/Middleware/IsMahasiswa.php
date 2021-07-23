@@ -20,6 +20,6 @@ class IsMahasiswa
             return $next($request);
         }
 
-        return redirect('home')->with('error', "You don't have Mahasiswa access.");
+        return redirect()->route('permit');
     }
 }

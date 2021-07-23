@@ -52,15 +52,17 @@ Daftar Mahasiswa
                             <td class="text-center">{{ $mhs->jurusan['jurusan'] }}</td>
                             <td class="text-center">
                                 @if ($mhs->status_id == 1)
-                                    <label class="badge badge-warning">Belum Magang</label>
+                                    <label class="badge">Belum Magang</label>
                                 @elseif ($mhs->status_id == 2)
                                     <label class="badge badge-success">Sedang Magang</label>
                                 @elseif ($mhs->status_id == 3)
                                     <label class="badge badge-danger">Sudah Magang</label>
+                                @elseif ($mhs->status_id == 4)
+                                    <label class="badge badge-warning">Sedang Mengajukan</label>
                                 @endif
                             </td>
                             <td class="text-center">
-                                <a href="{{ route('depart.detailMhs', $mhs->id) }}" class="nav-link">Lihat</a>
+                                <a href="{{ route('depart.detailMhs', $mhs->id) }}" class="btn btn-primary"> Lihat</a>
                             </td>
                         </tr>
                         @endforeach

@@ -1,4 +1,4 @@
-@extends('dosen.layout')
+@extends('spv.layout')
 
 @section('title')
 Profile Supervisor

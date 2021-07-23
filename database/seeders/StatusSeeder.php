@@ -24,6 +24,9 @@ class StatusSeeder extends Seeder
             [
                 'status' => 'Sudah Magang',
             ],
+            [
+                'status' => 'Sedang Mengajukan',
+            ],
         ];
 
         DB::table('status')->insert($status);

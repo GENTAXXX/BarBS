@@ -39,7 +39,7 @@ SIMAGANG
                 <div class="testimonial-item">
                     <a href="{{ route('detail.show', $data->id) }}">
                     <h3>{{ $data->nama_low }}</h3 >
-                        <img src="{{ asset('images/'.$data->foto_low) }}" class="testimonial-img" alt="">
+                        <img src="{{ asset('images/'.$data->mitra['foto_mitra']) }}" class="testimonial-img" alt="">
                         <div class="icon-box container">
                         <ul class="list-unstyled ">
                             <li class="d-flex align-items-start m-3"><span><img src="assets/img/building.svg" alt="" style="height: 20px;width: 20px;" class="img-fluid"></span><span class="ml-3">{{ $data->mitra['nama_mitra'] }}</span></li>
@@ -66,7 +66,7 @@ SIMAGANG
                 <div class="row m-5  card-list border" >
                     <div class="col-sm-2">
                         <a href="{{ route('detail.show', $data->id) }}">
-                            <img src="{{ asset('images/'.$data->foto_low) }}" class="img-fluid" alt="">
+                            <img src="{{ asset('images/'.$data->mitra['foto_mitra']) }}" class="img-fluid" alt="">
                         </a>
                     </div>
                     <div class="col-lg-6 pt-4 pt-lg-0">

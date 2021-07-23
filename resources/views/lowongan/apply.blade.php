@@ -30,7 +30,7 @@ Pengajuan Data Diri
         </div>
     @elseif ($button == 'enable')
         <div class="alert alert-success text-center">
-            <strong>Berhasil!</strong> Kamu sudah melengkapi data diri.
+            Silahkan melanjutkan pengajuan.
         </div>
     @endif
     <section class="content ">

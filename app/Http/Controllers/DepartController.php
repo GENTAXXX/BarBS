@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Departemen;
 use App\Models\Mahasiswa;
 use App\Models\Magang;
+use App\Models\SkillMhs;
 use Illuminate\Support\Facades\Auth;
 
 class DepartController extends Controller
@@ -23,12 +24,15 @@ class DepartController extends Controller
     
     public function detailMhs($id){
         $mhs = Mahasiswa::find($id);
+        $skill = SkillMhs::join('skill', 'skill_mhs.skill_id', '=', 'skill.id')
+                ->where('skill_mhs.mhs_id', $mhs->id)
+                ->select('skill')->get();
         $data = Magang::join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
         ->where('mhs_id', $mhs->id)
-        ->get();
+        ->first();
         // dd($data);
         $count = $this->countPengajuan();
-        return view('depart.mhs.show', compact('mhs', 'data', 'count'));
+        return view('depart.mhs.show', compact('mhs', 'data', 'count', 'skill'));
     }
 
     public function listMhs()

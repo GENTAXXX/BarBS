@@ -11,6 +11,7 @@ use App\Models\Supervisor;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Magang;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -66,6 +67,9 @@ class UserController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
+        $depart = Departemen::where('user_id', Auth::id())
+        ->first();
+
         $user = User::create($request->all());
         // dd($user['id']);
         switch ($user->role_id) {
@@ -85,6 +89,7 @@ class UserController extends Controller
                 Dosen::create([
                     'user_id' => $user['id'],
                     'nama_dosen' => $user['name'],
+                    'depart_id' => $depart->id,
                 ]);
                 break;
             case '4':
@@ -97,6 +102,7 @@ class UserController extends Controller
                 Mahasiswa::create([
                     'user_id' => $user['id'],
                     'nama_mhs' => $user['name'],
+                    'depart_id' => $depart->id,
                 ]);
                 break;
         }
@@ -158,7 +164,7 @@ class UserController extends Controller
         $request->merge([
             'password' => Hash::make($request->password)
         ]);
-        $user->update([$request->all()]);
+        $user->update($request->all());
         return redirect()->route('users.index')->with('success', 'User updated successfully.');
     }
 
@@ -174,18 +180,23 @@ class UserController extends Controller
         switch ($user->role_id){
             case '1':
                 Departemen::where('user_id', $user->id)->delete();
+                $user->delete();
                 break;
             case '2':
                 Mitra::where('user_id', $user->id)->delete();
+                $user->delete();
                 break;
             case '3':
                 Dosen::where('user_id', $user->id)->delete();
+                $user->delete();
                 break;
             case '4':
                 Supervisor::where('user_id', $user->id)->delete();
+                $user->delete();
                 break;
             case '5':
                 Mahasiswa::where('user_id', $user->id)->delete();
+                $user->delete();
                 break;
         }
         return redirect()->route('users.index')->with('success', 'Post deleted successfully.');

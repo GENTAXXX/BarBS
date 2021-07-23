@@ -74,13 +74,15 @@ class LowonganController extends Controller
         $imageName = $request->nama_low . '.' . $request->foto_low->extension();
         $request->foto_low->move(public_path('images'), $imageName);
 
+        $mitra = Mitra::where('user_id', Auth::id())->first();
+
         Lowongan::create([
             'nama_low' => $request->nama_low,
             'deskripsi_low' => $request->deskripsi_low,
             'telepon_low' => $request->telepon_low,
             'jumlah_mhs' => $request->jumlah_mhs,
             'durasi' => $request->durasi,
-            'mitra_id' => $request->mitra_id,
+            'mitra_id' => $mitra->id,
             'kategori_id' => $request->kategori_id,
             'lokasi' => $request->lokasi,
             'foto_low' => $imageName,

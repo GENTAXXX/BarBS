@@ -79,7 +79,7 @@ Detail Lowongan
                     </form>
                     <div>
                         <a href="{{ route('lowongan.apply', $low->id) }}">
-                            <button type="submit" class="btn btn-primary"> Apply</button>
+                            <button type="submit" class="btn btn-primary" {{ $button }}> Apply</button>
                         </a>
                     </div>
                 </div>

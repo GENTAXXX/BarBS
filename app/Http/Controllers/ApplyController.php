@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Bimbingan;
 use App\Models\Departemen;
 use App\Models\Dosen;
-use App\Models\Logbook;
 use App\Models\Lowongan;
 use App\Models\Magang;
 use App\Models\Mahasiswa;
@@ -45,7 +43,7 @@ class ApplyController extends Controller
 
     public function detailMagang($id){
         $data = Magang::join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
-        ->select('mahasiswa.*', 'lowongan.*', 'magang.id as magang_id', 'magang.*')
+        ->select('lowongan.*', 'magang.id as magang_id', 'magang.*')
         ->find($id);
 
         $mhs = Mahasiswa::where('id', $data->mhs_id)->first();
@@ -54,7 +52,7 @@ class ApplyController extends Controller
                 ->select('skill')->get();
 
         $count = $this->countPendaftar();
-        return view('mitra.magang.show', compact('data', 'count'));
+        return view('mitra.magang.show', compact('data', 'count', 'skill', 'mhs'));
     }
 
     public function listMagang(){
@@ -62,11 +60,12 @@ class ApplyController extends Controller
         ->join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
         ->join('mitra', 'lowongan.mitra_id', '=', 'mitra.id')
         ->where('mitra.user_id', Auth::id())
-        ->where('approval', '1')
+        ->where('approval', '>=', '1')
         ->select('mahasiswa.*', 'lowongan.*', 'mitra.*', 'magang.id as magang_id', 'magang.*')
         ->get();
+        $todayDate = date("Y-m-d");
         $count = $this->countPendaftar();
-        return view('mitra.magang.index', compact('data', 'count'));
+        return view('mitra.magang.index', compact('data', 'count', 'todayDate'));
     }
 
     public function listPendaftar(){
@@ -74,8 +73,7 @@ class ApplyController extends Controller
         ->join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
         ->join('mitra', 'lowongan.mitra_id', '=', 'mitra.id')
         ->where('mitra.user_id', Auth::id())
-        ->whereNull('spv_id')
-        ->whereNotNull('dosen_id')
+        ->where('approval', '0')
         ->select('mahasiswa.*', 'lowongan.*', 'mitra.*', 'magang.id as magang_id', 'magang.*')
         ->get();
         $count = $this->countPendaftar();
@@ -142,7 +140,17 @@ class ApplyController extends Controller
         $low = Lowongan::join('mitra', 'lowongan.mitra_id', 'mitra.id')
         ->select('mitra.*', 'lowongan.*')
         ->find($id);
-        return view('lowongan.detail', compact('low'));
+
+        $magang = Magang::join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
+        ->where('mahasiswa.user_id', Auth::id())
+        ->select('magang.*', 'mahasiswa.*')
+        ->first();
+        // dd($magang);
+        $button = 'enable';
+        if (isset($magang->approval) == '1'){
+            $button = 'disabled';
+        };
+        return view('lowongan.detail', compact('low', 'button'));
     }
     
     public function index()
@@ -181,6 +189,11 @@ class ApplyController extends Controller
         $magang = Magang::find($id);
         $magang->update([
             'dosen_id' => $request->dosen_id,
+        ]);
+
+        $mhs = Mahasiswa::find($magang->mhs_id);
+        $mhs->update([
+            'status_id' => '4'
         ]);
         // dd($request);
         
@@ -226,7 +239,9 @@ class ApplyController extends Controller
 
             $mgn = Magang::where('mhs_id', $mhs->id)
             ->where('id', '!=', $magang->id);
-            $mgn->delete();
+            $mgn->update([
+                'approval' => '2'
+            ]);
         } else {
             $this->reject($id);
         }
@@ -248,7 +263,7 @@ class ApplyController extends Controller
     public function end($id){
         $magang = Magang::find($id);
         $magang->update([
-            'approval' => '2'
+            'approval' => '3'
         ]);
 
         $mhs = Mahasiswa::find($magang->mhs_id);
@@ -256,7 +271,7 @@ class ApplyController extends Controller
             'status_id' => '3'
         ]);
 
-        return redirect()->route('pendaftar.index');
+        return redirect()->route('magang.index');
     }
 
     /**
