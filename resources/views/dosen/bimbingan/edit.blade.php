@@ -146,11 +146,12 @@ Detail Bimbingan Mahasiswa
                                         <td>
                                             <a href="{{ asset('file/'.$bim->file) }}" class="btn btn-primary btn-file">Unduh</a> 
                                         </td>
+                                        <td>{{ $bim->feedback }}</td>
                                         <td>
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" {{ $button }}>
-                                            Unggah
-                                            </button>
-                                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            @if (!isset($data->feedback))
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter-{{ $bim->bim_id }}" data-id="{{ $bim->bim_id }}">Unggah</button>
+                                            @endif
+                                            <div class="modal fade" id="exampleModalCenter-{{ $bim->bim_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content">
                                                         <div class="card card-primary">
@@ -180,7 +181,7 @@ Detail Bimbingan Mahasiswa
                                                                     </div> -->
                                                                     </div>
                                                                     <div class="card-footer">
-                                                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                                                        <button type="submit" class="btn btn-primary">Submit</button>
                                                                     </div>
                                                                 </form>
                                                             </div>

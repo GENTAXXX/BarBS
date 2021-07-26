@@ -34,7 +34,6 @@ class ApplyController extends Controller
 
     public function score(Request $request, $id){
         $data = Magang::find($id);
-        // dd($data);
         $data->update([
             'keterangan' => $request->keterangan,
             'nilai' => $request->nilai,
@@ -50,11 +49,7 @@ class ApplyController extends Controller
         ->where('approval', '3')
         ->select('magang.*', 'magang.id as mag_id', 'supervisor.*', 'mahasiswa.*', 'lowongan.nama_low')
         ->get();
-        
-        if (!isset($data->keterangan) && !isset($data->nilai)){
-            $button = 'disabled';
-        };
-        return view('spv.penilaian.index', compact('data', 'button'));
+        return view('spv.penilaian.index', compact('data'));
     }
 
     public function diajukan(){
@@ -75,8 +70,12 @@ class ApplyController extends Controller
                 ->where('skill_mhs.mhs_id', $mhs->id)
                 ->select('skill')->get();
 
+        $todayDate = date("Y-m-d");
         $count = $this->countPendaftar();
-        return view('mitra.magang.show', compact('data', 'count', 'skill', 'mhs'));
+        if (isset($data->approval) == '3'){
+            $button = 'disabled';
+        };
+        return view('mitra.magang.show', compact('data', 'count', 'skill', 'mhs', 'todayDate', 'button'));
     }
 
     public function listMagang(){
@@ -167,10 +166,8 @@ class ApplyController extends Controller
         $magang = Magang::join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
         ->where('mahasiswa.user_id', Auth::id())
         ->select('magang.*', 'mahasiswa.*')
-        ->first();
-        // dd($magang);
-        $button = 'enable';
-        if (isset($magang->approval) == '1'){
+        ->get();
+        if (!isset($magang->approval) == '1'){
             $button = 'disabled';
         };
         return view('lowongan.detail', compact('low', 'button'));
@@ -218,7 +215,6 @@ class ApplyController extends Controller
         $mhs->update([
             'status_id' => '4'
         ]);
-        // dd($request);
         
         return redirect()->route('pengajuan.index');
     }

@@ -82,7 +82,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 <li class="nav-item">
                                     <a href="{{ route('pengajuan.index') }}" class="nav-link @if(Route::is('pengajuan.index')) {{ 'active' }} @endif">
                                         <i class="fa fa-graduation-cap nav-icon"></i>
-                                        <p>Pengajuan <span class="badge badge-danger">{{ $count }}</span></p>
+                                        <p>Pengajuan <span class="badge badge-primary">{{ $count }}</span></p>
                                     </a>
                                 </li>
                             </ul>

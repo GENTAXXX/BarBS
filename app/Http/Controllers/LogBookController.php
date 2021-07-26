@@ -8,7 +8,6 @@ use App\Models\Magang;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Dompdf\Dompdf;
 use Barryvdh\DomPDF\Facade as PDF;
 
 class LogBookController extends Controller
@@ -23,11 +22,8 @@ class LogBookController extends Controller
         ->join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
         ->where('mahasiswa.user_id', Auth::id())
         ->get();
-        // dd($logs);
-        // view()->share('logs', $logs);
         $pdf = PDF::loadView('mhs.logbook.print', compact('logs'));
         return $pdf->download('Logbook.pdf');
-        // return view('mhs.logbook.print', compact('logs'));
     }
 
     public function logbookDetail($id){
@@ -42,7 +38,7 @@ class LogBookController extends Controller
         ->join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
         ->join('supervisor', 'magang.spv_id', '=', 'supervisor.id')
         ->where('supervisor.user_id', Auth::id())
-        ->where('magang.approval', '1')
+        ->select('mahasiswa.id as mhs_id', 'mahasiswa.*', 'lowongan.*', 'supervisor.*', 'magang.approval')
         ->get();
         return view('spv.logbook.index', compact('data'));
     }
@@ -54,7 +50,6 @@ class LogBookController extends Controller
         ->join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
         ->where('mahasiswa.user_id', Auth::id())
         ->get();
-        // dd($logs);
         return view('mhs.logbook.index', compact('logs', 'low'));
     }
 

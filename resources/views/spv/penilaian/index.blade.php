@@ -53,14 +53,16 @@ List Logbook Mahasiswa
                             <td class="text-center">{{ $mhs->nilai }}</td>
                             <td class="text-center">{{ $mhs->keterangan }}</td>
                             <td class="text-center">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" {{ $button }}>Nilai</button>
-                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                @if (!isset($mhs->keterangan) && !isset($mhs->nilai))
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter-{{ $mhs->mag_id }}" data-id="{{  $mhs->mag_id }}">Nilai</button>
+                                @endif
+                                    <div class="modal fade" id="exampleModalCenter-{{ $mhs->mag_id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content">
                                                 <div class="card card-primary">
                                                     <div class="card-header border-transparent">
-                                                        <h3 class="card-title">Masukan Nilai</h3>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">                               <span aria-hidden="true">&times;</span>
+                                                        <h3 class="card-title">Masukan Penilaian</h3>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
                                                     <div class="card-body p-0">

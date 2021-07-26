@@ -45,9 +45,8 @@ Lowongan Diajukan
                             <thead>
                                 <tr>
                                     <th class="text-center">Nomor</th>
-                                    <th class="text-center">Nama Mahasiswa</th>
-                                    <th class="text-center">Melamar</th>
-                                    <th class="text-center">Nama Mitra</th>
+                                    <th class="text-center">Lowongan</th>
+                                    <th class="text-center">Mitra</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Detail</th>
                                 </tr>
@@ -57,12 +56,15 @@ Lowongan Diajukan
                                 @foreach ($data as $data)
                                 <tr>
                                     <td class="text-center">{{ $no++ }}</a></td>
-                                    <td class="text-center">{{ $data->nama_mhs }}</td>
                                     <td class="text-center">{{ $data->nama_low }}</td>
                                     <td class="text-center">{{ $data->lowongan->mitra['nama_mitra'] }}</td>
                                     <td class="text-center">
                                         @if ($data->approval == 1)
                                             <label class="badge badge-success">Diterima</label>
+                                        @elseif ($data->approval == 2)
+                                            <label class="badge badge-danger">Ditolak</label>
+                                        @elseif ($data->approval == 3)
+                                            <label class="badge badge-danger">Selesai</label>
                                         @elseif ($data->approval == 'null')
                                             <label class="badge badge-warning">Menunggu</label>
                                         @endif

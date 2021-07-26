@@ -86,7 +86,7 @@ Profile Mahasiswa
                                         <select id="skillMhs" name="skill_id[]" class="form-control" multiple>
                                             <option value="">- Pilih Skill -</option>
                                             @foreach($skill as $skill)
-                                            <option value="{{ $skill['id'] }}">{{ $skill->skill }}</option>
+                                            <option value="{{ $skill['id'] }}" @if ($mhs->skill_id == $skill->id) selected @endif>{{ $skill->skill }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -95,7 +95,7 @@ Profile Mahasiswa
                                         <select name="jenis_kelamin" class="form-control">
                                             <option value="">- Pilih Jenis Kelamin -</option>
                                             @foreach($gender as $gender)
-                                            <option value="{{ $gender }}">{{ $gender }}</option>
+                                            <option value="{{ $gender }}" @if ($mhs->jenis_kelamin == $gender) selected @endif>{{ $gender }}</option>
                                             @endforeach
                                         </select>
                                     </div>

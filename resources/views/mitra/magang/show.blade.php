@@ -102,11 +102,13 @@ Detail Mahasiswa Magang
                                                 <td class="col-4">{{ $data->nama_low }}</td>
                                                 <td class="col-4">{{ $data->mahasiswa->jurusan['jurusan']}}</td>
                                                 <td class="col-2">
-                                                    @if ($data->approval == 1)
-                                                        <label class="badge badge-success">Magang</label>
-                                                    @elseif ($data->approval == 2)
-                                                        <label class="badge badge-danger">Selesai</label>
-                                                    @endif
+                                                @if ($data->approval == 1 && $data->tgl_selesai >= $todayDate )
+                                                    <label class="badge badge-success">Magang</label>
+                                                @elseif ($data->approval == 1 && $data->tgl_selesai <= $todayDate )
+                                                    <label class="badge badge-warning">Kadaluarsa</label>
+                                                @elseif ($data->approval == 3 )
+                                                    <label class="badge badge-danger">Selesai</label>
+                                                @endif
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -117,7 +119,7 @@ Detail Mahasiswa Magang
                         <div class="card-footer">
                             <form action="{{ route('pendaftar.end', $data->magang_id) }}" method="POST">
                                 @csrf
-                                <button type="submit" class="bnt btn-primary"> Akhiri</button>
+                                <button type="submit" class="bnt btn-danger" {{ $button }}> Akhiri</button>
                             </form>
                         </div>
                 </div>

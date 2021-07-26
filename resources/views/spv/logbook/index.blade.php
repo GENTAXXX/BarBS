@@ -42,6 +42,7 @@ active
                             <th class="text-center">Nama</th>
                             <th class="text-center">Asal</th>
                             <th class="text-center">Lowongan</th>
+                            <th class="text-center">Status</th>
                             <th class="text-center">Detail</th>
                         </tr>
                     </thead>
@@ -54,7 +55,14 @@ active
                             <td class="text-center">{{ $mhs->depart['nama_depart'] }}</td>
                             <td class="text-center">{{ $mhs->nama_low }}</td>
                             <td class="text-center">
-                                <a href="{{ route('spv.logbook', $mhs->id) }}" class="btn btn-primary">Lihat</a>
+                                @if ($mhs->approval == 1)
+                                    <label class="badge badge-primary">Magang</label>
+                                @elseif ($mhs->approval == 3 )
+                                    <label class="badge badge-danger">Selesai</label>
+                                @endif
+                            </td>
+                            <td class="text-center">
+                                <a href="{{ route('spv.logbook', $mhs->mhs_id) }}" class="btn btn-primary">Lihat</a>
                             </td>
                         </tr>
                         @endforeach
