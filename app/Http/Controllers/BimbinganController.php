@@ -17,9 +17,7 @@ class BimbinganController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function feedbackBimbingan($id){
-    //     $bim = Bimbingan::find($id);
-    // }[]
+    
     public function feedbackBimbingan(Request $request, $id){
         $bim = Bimbingan::find($id);
         $bim->update([
@@ -30,7 +28,6 @@ class BimbinganController extends Controller
 
     public function bimbinganDetail($id){
         $mhs = Mahasiswa::find($id);
-        // dd($mhs);
         $data = Bimbingan::join('magang', 'bimbingan.magang_id', '=', 'magang.id')
         ->where('magang.mhs_id', $mhs->id)
         ->select('bimbingan.*', 'magang.*', 'bimbingan.id as bim_id')
@@ -44,17 +41,26 @@ class BimbinganController extends Controller
         $skill = SkillMhs::join('skill', 'skill_mhs.skill_id', '=', 'skill.id')
         ->where('skill_mhs.mhs_id', $mhs->id)
         ->select('skill')->get();
-        return view('dosen.bimbingan.edit', compact('data', 'mhs', 'mag', 'skill', 'button'));
+        return view('dosen.bimbingan.edit', compact('data', 'mhs', 'mag', 'skill'));
     }
 
     public function mhsBimbingan(){
         $data = Mahasiswa::join('magang', 'mahasiswa.id', '=', 'magang.mhs_id')
+        ->leftJoin('bimbingan', 'magang.id', '=', 'bimbingan.magang_id')
         ->join('dosen', 'magang.dosen_id', '=', 'dosen.id')
         ->where('dosen.user_id', Auth::id())
-        ->where('magang.approval', '1')
-        ->select('mahasiswa.*', 'magang.*', 'dosen.*', 'mahasiswa.id as mhs_id')
+        ->where('magang.approval', '!=', '2')
+        ->select('mahasiswa.*', 'magang.*', 'dosen.*', 'mahasiswa.id as mhs_id', 'bimbingan.*')
+        ->orderBy('magang.approval', 'asc')
         ->get();
-        return view('dosen.bimbingan.index', compact('data'));
+        // dd($data);
+        $arrFeedback = array();
+        foreach($data as $data){
+            if(isset($data->feedback)) $arrFeedback[$data->mhs_id] = $data->feedback;
+        }
+        $dataGrouped = $data->groupBy('mahasiswa.nama_mhs');
+        
+        return view('dosen.bimbingan.index', compact('dataGrouped','arrFeedback'));
     }
 
     public function index()
@@ -63,6 +69,7 @@ class BimbinganController extends Controller
         $bimbingan = Bimbingan::join('magang', 'bimbingan.magang_id', '=', 'magang.id')
         ->join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
         ->where('mahasiswa.user_id', Auth::id())
+        ->orderBy('bimbingan.tgl_bimbingan', 'asc')
         ->get();
         return view('mhs.bimbingan.index', compact('bimbingan', 'low'));
     }

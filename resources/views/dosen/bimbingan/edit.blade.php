@@ -35,7 +35,7 @@ Detail Bimbingan Mahasiswa
                             </div>
                             <h3 class="profile-username text-center">{{ $mhs->nama_mhs }}</h3>
 
-                            <p class="text-muted text-center">Software Engineer</p>
+                            <p class="text-muted text-center">{{ $mhs->depart['nama_depart'] }}</p>
                             <strong><i class="fas fa-book mr-1"></i> NIM</strong>
 
                             <p class="text-muted">{{ $mhs->NIM }}</p>
@@ -134,6 +134,7 @@ Detail Bimbingan Mahasiswa
                                         <th>Catatan</th>
                                         <th>Berkas lampiran</th>
                                         <th>Feedback</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -163,11 +163,10 @@ class ApplyController extends Controller
         ->select('mitra.*', 'lowongan.*')
         ->find($id);
 
-        $magang = Magang::join('mahasiswa', 'magang.mhs_id', '=', 'mahasiswa.id')
-        ->where('mahasiswa.user_id', Auth::id())
-        ->select('magang.*', 'mahasiswa.*')
+        $mhs = Mahasiswa::where('user_id', Auth::id())
         ->get();
-        if (!isset($magang->approval) == '1'){
+        $button = 'enable';
+        if (isset($mhs->status_id) == '2'){
             $button = 'disabled';
         };
         return view('lowongan.detail', compact('low', 'button'));

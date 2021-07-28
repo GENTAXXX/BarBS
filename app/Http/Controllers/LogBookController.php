@@ -38,7 +38,9 @@ class LogBookController extends Controller
         ->join('lowongan', 'magang.lowongan_id', '=', 'lowongan.id')
         ->join('supervisor', 'magang.spv_id', '=', 'supervisor.id')
         ->where('supervisor.user_id', Auth::id())
+        ->where('magang.approval', '!=', '2')
         ->select('mahasiswa.id as mhs_id', 'mahasiswa.*', 'lowongan.*', 'supervisor.*', 'magang.approval')
+        ->orderBy('magang.approval', 'asc')
         ->get();
         return view('spv.logbook.index', compact('data'));
     }

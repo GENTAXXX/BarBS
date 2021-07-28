@@ -30,4 +30,8 @@ class Magang extends Model
     public function lowongan(){
         return $this->belongsTo(Lowongan::class, 'lowongan_id');
     }
+
+    public function bimbingan(){
+        return $this->hasMany(Bimbingan::class);
+    }
 }
