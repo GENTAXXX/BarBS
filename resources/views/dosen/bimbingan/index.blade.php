@@ -44,9 +44,9 @@ Daftar Bimbingan Mahasiswa
                     </thead>
                     <tbody>
                         @php $no = 1; @endphp
-                        @foreach ($dataGrouped as $mhs)
-                        <tr class="@if (isset($arrFeedback['mhs_id'])) table-secondary @endif">
-                            <td class="text-center">{{ $no++ }} {{ $mhs->feedback }}</td>
+                        @foreach ($data as $mhs)
+                        <tr class="@if (isset($arrFeedback[$mhs->mhs_id])) table-secondary @endif">
+                            <td class="text-center">{{ $no++ }}</td>
                             <td class="text-center">{{ $mhs->nama_mhs }}</td>
                             <td class="text-center">Departemen {{ $mhs->depart['nama_depart'] }}</td>
                             <td class="text-center">{{ $mhs->jurusan['jurusan'] }}</td>

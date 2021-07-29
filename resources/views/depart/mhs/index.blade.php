@@ -49,7 +49,7 @@ Daftar Mahasiswa
                             <td class="text-center">{{ $no++ }}</td>
                             <td class="text-center">{{ $mhs->nama_mhs }}</td>
                             <td class="text-center">{{ $mhs->NIM }}</td>
-                            <td class="text-center">{{ $mhs->jurusan['jurusan'] }}</td>
+                            <td class="text-center">@if(isset($mhs->jurusan['jurusan'])) {{ $mhs->jurusan['jurusan'] }}  @endif</td>
                             <td class="text-center">
                                 @if ($mhs->status_id == 1)
                                     <label class="badge">Belum Magang</label>
