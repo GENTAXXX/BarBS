@@ -52,15 +52,16 @@ class BimbinganController extends Controller
         ->where('magang.approval', '!=', '2')
         ->select('mahasiswa.*', 'magang.*', 'dosen.*', 'mahasiswa.id as mhs_id', 'bimbingan.*')
         ->orderBy('magang.approval', 'asc')
+        ->groupBy('mahasiswa.nama_mhs')
         ->get();
-        // dd($data);
+
         $arrFeedback = array();
-        foreach($data as $data){
-            if(isset($data->feedback)) $arrFeedback[$data->mhs_id] = $data->feedback;
+        foreach($data as $d){
+            if(isset($d->catatan) && isset($d->feedback) && isset($d->tgl_bimbingan)) $arrFeedback[$d->mhs_id] = $d->feedback;
+            if(!isset($d->catatan) && !isset($d->feedback) && !isset($d->tgl_bimbingan)) $arrFeedback[$d->mhs_id] = "Belum ada bimbingan";
         }
-        $dataGrouped = $data->groupBy('mahasiswa.nama_mhs');
         
-        return view('dosen.bimbingan.index', compact('dataGrouped','arrFeedback'));
+        return view('dosen.bimbingan.index', compact('data','arrFeedback'));
     }
 
     public function index()
