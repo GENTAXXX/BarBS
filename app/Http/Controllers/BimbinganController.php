@@ -61,7 +61,7 @@ class BimbinganController extends Controller
             if(!isset($d->catatan) && !isset($d->feedback) && !isset($d->tgl_bimbingan)) $arrFeedback[$d->mhs_id] = "Belum ada bimbingan";
         }
         
-        return view('dosen.bimbingan.index', compact('data','arrFeedback'));
+        return view('dosen.bimbingan.index', compact('data', 'arrFeedback'));
     }
 
     public function index()
